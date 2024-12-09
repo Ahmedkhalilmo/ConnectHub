@@ -11,7 +11,7 @@ public class User {
     protected String date;
     protected LocalDate userBirthDate;
     protected String ImageUrl;
-    protected static String relativePath = "src/main/resources/com/example/facebook/Users";
+    protected static String relativePath = "src/main/resources/com/example/ConnectHub/Users";
 
     public User() {
         this.username = null;

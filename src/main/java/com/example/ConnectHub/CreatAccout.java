@@ -162,7 +162,7 @@ public class CreatAccout {
         if (selectedFile != null) {
             try {
 
-                String relativePath = "src/main/resources/com/example/facebook/ProfileImages";
+                String relativePath = "src/main/resources/com/example/ConnectHub/ProfileImages";
 
                 Path from = Paths.get(selectedFile.toURI());
                 Path to = Paths.get(relativePath, selectedFile.getName());
