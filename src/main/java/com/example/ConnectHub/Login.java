@@ -28,7 +28,7 @@ public class Login {
         String userNameValue = username.getText();
         String passwordValue = password.getText();
         UserManager user=new UserManager();
-       if(! user.userFound(userNameValue)){
+       if(!user.userFound(userNameValue)){
            ErrorLabel.setText("username or password incorrect");
            return;
        }

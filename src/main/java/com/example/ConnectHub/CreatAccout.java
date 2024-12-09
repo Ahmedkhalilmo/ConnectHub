@@ -120,13 +120,13 @@ public class CreatAccout {
         }
         if(!Verification.checkpassword((password)))
         {
-            ErrorLabel.setText("Your password need to contain a capital letter ,small letter ,number and symbol");
+            ErrorLabel.setText("Your password need to contain\n a capital letter ,small letter ,number and symbol");
             return;
         }
 
         if(UserManager.userFound(username))
             {
-                ErrorLabel.setText("Username already taken. please choose another username");
+                ErrorLabel.setText("Username already taken");
                 return;
             }
 

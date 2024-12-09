@@ -11,11 +11,11 @@ public class UserManager extends User{
     public static boolean userFound(String username) {
 
             File userFile = new File(relativePath + "/" + username + ".txt");
-            if (!userFile.exists()) {
-                return false;
+            if (userFile.exists()) {
+                return true;
             }else{
-            return true;
-                }
+            return false;
+            }
     }
     public void UserData(String username) {
         try {

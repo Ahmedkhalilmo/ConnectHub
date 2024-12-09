@@ -27,7 +27,7 @@
          <font>
             <Font size="47.0" />
          </font></Label>
-      <Label fx:id="ErrorLabel" layoutX="545.0" layoutY="81.0" prefHeight="46.0" prefWidth="336.0" translateX="1.0">
+      <Label fx:id="ErrorLabel" layoutX="461.0" layoutY="51.0" prefHeight="70.0" prefWidth="430.0" translateX="1.0">
          <font>
             <Font size="18.0" />
          </font></Label>
