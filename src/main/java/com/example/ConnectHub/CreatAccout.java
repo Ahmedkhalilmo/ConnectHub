@@ -47,18 +47,16 @@ public class CreatAccout {
     @FXML
     Circle ProfileImageView;
     private String ImageUrl;
-    private boolean uploadphoto;
     private Path currentImagePath;
-    boolean alreadyExists = true;
     private Stage stage;
     private Scene scene;
     private Parent root;
     public void setLogin(ActionEvent e) throws IOException {
-        if(currentImagePath!= null & !alreadyExists)
+        if(currentImagePath!= null)
         {
             Files.delete(currentImagePath);
         }
-        Parent root = FXMLLoader.load(this.getClass().getResource("Login.fxml"));
+        root = FXMLLoader.load(this.getClass().getResource("Login.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene=new Scene(root);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Login.css")).toExternalForm());
@@ -138,7 +136,6 @@ public class CreatAccout {
             return;
         }
         User NewUser = new User(username,password,email,gender,userBirthDate,ImageUrl);
-
        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText(" SignUp successful --> Now Login ");
         if(alert.showAndWait().get() == ButtonType.OK || alert.showAndWait().get() == ButtonType.CANCEL)
@@ -169,7 +166,6 @@ public class CreatAccout {
                 if(!Files.exists(to))
                 {
                     Files.copy(from, to);
-                    alreadyExists = false;
                 }
                 ImageUrl = "ProfileImages/" + selectedFile.getName();
                 System.out.println(ImageUrl);
