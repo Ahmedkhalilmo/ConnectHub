@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.Login">
+   <children>
+      <Button fx:id="Loginbutton" layoutX="309.0" layoutY="317.0" mnemonicParsing="false" onAction="#setLogin" prefHeight="46.0" prefWidth="299.0" text="Login" />
+      <Button fx:id="CreatAccount" layoutX="306.0" layoutY="401.0" mnemonicParsing="false" onAction="#setCreatAccout" prefHeight="46.0" prefWidth="299.0" text="Creat Account" />
+      <TextField fx:id="username" layoutX="309.0" layoutY="199.0" prefHeight="40.0" prefWidth="299.0" promptText="username" />
+      <PasswordField fx:id="password" layoutX="309.0" layoutY="253.0" prefHeight="46.0" prefWidth="299.0" promptText="password" />
+      <Label layoutX="289.0" layoutY="83.0" prefHeight="86.0" prefWidth="340.0" text="ConnectHub">
+         <font>
+            <Font size="58.0" />
+         </font>
+      </Label>
+      <Line endX="180.4000244140625" layoutX="434.0" layoutY="384.0" startX="-134.80001831054688" />
+      <Label fx:id="ErrorLabel" layoutX="309.0" layoutY="159.0" prefHeight="40.0" prefWidth="387.0">
+         <font>
+            <Font size="22.0" />
+         </font></Label>
+   </children>
+</AnchorPane>
