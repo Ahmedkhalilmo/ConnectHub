@@ -27,34 +27,30 @@ public class Login {
     public void setLogin(ActionEvent e) throws IOException  {
         String userNameValue = username.getText();
         String passwordValue = password.getText();
-        UserManager user=new UserManager();
-       if(!user.userFound(userNameValue)){
-           ErrorLabel.setText("username or password incorrect");
-           return;
-       }
-        user.UserData(userNameValue);
-        if(passwordValue.equals(user.password)){
-            Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Home.fxml")));
+        User user = UserManager.isUser(userNameValue,passwordValue);
+        Home h=new Home();
+        h.setUser(user);
+        if(user != null)
+        {
+            Parent root = FXMLLoader.load(this.getClass().getResource("Home.fxml"));
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene=new Scene(root);
-            Home h=new Home();
-            h.setUser(user);
-           // scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Home.css")).toExternalForm());
+           // scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("CreateAccout.css")).toExternalForm());
             stage.setScene(scene);
             stage.show();
         }
-        else{
-            ErrorLabel.setText("username or password incorrect");
-
-
+        else
+        {
+            ErrorLabel.setText("username or password is incorrect");
+            System.out.println("not a user");
         }
 
     }
     public void setCreatAccout(ActionEvent e) throws IOException  {
-        Parent root = FXMLLoader.load(this.getClass().getResource("CreatAccout.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("CreateAccout.fxml")));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene=new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("CreatAccout.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("CreateAccout.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }

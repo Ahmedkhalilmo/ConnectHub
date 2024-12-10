@@ -10,8 +10,11 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.RadioButton?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.CreatAccout">
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.CreateAccout">
    <children>
       <Button layoutX="150.0" layoutY="492.0" mnemonicParsing="false" onAction="#setLogin" prefHeight="30.0" prefWidth="270.0" text="Login" />
       <Button layoutX="444.0" layoutY="492.0" mnemonicParsing="false" onAction="#setCreatAccout" prefHeight="30.0" prefWidth="270.0" text="Confirm" />
@@ -31,7 +34,7 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Button layoutX="175.0" layoutY="363.0" mnemonicParsing="false" onAction="#setImageUrl" prefHeight="30.0" prefWidth="200.0" text="Select a Profile Picture" />
+      <Button layoutX="132.0" layoutY="363.0" mnemonicParsing="false" onAction="#setImageUrl" prefHeight="30.0" prefWidth="286.0" text="Select a Profile Picture" />
       <Circle fx:id="ProfileImageView" fill="WHITE" layoutX="275.0" layoutY="228.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
 
    </children>

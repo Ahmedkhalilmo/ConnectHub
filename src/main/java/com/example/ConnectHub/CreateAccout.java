@@ -21,11 +21,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import javafx.fxml.FXML;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 
 import java.util.Objects;
 
 
-public class CreatAccout {
+public class CreateAccout {
 
     @FXML
     TextField usernameF;
@@ -44,6 +47,15 @@ public class CreatAccout {
     RadioButton FemaleF;
     @FXML
     DatePicker DateF;
+    @FXML
+    private ToggleGroup genderGroup;
+    @FXML
+    public void initialize() {
+        genderGroup = new ToggleGroup();
+        MaleF.setToggleGroup(genderGroup);
+        FemaleF.setToggleGroup(genderGroup);
+    }
+
     @FXML
     Circle ProfileImageView;
     private String ImageUrl;
@@ -64,79 +76,76 @@ public class CreatAccout {
         stage.show();
     }
     public void setCreatAccout(ActionEvent e) throws IOException {
-        String username = usernameF.getText();
-        String password = passwordF.getText();
-        String password2 = passwordF2.getText();
-        String email=emailF.getText();
-        String gender ="";
-        LocalDate userBirthDate = DateF.getValue();
-        if(MaleF.isSelected())
-        {
-            gender = "Male";
-        } else if (FemaleF.isSelected()) {
-            gender = "Female";
-        }
 
+            String username = usernameF.getText();
+            String password = passwordF.getText();
+            String password2 = passwordF2.getText();
+            String email = emailF.getText();
+            String gender = "";
+            LocalDate userBirthDate = DateF.getValue();
 
-        if(username.isEmpty())
-        {
-            ErrorLabel.setText("Please enter your Full name");
-            return;
-        }
-        if(email.isEmpty())
-        {
-            ErrorLabel.setText("Please enter your email");
-            return;
-        }
-        if(!Verification.checkemail(email))
-        {
-            ErrorLabel.setText("Please enter a valid email");
-            return;
-        }
-        if(password.isEmpty())
-        {
-            ErrorLabel.setText("Please enter your password");
-            return;
-        }
-        if(password2.isEmpty())
-        {
-            ErrorLabel.setText("Please confirm your password");
-            return;
-        }
-        if(gender.isEmpty())
-        {
-            ErrorLabel.setText("Please choose a gender");
-            return;
-        }
-        if (userBirthDate == null)
-        {
-            ErrorLabel.setText("Please enter a birthdate");
-            return;
-        }
-        if(!password.equals(password2))
-        {
-            ErrorLabel.setText("Passwords don't match!");
-            return;
-        }
-        if(!Verification.checkpassword((password)))
-        {
-            ErrorLabel.setText("Your password need to contain\n a capital letter ,small letter ,number and symbol");
-            return;
-        }
+            if (MaleF.isSelected()) {
+                gender = "Male";
+            } else if (FemaleF.isSelected()) {
+                gender = "Female";
+            }
 
-        if(UserManager.userFound(username))
-            {
+            if (username.isEmpty()) {
+                ErrorLabel.setText("Please enter your Full name");
+                return;
+            }
+            if (email.isEmpty()) {
+                ErrorLabel.setText("Please enter your email");
+                return;
+            }
+            if (!Verification.checkemail(email)) {
+                ErrorLabel.setText("Please enter a valid email");
+                return;
+            }
+            for(User user:UserManager.users)
+                {
+                if(user.getUsername().equals(username))
+                {
                 ErrorLabel.setText("Username already taken");
+                return;
+                 }
+             }
+            if (password.isEmpty()) {
+                ErrorLabel.setText("Please enter your password");
+                return;
+            }
+            if (password2.isEmpty()) {
+                ErrorLabel.setText("Please confirm your password");
+                return;
+            }
+            if (gender.isEmpty()) {
+                ErrorLabel.setText("Please choose a gender");
+                return;
+            }
+            if (userBirthDate == null) {
+                ErrorLabel.setText("Please enter a birthdate");
+                return;
+            }
+            if (!password.equals(password2)) {
+                ErrorLabel.setText("Passwords don't match!");
+                return;
+            }
+            if (!Verification.checkpassword(password)) {
+                ErrorLabel.setText("Your password needs to contain \n a capital letter, small letter, number, and symbol");
+                return;
+            }
+            if (currentImagePath == null) {
+                ErrorLabel.setText("Please choose a profile picture");
                 return;
             }
 
-        if(currentImagePath == null)
-        {
-            ErrorLabel.setText("Please choose a profile picture");
-            return;
-        }
+
+             User newUser = new User(username, password, email, gender, userBirthDate, ImageUrl);
+             UserManager.addUser(newUser);
+             UserManager.saveUsers();
+
         User NewUser = new User(username,password,email,gender,userBirthDate,ImageUrl);
-       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText(" SignUp successful --> Now Login ");
         if(alert.showAndWait().get() == ButtonType.OK || alert.showAndWait().get() == ButtonType.CANCEL)
         {
@@ -148,6 +157,7 @@ public class CreatAccout {
             stage.show();
 
         }
+
 
     }
     public void setImageUrl(ActionEvent e) {
