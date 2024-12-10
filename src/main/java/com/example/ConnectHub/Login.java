@@ -28,10 +28,10 @@ public class Login {
         String userNameValue = username.getText();
         String passwordValue = password.getText();
         User user = UserManager.isUser(userNameValue,passwordValue);
-        Home h=new Home();
-        h.setUser(user);
         if(user != null)
         {
+             Home h=new Home();
+            h.setUser(user);
             Parent root = FXMLLoader.load(this.getClass().getResource("Home.fxml"));
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene=new Scene(root);
