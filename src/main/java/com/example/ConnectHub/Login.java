@@ -34,10 +34,11 @@ public class Login {
             h.setUser(user);
             Parent root = FXMLLoader.load(this.getClass().getResource("Home.fxml"));
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-            scene=new Scene(root);
+            scene = new Scene(root);
            // scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("CreateAccout.css")).toExternalForm());
             stage.setScene(scene);
             stage.show();
+            // Home Scene ( Adham )
         }
         else
         {
