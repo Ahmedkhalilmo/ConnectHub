@@ -9,7 +9,6 @@ import java.util.List;
 public class UserManager {
     public static List<User> users = new ArrayList<>();
     public static User curr_user;
-    public static Image curr_user_profile;
     private static final String userfilepath = "users.dat";
 
     public static void addUser(User user) {

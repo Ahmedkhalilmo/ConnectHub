@@ -11,10 +11,10 @@ import java.util.Objects;
 
 public class Home {
 
-    private User user;
+    private User user=UserManager.curr_user;
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser() {
+
         System.out.println(user.getUsername());
 
 
