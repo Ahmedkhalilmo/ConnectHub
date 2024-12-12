@@ -24,9 +24,9 @@
          <children>
             <HBox alignment="CENTER" prefHeight="70.0" prefWidth="191.0">
                <children>
-                  <ImageView fitHeight="41.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="103.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icon.jpg" />
+                        <Image url="@icon.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="5.0" />
@@ -59,7 +59,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="70.0" prefWidth="227.0">
                <children>
-                  <Label fx:id="UsernameLabel" text="UserName" textFill="#cccccc">
+                  <Label fx:id="UsernameLabel" text="Nigga" textFill="#cccccc">
                      <font>
                         <Font name="TimeBurner Bold" size="24.0" />
                      </font>
@@ -80,19 +80,10 @@
       </HBox>
    </top>
    <left>
-      <VBox prefHeight="804.0" prefWidth="348.0" style="-fx-background-color: #18191a;" />
+      <VBox prefHeight="592.0" prefWidth="0.0" style="-fx-background-color: #18191a;" />
    </left>
    <right>
-      <ScrollPane hbarPolicy="NEVER" prefHeight="650.0" prefWidth="350.0" style="-fx-background-color: Transparent; -fx-focus-color: Transparent;" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
-         <content>
-            <StackPane>
-               <children>
-                  <Pane prefHeight="650.0" prefWidth="349.0" />
-                  <VBox fx:id="FriendVBox" prefWidth="349.0" style="-fx-background-color: #18191a;" />
-               </children>
-            </StackPane>
-         </content>
-      </ScrollPane>
+      <ScrollPane hbarPolicy="NEVER" prefHeight="650.0" prefWidth="0.0" style="-fx-background-color: Transparent; -fx-focus-color: Transparent;" vbarPolicy="NEVER" BorderPane.alignment="CENTER" />
    </right>
    <center>
       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="574.0" prefWidth="930.0" style="-fx-background-color: #18191a;" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
@@ -100,11 +91,11 @@
             <StackPane>
                <children>
                   <Pane prefHeight="650.0" prefWidth="607.0" />
-                  <VBox fx:id="PostCardLayout" prefWidth="578.0" style="-fx-background-color: #18191a;">
+                  <VBox fx:id="PostCardLayout" prefHeight="650.0" prefWidth="1211.0" style="-fx-background-color: #ffffff;">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 25px; -fx-background-color: #242526;">
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1025.0" style="-fx-background-radius: 25px; -fx-background-color: #d3d3d3;">
                            <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="251.0">
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="251.0" style="-fx-background-color: #d3d3d3;">
                                  <children>
                                     <ImageView fitHeight="59.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -135,7 +126,7 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER" layoutX="174.0" layoutY="10.0" prefHeight="100.0" prefWidth="251.0">
+                              <HBox alignment="CENTER" layoutX="174.0" layoutY="10.0" prefHeight="100.0" prefWidth="251.0" style="-fx-background-color: #d3d3d3;">
                                  <children>
                                     <ImageView fitHeight="59.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
                                        <image>

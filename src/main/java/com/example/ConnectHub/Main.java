@@ -16,7 +16,7 @@ public class Main extends Application {
         UserManager.loadUsers();
         Scene scene = new Scene(root);
         try {
-            Image icon = new Image(getClass().getResourceAsStream("icon.jpg"));
+            Image icon = new Image(getClass().getResourceAsStream("icon.png"));
             stage.getIcons().add(icon);
         } catch (Exception e) {
             e.printStackTrace();
