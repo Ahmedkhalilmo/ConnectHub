@@ -19,6 +19,8 @@ import javafx.stage.FileChooser;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
+import javafx.scene.input.MouseEvent;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,10 +68,10 @@ public class Home {
         }
     }
 
-    public void OpenProfile(javafx.scene.input.MouseEvent e) throws IOException  {
+    public void OpenProfile(MouseEvent e) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("ProfilePage.fxml")));
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene=new Scene(root);
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
         //scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("CreateAccount.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
@@ -175,6 +177,15 @@ public class Home {
 
             postsContainer.getChildren().add(postBox);
         }
+    }
+
+
+    public void openNotificationPanel(MouseEvent e) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("NotificationBar.fxml")));
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public String getImgUrl() {
