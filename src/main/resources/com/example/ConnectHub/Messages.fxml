@@ -13,22 +13,22 @@
     <center>
         <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="530.0" style="-fx-background-color: #3a3b3c; -fx-background-radius: 50;">
             <children>
-                <HBox prefWidth="530.0">
+                <HBox prefWidth="530.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30;">
                     <children>
                         <Circle fx:id="ProfileImageView" fill="DODGERBLUE" radius="40.0" stroke="BLACK" strokeType="INSIDE" HBox.hgrow="NEVER">
                             <HBox.margin>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </HBox.margin>
                         </Circle>
-                        <Label fx:id="UsernameL" minWidth="-Infinity" prefHeight="42.0" prefWidth="226.0" text="Name" textFill="#ffffffde">
+                        <Label fx:id="UsernameL" minWidth="-Infinity" prefHeight="42.0" prefWidth="226.0" text="Name" textFill="#000000de">
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin>
                             <font>
-                                <Font name="TimeBurner Bold" size="19.0" />
+                                <Font name="System Bold" size="22.0" />
                             </font>
                         </Label>
-                        <Label fx:id="MessageL" alignment="TOP_LEFT" prefHeight="27.0" prefWidth="356.0" text="Message" textFill="#fffdfd" wrapText="true">
+                        <Label fx:id="MessageL" alignment="TOP_LEFT" prefHeight="27.0" prefWidth="356.0" text="Message" wrapText="true">
                             <font>
                                 <Font name="TimeBurner Bold" size="18.0" />
                             </font>

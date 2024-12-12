@@ -17,7 +17,7 @@
     <center>
         <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#openChat" prefHeight="160.0" prefWidth="506.0" style="-fx-background-color: #3a3b3c; -fx-background-radius: 50;">
             <children>
-                <HBox alignment="CENTER_LEFT" prefHeight="120.0" prefWidth="615.0">
+                <HBox alignment="CENTER_LEFT" prefHeight="120.0" prefWidth="615.0" style="-fx-background-color: #ffffff; -fx-background-radius: 50;">
                     <children>
                         <ImageView fitHeight="110.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                             <HBox.margin>
@@ -48,6 +48,9 @@
                                     </stops>
                                 </LinearGradient>
                             </textFill>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
                         </Label>
                     </children>
                 </HBox>
