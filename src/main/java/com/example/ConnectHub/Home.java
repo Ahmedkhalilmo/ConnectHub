@@ -21,7 +21,6 @@ public class Home {
     private User user=UserManager.curr_user;
 
     public void setUser() {
-
         System.out.println(user.getUsername());
 
 
@@ -34,7 +33,7 @@ public class Home {
 //        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("CreateAccount.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
-
     }
+
 }
 
