@@ -20,7 +20,7 @@
     <children>
         <ImageView fitHeight="735.0" fitWidth="1285.0" layoutX="-4.0" layoutY="-1.0" pickOnBounds="true">
             <image>
-                <Image url="@ProfileImages/download.jpg" />
+                <Image url="@ProfileImages/xyz.png" />
             </image>
             <effect>
                 <DropShadow blurType="ONE_PASS_BOX">
@@ -63,12 +63,12 @@
         </ScrollPane>
         <ImageView fitHeight="152.0" fitWidth="238.0" layoutX="41.0" layoutY="25.0" onMouseClicked="#returntoHomepage" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@ProfileImages/download.jpg" />
+                <Image url="@ProfileImages/Screenshot 2024-11-12 182517.png" />
             </image>
         </ImageView>
         <ImageView fitHeight="94.0" fitWidth="93.0" layoutX="865.0" layoutY="31.0" onMouseClicked="#addChat" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@ProfileImages/download.jpg" />
+                <Image url="@ProfileImages/Screenshot 2024-11-12 182517.png" />
             </image>
             <effect>
                 <Blend mode="MULTIPLY" />

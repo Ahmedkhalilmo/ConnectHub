@@ -20,7 +20,7 @@
     <children>
         <ImageView fitHeight="735.0" fitWidth="1299.0" layoutX="-4.0" layoutY="-3.0" pickOnBounds="true">
             <image>
-                <Image url="@ProfileImages/download.jpg" />
+                <Image url="@ProfileImages/Screenshot 2024-11-12 182517.png" />
             </image>
         </ImageView>
         <Pane layoutX="316.0" layoutY="630.0" prefHeight="83.0" prefWidth="640.0" style="-fx-background-color: #242526; -fx-background-radius: 50;">
@@ -32,14 +32,14 @@
                 </TextField>
                 <ImageView fitHeight="62.0" fitWidth="62.0" layoutX="553.0" layoutY="12.0" onMouseClicked="#createNewMsg" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@ProfileImages/download.jpg" />
+                        <Image url="@ProfileImages/Screenshot 2024-11-12 182517.png" />
                     </image>
                 </ImageView>
             </children>
         </Pane>
         <ImageView fitHeight="80.0" fitWidth="110.0" layoutX="29.0" layoutY="39.0" onMouseClicked="#returnToChats" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@ProfileImages/download.jpg" />
+                <Image url="@ProfileImages/Screenshot 2024-11-12 182517.png" />
             </image>
             <effect>
                 <Glow />
@@ -61,7 +61,7 @@
                     <children>
                         <ImageView fitHeight="80.0" fitWidth="90.0" layoutX="58.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@ProfileImages/download.jpg" />
+                                <Image url="@ProfileImages/Screenshot 2024-11-12 182517.png" />
                             </image>
                         </ImageView>
                         <Separator layoutX="156.0" opacity="0.41" orientation="VERTICAL" prefHeight="85.0" prefWidth="18.0" />
@@ -92,7 +92,7 @@
         </HBox>
         <ImageView fitHeight="64.0" fitWidth="100.0" layoutX="968.0" layoutY="639.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@ProfileImages/download.jpg" />
+                <Image url="@ProfileImages/Screenshot 2024-11-12 182517.png" />
             </image>
             <effect>
                 <Glow />

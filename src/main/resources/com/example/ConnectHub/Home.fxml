@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="MyBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #18191a;" stylesheets="@Home.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.Home">
+<BorderPane fx:id="MyBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #18191a;" stylesheets="@Home.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.Home">
    <top>
       <HBox fx:id="HBoxTop" alignment="CENTER" prefHeight="70.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
@@ -36,14 +36,18 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="70.0" prefWidth="426.0">
                <children>
-                  <ImageView fitHeight="59.0" fitWidth="53.0"  pickOnBounds="true" preserveRatio="true">
+                  <ImageView accessibleRole="BUTTON" fitHeight="59.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@bubble-chat.png" />
                      </image>
-                     <HBox.margin>
-                        <Insets right="25.0" />
-                     </HBox.margin>
                   </ImageView>
+                  <Button focusTraversable="false" mnemonicParsing="false" onAction="#OpenChat" text="Chat" wrapText="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+                  <Button onAction="#OpenChat" style="-fx-background-color: transparent; -fx-padding: 0;" />
+
                   <ImageView fx:id="SearchBTN" fitHeight="37.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@SearchIcon.png" />
@@ -68,10 +72,10 @@
                      </font>
                   </Label>
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="48.0" prefWidth="13.0" />
-                  <Circle fx:id="ProfileImageView" fill="DODGERBLUE"  radius="31.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="ProfileImageView" fill="DODGERBLUE" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
                </children>
             </HBox>
-            <ImageView fitHeight="57.0" fitWidth="61.0"  pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="57.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@notification.png" />
                </image>
@@ -115,7 +119,7 @@
                                        </image>
                                     </ImageView>
                                     <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="23.0" />
-                                    <Button mnemonicParsing="false"  prefHeight="30.0" prefWidth="144.0" style="-fx-background-radius: 100px;" text="Write A Post">
+                                    <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="144.0" style="-fx-background-radius: 100px;" text="Write A Post">
                                        <font>
                                           <Font name="TimeBurner Bold" size="18.0" />
                                        </font>
@@ -146,7 +150,7 @@
                                        </image>
                                     </ImageView>
                                     <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="23.0" />
-                                    <Button mnemonicParsing="false"  prefHeight="30.0" prefWidth="144.0" style="-fx-background-radius: 100px;" text="Post a picture">
+                                    <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="144.0" style="-fx-background-radius: 100px;" text="Post a picture">
                                        <font>
                                           <Font name="TimeBurner Bold" size="18.0" />
                                        </font>
