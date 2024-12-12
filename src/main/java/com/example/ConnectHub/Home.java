@@ -26,21 +26,12 @@ public class Home {
 
 
     }
-    public void OpenChat(MouseEvent e) throws IOException {
-        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(this.getClass().getResource("Chat.fxml"));
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
 
-        // Debugging
-        System.out.println("Navigated to Chat.fxml");
-    }
-
-    public void OpenChat(ActionEvent e) throws IOException {
-        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(this.getClass().getResource("Chat.fxml"));
-        scene = new Scene(root);
+    public void OpenChat(javafx.scene.input.MouseEvent e) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Chat.fxml")));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+//        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("CreateAccount.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
 

@@ -36,17 +36,11 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="70.0" prefWidth="426.0">
                <children>
-                  <ImageView accessibleRole="BUTTON" fitHeight="59.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="59.0" fitWidth="53.0" onMouseClicked="#OpenChat" pickOnBounds="true" preserveRatio="true" translateX="-100.0">
                      <image>
                         <Image url="@bubble-chat.png" />
                      </image>
                   </ImageView>
-                  <Button focusTraversable="false" mnemonicParsing="false" onAction="#OpenChat" text="Chat" wrapText="true">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-                  <Button onAction="#OpenChat" style="-fx-background-color: transparent; -fx-padding: 0;" />
 
                   <ImageView fx:id="SearchBTN" fitHeight="37.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -56,7 +50,6 @@
                         <Insets top="4.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="70.0" prefWidth="14.0" />
                   <Label text="Search!" textFill="#cccccc">
                      <font>
                         <Font name="TimeBurner Bold" size="18.0" />
