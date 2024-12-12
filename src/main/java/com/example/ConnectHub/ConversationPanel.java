@@ -2,17 +2,24 @@ package com.example.ConnectHub;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class ConversationPanel {
+
+    private Stage stage;
+    private Scene scene;
     @FXML
     VBox MessagesVBox;
     @FXML
@@ -36,15 +43,25 @@ public class ConversationPanel {
     private void createMsgPanel(Message message) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         BorderPane root;
-        fxmlLoader.setLocation(getClass().getResource("com/example/ConnectHub/Messages.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/com/example/ConnectHub/Messages.fxml")); // Corrected path
         root = fxmlLoader.load();
-        if (message.getUser().getUsername().toLowerCase().equals(UserManager.curr_user.getUsername().toLowerCase())) {
-            HBox hBox = new HBox();
-            root.setRight(hBox);
-            root.setMargin(hBox, new Insets(25, 25, 25, 125)); // top, right, bottom, left
-        }
+
+// Get the controller
         MessagePanel chatPanel = fxmlLoader.getController();
-        chatPanel.setData(message);
+        if (chatPanel != null) {
+            chatPanel.setData(message); // Pass the message to the controller for handling
+        }
+
+// Dynamically modify alignment based on sender
+        if (message.getUser().getUsername().equalsIgnoreCase(UserManager.curr_user.getUsername())) {
+            BorderPane.setAlignment(root, Pos.CENTER_RIGHT); // Right align for current user
+            root.setPadding(new Insets(25, 25, 25, 125)); // Add margin as required
+        } else {
+            BorderPane.setAlignment(root, Pos.CENTER_LEFT); // Left align for others
+            root.setPadding(new Insets(25, 125, 25, 25)); // Adjust margin for other user
+        }
+
+// Add the new message to the VBox
         MessagesVBox.getChildren().add(root);
     }
 
@@ -70,10 +87,11 @@ public class ConversationPanel {
     //StartUpPane.getChildren().add(root);
     //}
     public void returnToChats(MouseEvent e) throws IOException {
-        Pane rootPane = (Pane) ((Node) e.getSource()).getScene().getRoot();
-
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("Chat.fxml"));
-        Parent root = fxmlLoader.load();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Chat.fxml")));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        //scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("CreateAccount.css")).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
     }
 }

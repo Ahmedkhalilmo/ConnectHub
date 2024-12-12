@@ -18,7 +18,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.ConversationPanel">
     <children>
-        <ImageView fitHeight="735.0" fitWidth="1299.0" layoutX="-4.0" layoutY="-3.0" pickOnBounds="true">
+        <ImageView fitHeight="720.0" fitWidth="1280.0" layoutX="-4.0" layoutY="-3.0" pickOnBounds="true">
             <image>
                 <Image url="@ProfileImages/Screenshot 2024-11-12 182517.png" />
             </image>
@@ -37,9 +37,9 @@
                 </ImageView>
             </children>
         </Pane>
-        <ImageView fitHeight="80.0" fitWidth="110.0" layoutX="29.0" layoutY="39.0" onMouseClicked="#returnToChats" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="93.0" fitWidth="117.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#returnToChats" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@ProfileImages/Screenshot 2024-11-12 182517.png" />
+                <Image url="@return.png" />
             </image>
             <effect>
                 <Glow />
