@@ -100,3 +100,32 @@
     -fx-background-radius: 15px;
     -fx-border-radius: 15px;
 }
+.post-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+    -fx-border-color: #d3d3d3;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, #000000, 10, 0.2, 0, 0);
+}
+
+.post-header {
+    -fx-spacing: 10px;
+    -fx-alignment: center-left;
+}
+
+.profile-image {
+    -fx-fill: dodgerblue;
+    -fx-radius: 20;
+}
+
+.post-content {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+}
+
+.user-name {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}

@@ -5,20 +5,22 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="MyBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #18191a;" stylesheets="@Home.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.Home">
+   <!-- Top Bar Section -->
    <top>
       <HBox fx:id="HBoxTop" alignment="CENTER" prefHeight="70.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
@@ -50,7 +52,7 @@
                         <Insets top="4.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Label text="Search!" textFill="#cccccc">
+                  <Label text="Search!" textFill="#cccccc" translateX="15.0">
                      <font>
                         <Font name="TimeBurner Bold" size="18.0" />
                      </font>
@@ -59,13 +61,29 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="70.0" prefWidth="227.0">
                <children>
-                  <Label fx:id="UsernameLabel" text="Nigga" textFill="#cccccc">
+                  <Label fx:id="UsernameLabel" text="UserName" textFill="#cccccc">
                      <font>
                         <Font name="TimeBurner Bold" size="24.0" />
                      </font>
                   </Label>
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="48.0" prefWidth="13.0" />
-                  <Circle fx:id="ProfileImageView" fill="DODGERBLUE" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="ProfileImageView" radius="31.0" stroke="BLACK" strokeType="INSIDE">
+                     <fill>
+                        <RadialGradient centerX="0.2569060773480663" centerY="0.509478672985782" focusAngle="-39.81" focusDistance="-0.09195402298850575" radius="0.5804597701149425">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.35653021931648254" green="0.2222222238779068" blue="0.8421052694320679" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.25" green="0.30714285373687744" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </fill></Circle>
                </children>
             </HBox>
             <ImageView fitHeight="57.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
@@ -74,102 +92,74 @@
                </image>
             </ImageView>
          </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
       </HBox>
    </top>
+
+   <!-- Left and Right Bar Section -->
    <left>
-      <VBox prefHeight="592.0" prefWidth="0.0" style="-fx-background-color: #18191a;" />
+      <VBox fx:id="LeftBar" prefHeight="647.0" prefWidth="200.0" style="-fx-background-color: #d3d3d3;" />
    </left>
    <right>
-      <ScrollPane hbarPolicy="NEVER" prefHeight="650.0" prefWidth="0.0" style="-fx-background-color: Transparent; -fx-focus-color: Transparent;" vbarPolicy="NEVER" BorderPane.alignment="CENTER" />
+      <VBox fx:id="RightBar" prefHeight="636.0" prefWidth="0.0" style="-fx-background-color: #ffffff;" />
    </right>
+
+   <!-- Main Content Section -->
    <center>
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="574.0" prefWidth="930.0" style="-fx-background-color: #18191a;" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="574.0" prefWidth="930.0" style="-fx-background-color: #18191a;" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
          <content>
             <StackPane>
-               <children>
-                  <Pane prefHeight="650.0" prefWidth="607.0" />
-                  <VBox fx:id="PostCardLayout" prefHeight="650.0" prefWidth="1211.0" style="-fx-background-color: #ffffff;">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1025.0" style="-fx-background-radius: 25px; -fx-background-color: #d3d3d3;">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="251.0" style="-fx-background-color: #d3d3d3;">
-                                 <children>
-                                    <ImageView fitHeight="59.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@WritingIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="23.0" />
-                                    <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="144.0" style="-fx-background-radius: 100px;" text="Write A Post">
-                                       <font>
-                                          <Font name="TimeBurner Bold" size="18.0" />
-                                       </font>
-                                       <textFill>
-                                          <LinearGradient endX="1.0" endY="1.0">
-                                             <stops>
-                                                <Stop>
-                                                   <color>
-                                                      <Color />
-                                                   </color>
-                                                </Stop>
-                                                <Stop offset="1.0">
-                                                   <color>
-                                                      <Color red="0.7166666388511658" blue="1.0" />
-                                                   </color>
-                                                </Stop>
-                                             </stops>
-                                          </LinearGradient>
-                                       </textFill>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" layoutX="174.0" layoutY="10.0" prefHeight="100.0" prefWidth="251.0" style="-fx-background-color: #d3d3d3;">
-                                 <children>
-                                    <ImageView fitHeight="59.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@ImageIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="23.0" />
-                                    <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="144.0" style="-fx-background-radius: 100px;" text="Post a picture">
-                                       <font>
-                                          <Font name="TimeBurner Bold" size="18.0" />
-                                       </font>
-                                       <textFill>
-                                          <LinearGradient endX="1.0" endY="1.0">
-                                             <stops>
-                                                <Stop>
-                                                   <color>
-                                                      <Color />
-                                                   </color>
-                                                </Stop>
-                                                <Stop offset="1.0">
-                                                   <color>
-                                                      <Color red="0.7166666388511658" blue="1.0" />
-                                                   </color>
-                                                </Stop>
-                                             </stops>
-                                          </LinearGradient>
-                                       </textFill>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="20.0" top="20.0" />
-                           </VBox.margin>
-                        </HBox>
-                     </children>
+               <VBox fx:id="PostCardLayout" prefHeight="800.0" prefWidth="1242.0" style="-fx-background-color: #ffffff;">
+                  <!-- Post Input Area -->
+                  <VBox fx:id="PostInputArea" prefHeight="142.0" prefWidth="1242.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #d3d3d3; -fx-padding: 10px; -fx-spacing: 10px;">
+                     <HBox alignment="CENTER" prefHeight="60.0" prefWidth="938.0" translateX="-150.0">
+                        <children>
+                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10px;">
+                              <children>
+                                 <!-- Image icon -->
+                                 <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#uploadImage" preserveRatio="true">
+                                    <image>
+                                       <Image url="@ImageIcon.png" />
+                                    </image>
+                                 </ImageView>
+                                 <!-- Text Field for Post -->
+                                 <TextField fx:id="postContentArea" prefHeight="44.0" prefWidth="463.0" promptText="What's on your mind?" />
+                              </children>
+                           </HBox>
+                        </children>
+                     </HBox>
+                     <!-- Button to Submit Post -->
+                     <HBox alignment="CENTER" prefHeight="40.0">
+                        <children>
+                           <Button mnemonicParsing="false" onAction="#createPost" onMouseClicked="#createPost" prefHeight="30.0" prefWidth="144.0" style="-fx-background-radius: 100px;" text="Post" translateX="-150.0">
+                              <font>
+                                 <Font name="TimeBurner Bold" size="18.0" />
+                              </font>
+                              <textFill>
+                                 <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                       <Stop>
+                                          <color>
+                                             <Color />
+                                          </color>
+                                       </Stop>
+                                       <Stop offset="1.0">
+                                          <color>
+                                             <Color red="0.5686274766921997" green="0.5607843399047852" blue="1.0" />
+                                          </color>
+                                       </Stop>
+                                    </stops>
+                                 </LinearGradient>
+                              </textFill>
+                           </Button>
+                        </children>
+                     </HBox>
                   </VBox>
-               </children>
+
+                  <!-- Posts Display Area -->
+                  <VBox fx:id="postsContainer" prefHeight="650.0" prefWidth="1211.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #d3d3d3; -fx-padding: 10px; -fx-spacing: 10px;" />
+               </VBox>
             </StackPane>
          </content>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
       </ScrollPane>
    </center>
 </BorderPane>
