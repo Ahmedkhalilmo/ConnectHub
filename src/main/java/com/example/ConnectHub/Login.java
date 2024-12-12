@@ -1,5 +1,4 @@
 package com.example.ConnectHub;
-
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -13,8 +12,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Login {
-
-
     private Stage stage;
     private Scene scene;
     @FXML
