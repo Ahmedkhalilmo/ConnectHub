@@ -1,13 +1,102 @@
-
-
-#MyBorderPane{
-    -fx-background-color: #121212;
-
+/* Root style for the application */
+.root {
+    -fx-background-color: white;
+    -fx-font-family: 'Poppins', 'Arial', sans-serif;
+    -fx-font-size: 14px;
 }
-#SearchBar{
-    -fx-text-fill: rgba(204,204,204);
-    -fx-background-radius: 200px;
+
+/* Label styling */
+.label {
+    -fx-text-fill: linear-gradient(to right, #6a11cb, #2575fc);
+    -fx-text-alignment: center;
 }
-#HBoxTop , #VBoxLeft{
-    -fx-background-color: #2b3137;
+
+/* Button styling */
+.button {
+    -fx-background-color: linear-gradient(to right, #6a11cb, #2575fc);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 4);
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to right, #2575fc, #6a11cb);
+}
+
+.button:pressed {
+    -fx-background-color: #1e5ab5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 3, 0.5, 0, 2);
+}
+
+/* Text field styling */
+.text-field, .password-field {
+    -fx-background-color: white;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.3, 1, 1);
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #2575fc;
+    -fx-background-color: #eef5ff;
+}
+
+/* Separator and line styling */
+.line {
+    -fx-stroke: #ccd0d5;
+    -fx-stroke-width: 1.5px;
+}
+
+/* HBox and VBox styling */
+.hbox, .vbox {
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+}
+
+/* Circle (Profile Image) styling */
+.circle {
+    -fx-fill: black;
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+}
+
+/* ScrollPane styling */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+/* Styling for top HBox */
+#HBoxTop {
+    -fx-background-color: linear-gradient(to bottom right, #dbeafe, #ffffff);
+}
+
+/* Styling for left and right sections */
+.vbox {
+    -fx-background-color: linear-gradient(to bottom right, #e3e8ef, #f1f5f9);
+    -fx-padding: 15px;
+    -fx-border-radius: 10px;
+}
+
+/* Styling for post container */
+.post-container {
+    -fx-background-color: #f3f4f6;
+    -fx-background-radius: 15px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.3, 1, 1);
+}
+
+/* Button styling in posts */
+.post-container .button {
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
 }

@@ -34,6 +34,7 @@ public class Login {
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             Parent root = FXMLLoader.load(this.getClass().getResource("Home.fxml"));
             scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Home.css")).toExternalForm());
             stage.setScene(scene);
             stage.show();
         }
