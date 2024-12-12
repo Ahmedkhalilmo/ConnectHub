@@ -75,7 +75,7 @@
                   <Font name="TimeBurner Bold" size="24.0" />
                </font>
             </Label>
-            <Circle fx:id="ProfileImageView" radius="31.0" stroke="BLACK" strokeType="INSIDE" translateX="100.0">
+            <Circle fx:id="ProfileImageView" onMouseClicked="#OpenProfile" radius="31.0" stroke="BLACK" strokeType="INSIDE" translateX="100.0">
                <fill>
                   <RadialGradient centerX="0.2569060773480663" centerY="0.509478672985782" focusAngle="-39.81" focusDistance="-0.09195402298850575" radius="0.5804597701149425">
                      <stops>
