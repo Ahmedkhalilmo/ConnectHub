@@ -6,14 +6,10 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane style="-fx-background-color: Transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.MessagePanel">
+<BorderPane style="-fx-background-color: Transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.MessagePanel">
     <center>
         <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="530.0" style="-fx-background-color: #3a3b3c; -fx-background-radius: 50;">
             <children>
@@ -24,39 +20,23 @@
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </HBox.margin>
                         </Circle>
-                        <Label fx:id="UsernameL" prefHeight="42.0" prefWidth="97.0" text="Name">
+                        <Label fx:id="UsernameL" minWidth="-Infinity" prefHeight="42.0" prefWidth="226.0" text="Name" textFill="#ffffffde">
                             <HBox.margin>
-                                <Insets left="20.0" top="15.0" />
+                                <Insets />
                             </HBox.margin>
                             <font>
                                 <Font name="TimeBurner Bold" size="19.0" />
                             </font>
-                            <textFill>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                        <Stop>
-                                            <color>
-                                                <Color red="0.7263157963752747" green="0.6240935921669006" blue="0.6240935921669006" />
-                                            </color>
-                                        </Stop>
-                                        <Stop offset="1.0">
-                                            <color>
-                                                <Color red="1.0" green="1.0" blue="1.0" />
-                                            </color>
-                                        </Stop>
-                                    </stops>
-                                </LinearGradient>
-                            </textFill>
                         </Label>
-                        <Separator opacity="0.0" orientation="VERTICAL" />
-                        <Label fx:id="MessageL" alignment="TOP_LEFT" prefWidth="327.0" text="Message" textFill="#fffdfd" wrapText="true">
-                            <HBox.margin>
-                                <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
-                            </HBox.margin>
+                        <Label fx:id="MessageL" alignment="TOP_LEFT" prefHeight="27.0" prefWidth="356.0" text="Message" textFill="#fffdfd" wrapText="true">
                             <font>
                                 <Font name="TimeBurner Bold" size="18.0" />
                             </font>
+                     <HBox.margin>
+                        <Insets left="-220.0" top="40.0" />
+                     </HBox.margin>
                         </Label>
+                        <Separator opacity="0.0" orientation="VERTICAL" />
                     </children>
                 </HBox>
             </children>

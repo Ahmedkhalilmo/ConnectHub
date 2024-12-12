@@ -30,9 +30,9 @@
                         <Font name="TimeBurner Bold" size="18.0" />
                     </font>
                 </TextField>
-                <ImageView fitHeight="62.0" fitWidth="62.0" layoutX="553.0" layoutY="12.0" onMouseClicked="#createNewMsg" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="80.0" fitWidth="100.0" layoutX="552.0" layoutY="2.0" onMouseClicked="#createNewMsg" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@ProfileImages/Screenshot 2024-11-12 182517.png" />
+                        <Image url="@sendmsg.png" />
                     </image>
                 </ImageView>
             </children>
@@ -59,9 +59,9 @@
             <children>
                 <Pane prefHeight="75.0" prefWidth="626.0" style="-fx-background-color: #242526; -fx-background-radius: 50;">
                     <children>
-                        <ImageView fitHeight="80.0" fitWidth="90.0" layoutX="58.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="83.0" fitWidth="80.0" layoutX="38.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@ProfileImages/Screenshot 2024-11-12 182517.png" />
+                                <Image url="@group.png" />
                             </image>
                         </ImageView>
                         <Separator layoutX="156.0" opacity="0.41" orientation="VERTICAL" prefHeight="85.0" prefWidth="18.0" />
@@ -70,16 +70,16 @@
                                 <Font name="TimeBurner Bold" size="44.0" />
                             </font>
                             <textFill>
-                                <LinearGradient endX="1.0" endY="1.0">
+                                <LinearGradient endX="0.6682464454976303" endY="1.0">
                                     <stops>
                                         <Stop>
                                             <color>
-                                                <Color red="0.6000000238418579" green="0.5097777843475342" blue="0.41333332657814026" />
+                                                <Color red="0.14509804546833038" green="0.4588235318660736" blue="0.9882352948188782" />
                                             </color>
                                         </Stop>
                                         <Stop offset="1.0">
                                             <color>
-                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                                <Color red="0.4156862795352936" green="0.06666667014360428" blue="0.7960784435272217" />
                                             </color>
                                         </Stop>
                                     </stops>
@@ -90,9 +90,9 @@
                 </Pane>
             </children>
         </HBox>
-        <ImageView fitHeight="64.0" fitWidth="100.0" layoutX="968.0" layoutY="639.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="967.0" layoutY="632.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@ProfileImages/Screenshot 2024-11-12 182517.png" />
+                <Image url="@adduser.png" />
             </image>
             <effect>
                 <Glow />

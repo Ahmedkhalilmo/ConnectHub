@@ -24,7 +24,7 @@
                                 <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                             </HBox.margin>
                             <image>
-                                <Image url="@ProfileImages/download.jpg" />
+                                <Image url="@group.png" />
                             </image>
                         </ImageView>
                         <Separator orientation="VERTICAL" prefHeight="120.0" prefWidth="63.0" style="-fx-background-color: Transparent;" />
@@ -33,16 +33,16 @@
                                 <Font name="TimeBurner Bold" size="48.0" />
                             </font>
                             <textFill>
-                                <LinearGradient endX="1.0" endY="1.0">
+                                <LinearGradient endX="0.9099526066350713" endY="0.5545023696682465" startX="0.1090047393364929">
                                     <stops>
                                         <Stop>
                                             <color>
-                                                <Color red="0.557894766330719" green="0.4091227948665619" blue="0.22729045152664185" />
+                                                <Color red="0.14509804546833038" green="0.4588235318660736" blue="0.9882352948188782" />
                                             </color>
                                         </Stop>
                                         <Stop offset="1.0">
                                             <color>
-                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                                <Color red="0.4156862795352936" green="0.06666667014360428" blue="0.7960784435272217" />
                                             </color>
                                         </Stop>
                                     </stops>
