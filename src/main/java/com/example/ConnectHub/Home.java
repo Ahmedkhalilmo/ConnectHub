@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -30,10 +31,9 @@ public class Home {
     private Scene scene;
     private User user = UserManager.curr_user;
     private List<Post> posts = new ArrayList<>();
-
+    private String imgUrl = user.getImageUrl();
     @FXML
     private TextField postContentArea;
-
     @FXML
     private VBox postsContainer;
     @FXML
@@ -66,8 +66,6 @@ public class Home {
         }
     }
 
-
-
     public void createPost() {
         if (PostCardLayout != null) {
             String content = postContentArea.getText();
@@ -75,15 +73,9 @@ public class Home {
             if (!content.trim().isEmpty()) {
                 Image currentPostImage = postImage;
                 postImage = null;
-
-
                 Post newPost = new Post(content, currentPostImage);
                 posts.add(newPost);
-
-
                 postContentArea.clear();
-
-
                 displayPosts();
             } else {
                 System.out.println("Cannot create an empty post.");
@@ -93,9 +85,6 @@ public class Home {
         }
     }
 
-
-
-    // Handle image upload
     public void uploadImage() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image");
@@ -110,91 +99,81 @@ public class Home {
     }
 
 
-    // Display all posts in the postsContainer
     public void displayPosts() {
         postsContainer.getChildren().clear();
 
-
         for (Post post : posts) {
             VBox postBox = new VBox();
-            postBox.setSpacing(10);
+            postBox.setSpacing(15);
             postBox.setStyle("-fx-background-color: white; -fx-background-radius: 10px; -fx-padding: 10px; -fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-effect: dropshadow(gaussian, #000000, 10, 0.2, 0, 0);");
 
-
             HBox postHeader = new HBox();
-            postHeader.setSpacing(10);
+            postHeader.setSpacing(30);
             postHeader.setStyle("-fx-alignment: center-left;");
 
+            ImageView profileImage = new ImageView();
+            profileImage.setFitWidth(40);
+            profileImage.setFitHeight(40);
+            profileImage.setPreserveRatio(false);
 
-            Circle profileImage = new Circle(20);
-            profileImage.setFill(Color.DODGERBLUE);
+            Circle profileImageMask = new Circle(20);
+            profileImageMask.setCenterX(20);
+            profileImageMask.setCenterY(20);
+
+            // Set the image inside the circular mask
+            if (imgUrl != null && !imgUrl.isEmpty()) {
+                try {
+                    InputStream imageStream = getClass().getResourceAsStream(imgUrl);
+                    if (imageStream != null) {
+                        profileImage.setImage(new Image(imageStream));
+                    } else {
+                        System.err.println("Image not found: " + imgUrl);
+                        profileImage.setImage(new Image("file:default-profile-image.png"));  // Fallback default image
+                    }
+                } catch (Exception e) {
+                    System.err.println("Error loading profile image: " + e.getMessage());
+                    profileImage.setImage(new Image("file:default-profile-image.png"));  // Fallback default image
+                }
+            } else {
+                profileImage.setImage(new Image("file:default-profile-image.png"));
+            }
+
+
+            profileImage.setClip(profileImageMask);
+
             postHeader.getChildren().add(profileImage);
 
-            // User name
+
             Label userNameLabel = new Label(UsernameLabel.getText());
             userNameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
             postHeader.getChildren().add(userNameLabel);
 
-            // Add the post header (user info) to the post box
             postBox.getChildren().add(postHeader);
 
-            // Post content (text)
             TextArea textArea = new TextArea(post.getTextContent());
-            textArea.setEditable(false);  // Make sure the text isn't editable
+            textArea.setEditable(false);
             textArea.setWrapText(true);
             textArea.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 14px;");
 
-            // Add text content to the post box
             postBox.getChildren().add(textArea);
 
-            // Image (only if it's not null)
             if (post.getImage() != null) {
                 ImageView imageView = new ImageView(post.getImage());
-                imageView.setFitWidth(300);  // Resize image to fit
+                imageView.setFitWidth(300);
                 imageView.setPreserveRatio(true);
-                postBox.getChildren().add(imageView);  // Add the image under the text
+                postBox.getChildren().add(imageView);
             }
 
-            // Add the complete post card to the postsContainer
             postsContainer.getChildren().add(postBox);
         }
     }
 
-
-    // Delete a post from the list
-}
-
-
-
-class Post {
-    private String textContent;
-    private Image image;
-
-    // Constructor to allow posts without an image
-    public Post(String textContent) {
-        this.textContent = textContent;
-        this.image = null;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    // Constructor to allow posts with an image
-    public Post(String textContent, Image image) {
-        this.textContent = textContent;
-        this.image = image;
-    }
-
-    public String getTextContent() {
-        return textContent;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    @Override
-    public String toString() {
-        return "Post{" +
-                "textContent='" + textContent + '\'' +
-                ", image=" + (image != null ? "Yes" : "No") +
-                '}';
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }
+
