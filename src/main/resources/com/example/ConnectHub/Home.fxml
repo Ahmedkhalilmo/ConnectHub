@@ -1,10 +1,187 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.Home">
-   <children>
-      <Button layoutX="290.0" layoutY="156.0" mnemonicParsing="false" onAction="#setUser" text="Button" />
-   </children>
-</AnchorPane>
+<BorderPane fx:id="MyBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #18191a;" stylesheets="@Home.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.Home">
+   <top>
+      <HBox fx:id="HBoxTop" alignment="CENTER" prefHeight="70.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="191.0">
+               <children>
+                  <ImageView fitHeight="41.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icon.jpg" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="426.0">
+               <children>
+                  <ImageView fitHeight="59.0" fitWidth="53.0"  pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@bubble-chat.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="25.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="SearchBTN" fitHeight="37.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@SearchIcon.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="4.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="70.0" prefWidth="14.0" />
+                  <Label text="Search!" textFill="#cccccc">
+                     <font>
+                        <Font name="TimeBurner Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="227.0">
+               <children>
+                  <Label fx:id="UsernameLabel" text="UserName" textFill="#cccccc">
+                     <font>
+                        <Font name="TimeBurner Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="48.0" prefWidth="13.0" />
+                  <Circle fx:id="ProfileImageView" fill="DODGERBLUE"  radius="31.0" stroke="BLACK" strokeType="INSIDE" />
+               </children>
+            </HBox>
+            <ImageView fitHeight="57.0" fitWidth="61.0"  pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@notification.png" />
+               </image>
+            </ImageView>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="804.0" prefWidth="348.0" style="-fx-background-color: #18191a;" />
+   </left>
+   <right>
+      <ScrollPane hbarPolicy="NEVER" prefHeight="650.0" prefWidth="350.0" style="-fx-background-color: Transparent; -fx-focus-color: Transparent;" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+         <content>
+            <StackPane>
+               <children>
+                  <Pane prefHeight="650.0" prefWidth="349.0" />
+                  <VBox fx:id="FriendVBox" prefWidth="349.0" style="-fx-background-color: #18191a;" />
+               </children>
+            </StackPane>
+         </content>
+      </ScrollPane>
+   </right>
+   <center>
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="574.0" prefWidth="930.0" style="-fx-background-color: #18191a;" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+         <content>
+            <StackPane>
+               <children>
+                  <Pane prefHeight="650.0" prefWidth="607.0" />
+                  <VBox fx:id="PostCardLayout" prefWidth="578.0" style="-fx-background-color: #18191a;">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 25px; -fx-background-color: #242526;">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="251.0">
+                                 <children>
+                                    <ImageView fitHeight="59.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@WritingIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="23.0" />
+                                    <Button mnemonicParsing="false"  prefHeight="30.0" prefWidth="144.0" style="-fx-background-radius: 100px;" text="Write A Post">
+                                       <font>
+                                          <Font name="TimeBurner Bold" size="18.0" />
+                                       </font>
+                                       <textFill>
+                                          <LinearGradient endX="1.0" endY="1.0">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="0.7166666388511658" blue="1.0" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </LinearGradient>
+                                       </textFill>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" layoutX="174.0" layoutY="10.0" prefHeight="100.0" prefWidth="251.0">
+                                 <children>
+                                    <ImageView fitHeight="59.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@ImageIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="23.0" />
+                                    <Button mnemonicParsing="false"  prefHeight="30.0" prefWidth="144.0" style="-fx-background-radius: 100px;" text="Post a picture">
+                                       <font>
+                                          <Font name="TimeBurner Bold" size="18.0" />
+                                       </font>
+                                       <textFill>
+                                          <LinearGradient endX="1.0" endY="1.0">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="0.7166666388511658" blue="1.0" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </LinearGradient>
+                                       </textFill>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </StackPane>
+         </content>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </ScrollPane>
+   </center>
+</BorderPane>

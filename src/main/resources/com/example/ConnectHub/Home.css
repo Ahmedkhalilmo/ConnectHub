@@ -1,0 +1,13 @@
+
+
+#MyBorderPane{
+    -fx-background-color: #121212;
+
+}
+#SearchBar{
+    -fx-text-fill: rgba(204,204,204);
+    -fx-background-radius: 200px;
+}
+#HBoxTop , #VBoxLeft{
+    -fx-background-color: #2b3137;
+}
