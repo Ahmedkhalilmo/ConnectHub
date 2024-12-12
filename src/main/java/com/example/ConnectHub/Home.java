@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.fxml.FXMLLoader;
@@ -45,8 +46,11 @@ public class Home {
     @FXML
     private Circle ProfileImageView;
 
+
     public void initialize() {
         UsernameLabel.setText(user.getUsername());
+        Image image = new Image(getClass().getResourceAsStream(user.getImageUrl()));
+        ProfileImageView.setFill(new ImagePattern(image));
     }
 
     public void OpenChat(javafx.scene.input.MouseEvent e) throws IOException {
