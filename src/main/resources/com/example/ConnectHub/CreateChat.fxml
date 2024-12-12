@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fitHeight="200.0" fitWidth="400.0" pickOnBounds="true" smooth="false">
+            <image>
+                <Image url="@ProfileImages/download.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="266.0" layoutX="67.0" layoutY="25.0" opacity="0.23" pickOnBounds="true">
+            <image>
+                <Image url="@ProfileImages/download.jpg" />
+            </image>
+        </ImageView>
+        <Label layoutX="85.0" layoutY="47.0" text="Set name of the chat" textFill="#e7e0e0">
+            <font>
+                <Font name="TimeBurner Bold" size="18.0" />
+            </font>
+        </Label>
+        <TextField layoutX="85.0" layoutY="81.0" prefHeight="38.0" prefWidth="230.0" />
+    </children>
+</AnchorPane>

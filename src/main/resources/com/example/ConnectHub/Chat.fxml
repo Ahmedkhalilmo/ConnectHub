@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.ChatController">
+    <children>
+        <ImageView fitHeight="735.0" fitWidth="1285.0" layoutX="-4.0" layoutY="-1.0" pickOnBounds="true">
+            <image>
+                <Image url="@ProfileImages/download.jpg" />
+            </image>
+            <effect>
+                <DropShadow blurType="ONE_PASS_BOX">
+                    <color>
+                        <Color red="0.8947368264198303" green="0.874853789806366" blue="0.874853789806366" />
+                    </color>
+                </DropShadow>
+            </effect>
+        </ImageView>
+        <Label layoutX="355.0" layoutY="31.0" text="Chats">
+            <font>
+                <Font name="TimeBurner Bold" size="64.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.5263158082962036" green="0.46627679467201233" blue="0.3547758162021637" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="1.0" green="1.0" blue="1.0" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Label>
+        <ScrollPane hbarPolicy="NEVER" layoutX="355.0" layoutY="119.0" prefHeight="602.0" prefWidth="615.0" style="-fx-background-color: Transparent;" vbarPolicy="NEVER">
+            <content>
+                <StackPane style="-fx-background-color: Transparent;">
+                    <children>
+                        <Pane prefHeight="600.0" prefWidth="615.0" />
+                        <VBox fx:id="ChatsVBox" prefWidth="615.0" style="-fx-background-color: #18191a;" />
+                    </children>
+                </StackPane>
+            </content>
+        </ScrollPane>
+        <ImageView fitHeight="152.0" fitWidth="238.0" layoutX="41.0" layoutY="25.0" onMouseClicked="#returntoHomepage" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@ProfileImages/download.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="94.0" fitWidth="93.0" layoutX="865.0" layoutY="31.0" onMouseClicked="#addChat" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@ProfileImages/download.jpg" />
+            </image>
+            <effect>
+                <Blend mode="MULTIPLY" />
+            </effect>
+        </ImageView>
+        <TextField fx:id="ChatNameTF" layoutX="557.0" layoutY="52.0" prefHeight="50.0" prefWidth="290.0" promptText="Enter New Chat Name!">
+            <font>
+                <Font name="TimeBurner Bold" size="18.0" />
+            </font>
+        </TextField>
+    </children>
+</AnchorPane>

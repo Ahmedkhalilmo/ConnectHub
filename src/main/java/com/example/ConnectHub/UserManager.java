@@ -10,6 +10,8 @@ public class UserManager {
     public static List<User> users = new ArrayList<>();
     public static User curr_user;
     private static final String userfilepath = "users.dat";
+    protected static String ChatsFilePath = "chats.dat";
+    public static List<Conversation> chats = new ArrayList<>();
 
     public static void addUser(User user) {
         users.add(user);
@@ -52,5 +54,20 @@ public class UserManager {
         return null;
     }
 
-
+    public static void addConversation(Conversation conversation)
+    {
+        chats.add(conversation);
+    }
+    public static User IsUser(String Username,String Password)
+    {
+        for(User user: users)
+        {
+            if(Username.equals(user.getUsername())&&Password.equals(user.getPassword()))
+            {
+                curr_user = user;
+                return user;
+            }
+        }
+        return null;
+    }
 }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane style="-fx-background-color: Transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.ChatPanel">
+    <center>
+        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#openChat" prefHeight="160.0" prefWidth="506.0" style="-fx-background-color: #3a3b3c; -fx-background-radius: 50;">
+            <children>
+                <HBox alignment="CENTER_LEFT" prefHeight="120.0" prefWidth="615.0">
+                    <children>
+                        <ImageView fitHeight="110.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                            <HBox.margin>
+                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                            </HBox.margin>
+                            <image>
+                                <Image url="@ProfileImages/download.jpg" />
+                            </image>
+                        </ImageView>
+                        <Separator orientation="VERTICAL" prefHeight="120.0" prefWidth="63.0" style="-fx-background-color: Transparent;" />
+                        <Label fx:id="ChatNameTF" prefWidth="368.0" text="Chat Name" wrapText="true">
+                            <font>
+                                <Font name="TimeBurner Bold" size="48.0" />
+                            </font>
+                            <textFill>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop>
+                                            <color>
+                                                <Color red="0.557894766330719" green="0.4091227948665619" blue="0.22729045152664185" />
+                                            </color>
+                                        </Stop>
+                                        <Stop offset="1.0">
+                                            <color>
+                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                            </color>
+                                        </Stop>
+                                    </stops>
+                                </LinearGradient>
+                            </textFill>
+                        </Label>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+    <padding>
+        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+    </padding>
+</BorderPane>
