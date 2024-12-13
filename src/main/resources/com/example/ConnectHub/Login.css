@@ -5,7 +5,7 @@
 }
 
 
-.label {
+#ConnectHub{
     -fx-text-fill: linear-gradient(to right, #6a11cb, #2575fc);
     -fx-text-alignment: center;
 }

@@ -47,7 +47,7 @@ public class Login {
         }
         else
         {
-            ErrorLabel.setText("username or password is incorrect");
+            ErrorLabel.setText("Username or password is incorrect");
             System.out.println("not a user");
         }
 

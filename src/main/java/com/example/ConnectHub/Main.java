@@ -14,8 +14,8 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         UserManager.loadUsers();
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         Scene scene = new Scene(root);
         try {
             Image icon = new Image(getClass().getResourceAsStream("icon.png"));
@@ -28,14 +28,10 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-        // Calculate center position
         double centerX = (screenBounds.getWidth() - stage.getWidth()) / 2;
         double centerY = (screenBounds.getHeight() - stage.getHeight()) / 2;
-
-        // Apply the position
         stage.setX(centerX);
         stage.setY(centerY);
-
 
     }
 
