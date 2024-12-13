@@ -52,4 +52,12 @@ public class ProfilePage {
         stage.setScene(scene);
         stage.show();
     }
+    public void LogOut(javafx.event.ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("login.fxml")));
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Login.css")).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
 }
