@@ -138,9 +138,9 @@ public class CreateAccount {
                 ErrorLabel.setText("Please choose a profile picture");
                 return;
             }
+        String hashedPassword = Verification.hashPassword(password);
 
-
-             User newUser = new User(username, password, email, gender, userBirthDate, ImageUrl);
+             User newUser = new User(username, hashedPassword, email, gender, userBirthDate, ImageUrl);
              UserManager.addUser(newUser);
              UserManager.saveUsers();
 

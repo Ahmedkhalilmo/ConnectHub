@@ -4,6 +4,12 @@ package com.example.ConnectHub;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
+
 public class Verification {
  
     private static final Pattern CAPITAL_LETTER_PATTERN = Pattern.compile("[A-Z]");
@@ -12,18 +18,22 @@ public class Verification {
     private static final Pattern SYMBOL_PATTERN = Pattern.compile("[^\\w\\s]");
     private static final Pattern EmailPattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
     public static boolean hasCapitalLetter(String string) {
+
         return CAPITAL_LETTER_PATTERN.matcher(string).find();
     }
  
     public static boolean hasSmallLetter(String string) {
+
         return SMALL_LETTER_PATTERN.matcher(string).find();
     }
  
     public static boolean hasNumber(String string) {
+
         return NUMBER_PATTERN.matcher(string).find();
     }
  
     public static boolean hasSymbol(String string) {
+
         return SYMBOL_PATTERN.matcher(string).find();
     }
 
@@ -52,6 +62,21 @@ public class Verification {
         }
 
         return false;
+    }
+    public static String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            return Base64.getEncoder().encodeToString(hashedBytes);
+
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error hashing password: " + e.getMessage());
+        }
+    }
+
+    public static boolean verifyPassword(String plainPassword, String hashedPassword) {
+        String hashedPlainPassword = hashPassword(plainPassword);
+        return hashedPlainPassword.equals(hashedPassword);
     }
 }
  
