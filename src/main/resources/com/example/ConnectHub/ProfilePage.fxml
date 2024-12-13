@@ -39,7 +39,7 @@
                 </ScrollPane>
                 <Pane layoutX="14.0" layoutY="180.0" prefHeight="253.0" prefWidth="326.0" style="-fx-background-color: D3D3D3; -fx-background-radius: 50;">
                     <children>
-                        <Label layoutX="100.0" layoutY="20.0" style="-fx-background-color: 6A11CBFF;" text="Details">
+                        <Label layoutX="100.0" layoutY="20.0" style="-fx-background-color: #A11CBFF;" text="Details">
                             <font>
                                 <Font name="TimeBurner Bold" size="40.0" />
                             </font>
