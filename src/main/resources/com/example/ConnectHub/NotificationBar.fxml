@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="PostSelectedPanel" alignment="CENTER" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.NotificationBar">
+   <children>
+      <VBox onMouseClicked="#returnToHomepage" prefHeight="200.0" prefWidth="500.0">
+         <children>
+            <ImageView fitHeight="93.0" fitWidth="117.0" onMouseClicked="#returntoHomepage" pickOnBounds="true" preserveRatio="true" translateX="20.0" translateY="20.0">
+               <image>
+                  <Image url="@return.png" />
+               </image>
+            </ImageView>
+         </children></VBox>
+      <VBox alignment="BOTTOM_CENTER" maxHeight="600.0" maxWidth="649.0" prefHeight="600.0" prefWidth="649.0" style="-fx-background-color: #D3D3D3; -fx-background-radius: 20;">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="74.0" fitWidth="84.0" onMouseClicked="#openNotificationPanel" pickOnBounds="true" preserveRatio="true" translateX="10.0" translateY="10.0">
+                     <image>
+                        <Image url="@notification.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Notification" translateX="20.0" translateY="10.0">
+                     <font>
+                        <Font size="60.0" />
+                     </font>
+                     <textFill>
+                        <RadialGradient centerX="0.2569060773480663" centerY="0.5" focusAngle="-16.7" focusDistance="-0.11494252873563227" radius="0.5689655172413793">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.2666666805744171" blue="1.0" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.006711409395973154">
+                                 <color>
+                                    <Color red="0.14509804546833038" green="0.4588235318660736" blue="0.9882352948188782" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.4156862795352936" green="0.06666667014360428" blue="0.7960784435272217" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefWidth="649.0" style="-fx-background-color: #D3D3D3;">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" maxHeight="500.0" maxWidth="649.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="649.0" style="-fx-background-color: Transparent; -fx-focus-color: Transparent;" vbarPolicy="NEVER">
+                     <content>
+                        <StackPane>
+                           <children>
+                              <Pane prefHeight="500.0" prefWidth="648.0" />
+                              <VBox fx:id="NotificationVBox" alignment="TOP_CENTER" fillWidth="false" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="648.0" style="-fx-background-color: #D3D3D3;" />
+                           </children>
+                        </StackPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox onMouseClicked="#returnToHomepage" prefHeight="200.0" prefWidth="500.0" />
+   </children>
+</HBox>

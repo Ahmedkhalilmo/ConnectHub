@@ -65,7 +65,7 @@
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="48.0" prefWidth="13.0" />
                </children>
             </HBox>
-            <ImageView fitHeight="57.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="57.0" fitWidth="61.0" onMouseClicked="#openNotificationPanel" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@notification.png" />
                </image>

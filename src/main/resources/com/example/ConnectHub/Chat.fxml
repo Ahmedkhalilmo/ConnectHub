@@ -48,7 +48,7 @@
                 <StackPane style="-fx-background-color: Transparent;">
                     <children>
                         <Pane prefHeight="600.0" prefWidth="615.0" />
-                        <VBox fx:id="ChatsVBox" prefWidth="615.0" style="-fx-background-color: #D3D3D3;" />
+                        <VBox fx:id="ChatsVBox" prefWidth="615.0" style="-fx-background-color: #D3D3D3; -fx-background-radius: 20;" />
                     </children>
                 </StackPane>
             </content>
