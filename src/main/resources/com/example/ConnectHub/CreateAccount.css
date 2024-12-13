@@ -4,7 +4,7 @@
     -fx-font-size: 14px;
 }
 
-.label {
+#ConnectHub {
     -fx-text-fill: linear-gradient(to right, #6a11cb, #2575fc);
 
 }

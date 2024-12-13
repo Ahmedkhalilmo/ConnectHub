@@ -6,36 +6,74 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.control.RadioButton?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.CreateAccount">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.CreateAccount">
    <children>
-      <Button layoutX="150.0" layoutY="492.0" mnemonicParsing="false" onAction="#setLogin" prefHeight="30.0" prefWidth="270.0" text="Login" />
-      <Button layoutX="444.0" layoutY="492.0" mnemonicParsing="false" onAction="#setCreateAccount" prefHeight="30.0" prefWidth="270.0" text="Confirm" />
-      <TextField fx:id="usernameF" layoutX="547.0" layoutY="128.0" prefHeight="38.0" prefWidth="243.0" promptText="Username" />
-      <TextField fx:id="emailF" layoutX="547.0" layoutY="182.0" prefHeight="38.0" prefWidth="243.0" promptText="Email" />
-      <PasswordField fx:id="passwordF" layoutX="547.0" layoutY="234.0" prefHeight="38.0" prefWidth="243.0" promptText="Password" />
-      <PasswordField fx:id="passwordF2" layoutX="547.0" layoutY="289.0" prefHeight="38.0" prefWidth="243.0" promptText="Confirm Password" />
-      <Line endX="375.2000732421875" endY="-3.0517578125E-5" layoutX="404.0" layoutY="455.0" startX="-296.0" startY="-3.0517578125E-5" />
-      <RadioButton fx:id="MaleF" layoutX="554.0" layoutY="336.0" mnemonicParsing="false" text="Male" />
-      <RadioButton fx:id="FemaleF" layoutX="688.0" layoutY="336.0" mnemonicParsing="false" text="Female" />
-      <DatePicker fx:id="DateF" layoutX="547.0" layoutY="393.0" prefHeight="30.0" prefWidth="243.0" />
-      <Label fx:id="ConnectHub" layoutX="154.0" layoutY="28.0" prefHeight="62.0" prefWidth="262.0" text="ConnectHub">
-         <font>
-            <Font size="47.0" />
-         </font></Label>
-      <Label fx:id="ErrorLabel" layoutX="461.0" layoutY="51.0" prefHeight="70.0" prefWidth="430.0" translateX="1.0">
-         <font>
-            <Font size="18.0" />
-         </font></Label>
-      <Button layoutX="132.0" layoutY="363.0" mnemonicParsing="false" onAction="#setImageUrl" prefHeight="30.0" prefWidth="286.0" text="Select a Profile Picture" />
-      <Circle fx:id="ProfileImageView" fill="WHITE" layoutX="275.0" layoutY="228.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-
+      <HBox alignment="CENTER" prefHeight="295.0" prefWidth="809.0" translateX="-109.0">
+         <children>
+            <VBox prefHeight="295.0" prefWidth="402.0" translateX="80.0" translateY="-30.0">
+               <children>
+                  <Label fx:id="ConnectHub" prefHeight="70.0" prefWidth="317.0" text="ConnectHub" translateX="25.0" translateY="-20.0">
+                     <font>
+                        <Font size="47.0" />
+                     </font>
+                  </Label>
+                  <Circle fx:id="ProfileImageView" fill="WHITE" radius="100.0" stroke="BLACK" strokeType="INSIDE" translateX="61.0" translateY="9.0" />
+                  <Button mnemonicParsing="false" onAction="#setImageUrl" prefHeight="30.0" prefWidth="286.0" text="Select a Profile Picture" translateX="13.0" translateY="44.0" />
+               </children>
+            </VBox>
+            <VBox alignment="TOP_RIGHT" prefHeight="295.0" prefWidth="260.0" translateX="130.0" translateY="-55.0">
+               <children>
+                  <Label fx:id="ErrorLabel" prefHeight="85.0" prefWidth="260.0" translateY="16.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.95686274766922" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.30588236451148987" green="0.08235294371843338" blue="0.08235294371843338" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <TextField fx:id="usernameF" prefHeight="38.0" prefWidth="290.0" promptText="Username" translateY="26.0" />
+                  <TextField fx:id="emailF" prefHeight="38.0" prefWidth="243.0" promptText="Email" translateY="40.0" />
+                  <PasswordField fx:id="passwordF" prefHeight="38.0" prefWidth="243.0" promptText="Password" translateY="54.0" />
+                  <PasswordField fx:id="passwordF2" prefHeight="38.0" prefWidth="243.0" promptText="Confirm Password" translateY="72.0" />
+                  <HBox prefHeight="36.0" prefWidth="238.0" translateY="90.0">
+                     <children>
+                        <RadioButton fx:id="MaleF" mnemonicParsing="false" text="Male" />
+                        <RadioButton fx:id="FemaleF" mnemonicParsing="false" text="Female" translateX="90.0" />
+                     </children>
+                  </HBox>
+                  <DatePicker fx:id="DateF" prefHeight="30.0" prefWidth="243.0" translateX="-15.0" translateY="97.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Line endX="442.0928955078125" endY="-1.0848026275634766" startX="-296.0" startY="-3.0517578125E-5" translateY="79.0" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="710.0" translateX="-27.0" translateY="70.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#setLogin" prefHeight="30.0" prefWidth="270.0" text="Login" />
+            <Button mnemonicParsing="false" onAction="#setCreateAccount" prefHeight="30.0" prefWidth="270.0" text="Confirm" translateX="66.0" />
+         </children>
+      </HBox>
    </children>
-</AnchorPane>
+</VBox>

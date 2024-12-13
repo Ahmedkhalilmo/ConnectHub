@@ -17,7 +17,7 @@
    <children>
       <VBox onMouseClicked="#returnToHomepage" prefHeight="200.0" prefWidth="500.0">
          <children>
-            <ImageView fitHeight="93.0" fitWidth="117.0" onMouseClicked="#returntoHomepage" pickOnBounds="true" preserveRatio="true" translateX="20.0" translateY="20.0">
+            <ImageView fx:id="returnimage" fitHeight="93.0" fitWidth="117.0" onMouseClicked="#returntoHomepage" pickOnBounds="true" preserveRatio="true" translateX="20.0" translateY="20.0">
                <image>
                   <Image url="@return.png" />
                </image>

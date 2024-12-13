@@ -185,6 +185,8 @@ public class Home {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("NotificationBar.fxml")));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("NotificationBar.css")).toExternalForm());
+
         stage.setScene(scene);
         stage.show();
     }
