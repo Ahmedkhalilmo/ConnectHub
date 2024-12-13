@@ -1,5 +1,6 @@
 package com.example.ConnectHub;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -22,6 +23,7 @@ public class FriendProfileController {
     private Stage stage;
     private Scene scene;
     private User user = SearchResults.friendUser;
+    FriendsManager friends_manager = new FriendsManager();
 
     @FXML
     private Label nameLabel;
@@ -58,6 +60,11 @@ public class FriendProfileController {
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Home.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
+    }
+    public void addFriend(ActionEvent e){
+        String user2 = user.getUsername();
+        String user1 = UserManager.curr_user.getUsername();
+        friends_manager.addFriend(user1,user2);
     }
 
 }

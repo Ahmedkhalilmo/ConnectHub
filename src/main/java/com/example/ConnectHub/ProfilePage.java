@@ -1,5 +1,7 @@
 package com.example.ConnectHub;
 
+import com.example.ConnectHub.FriendsManager;
+
 import javafx.geometry.Rectangle2D;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -76,4 +78,5 @@ public class ProfilePage {
         stage.setY(centerY);
 
     }
+
 }

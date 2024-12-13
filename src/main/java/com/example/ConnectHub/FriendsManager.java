@@ -20,13 +20,14 @@ public class FriendsManager {
     // add new friend connection between users
     public void addFriend(String user1, String user2) {
         // Add user1 and user2 to the graph if they don't exist
+        System.out.println("started");
         friendsGraph.putIfAbsent(user1, new HashSet<>());
-        friendsGraph.putIfAbsent(user2, new HashSet<>());
 
+        System.out.println("initialzed");
         // Add the friendship connection
         friendsGraph.get(user1).add(user2);
-        friendsGraph.get(user2).add(user1);
 
+        System.out.println("friend added");
         saveToFile();
     }
 
@@ -35,10 +36,6 @@ public class FriendsManager {
         if (friendsGraph.containsKey(user1)) {
             friendsGraph.get(user1).remove(user2);
         }
-        if (friendsGraph.containsKey(user2)) {
-            friendsGraph.get(user2).remove(user1);
-        }
-
         saveToFile();
     }
 
@@ -74,8 +71,11 @@ public class FriendsManager {
                     friendsGraph.put(user, friends);
                 }
             }
+            System.out.println(UserManager.curr_user.getUsername() + " " +
+                    friendsGraph.get(UserManager.curr_user.getUsername()));
         } catch (FileNotFoundException e) {
             // File does not exist, no data to load
+            System.err.println("no files detected");
         } catch (IOException e) {
             System.err.println("Error loading from file: " + e.getMessage());
         }
