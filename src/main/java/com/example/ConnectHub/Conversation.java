@@ -40,7 +40,7 @@ public class Conversation implements Serializable{
     }
     public void addUser(User user) {
         if(usersOfConcervation.contains(user)){
-            System.out.println("user is already exist");
+            System.out.println("user already exists");
         }
         else
         {

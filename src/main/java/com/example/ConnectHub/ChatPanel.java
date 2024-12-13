@@ -25,11 +25,15 @@ public class ChatPanel {
     }
 
     public void openChat(MouseEvent e) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(this.getClass().getResource("Conversation.fxml")));
-        Parent root = loader.load();
-        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ConnectHub/Conversation.fxml"));
+        Parent root = loader.load();  // Load the FXML file
+
+        // Get the controller and set data
         ConversationPanel conversationPanel = loader.getController();
-        conversationPanel.setData(curr_conversation);
+        conversationPanel.setData(curr_conversation);  // Pass the conversation data
+
+        // Set up the stage and scene
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

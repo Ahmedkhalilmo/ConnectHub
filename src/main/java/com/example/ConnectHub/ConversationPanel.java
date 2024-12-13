@@ -33,9 +33,9 @@ public class ConversationPanel {
         ChatnameL.setText(conversation.getNameOfChat());
         loadMsgs();
     }
-
     private void loadMsgs() throws IOException {
-        for (Message message : curr_conversation.getAllMessages()) {
+        for(Message message: curr_conversation.getAllMessages())
+        {
             createMsgPanel(message);
         }
     }
@@ -43,33 +43,25 @@ public class ConversationPanel {
     private void createMsgPanel(Message message) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         BorderPane root;
-        fxmlLoader.setLocation(getClass().getResource("/com/example/ConnectHub/Messages.fxml")); // Corrected path
+        fxmlLoader.setLocation(getClass().getResource("Messages.fxml"));
         root = fxmlLoader.load();
-
-// Get the controller
+        if(message.getUser().getUsername().toLowerCase().equals(UserManager.curr_user.getUsername().toLowerCase()))
+        {
+            HBox hBox = new HBox();
+            root.setRight(hBox);
+            root.setMargin(hBox, new Insets(25, 25, 25, 125)); // top, right, bottom, left
+        }
         MessagePanel chatPanel = fxmlLoader.getController();
-        if (chatPanel != null) {
-            chatPanel.setData(message); // Pass the message to the controller for handling
-        }
-
-// Dynamically modify alignment based on sender
-        if (message.getUser().getUsername().equalsIgnoreCase(UserManager.curr_user.getUsername())) {
-            BorderPane.setAlignment(root, Pos.CENTER_RIGHT); // Right align for current user
-            root.setPadding(new Insets(25, 25, 25, 125)); // Add margin as required
-        } else {
-            BorderPane.setAlignment(root, Pos.CENTER_LEFT); // Left align for others
-            root.setPadding(new Insets(25, 125, 25, 25)); // Adjust margin for other user
-        }
-
-// Add the new message to the VBox
+        chatPanel.setData(message);
         MessagesVBox.getChildren().add(root);
     }
 
     public void createNewMsg(MouseEvent e) throws IOException {
-        Message message = new Message(UserManager.curr_user, MessageContentTF.getText());
-        curr_conversation.sendMessage(UserManager.curr_user, message);
+        Message message = new Message(UserManager.curr_user,MessageContentTF.getText());
+        curr_conversation.sendMessage(UserManager.curr_user,message);
         createMsgPanel(message);
         MessageContentTF.clear();
+        UserManager.saveChats();
     }
 
     //public void addUser(MouseEvent e) throws IOException {

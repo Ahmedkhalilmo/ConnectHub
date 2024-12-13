@@ -68,4 +68,25 @@ public class UserManager {
         }
         return SearchResults.usersearch;
     }
+    public static void saveChats() {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(ChatsFilePath))) {
+            out.writeObject(chats);
+            System.out.println("Chats saved successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void loadChats() {
+        File file = new File(ChatsFilePath);
+        if (file.exists()) {
+            try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
+                chats = (List<Conversation>) in.readObject();
+                System.out.println("Chats loaded successfully.");
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("No chat data file found. Starting with an empty chat list.");
+        }
+    }
 }

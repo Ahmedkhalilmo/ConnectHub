@@ -27,6 +27,7 @@ public class ChatController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        UserManager.loadChats(); // Load chats when the controller is initialized
         for (Conversation conversation : UserManager.chats) {
             if (!conversation.getUsernamesOfParticipants().contains(UserManager.curr_user.getUsername().toLowerCase())) {
                 continue;
@@ -41,12 +42,14 @@ public class ChatController implements Initializable {
 
     public void addChat(MouseEvent e) throws IOException {
 
-        if (ChatNameTF.getText().isEmpty()) {
+        if(ChatNameTF.getText().isEmpty())
+        {
             return;
         }
-        Conversation newconversation = new Conversation(UserManager.curr_user, ChatNameTF.getText());
+        Conversation newconversation = new Conversation(UserManager.curr_user,ChatNameTF.getText());
         UserManager.addConversation(newconversation);
         ConversationPanelCreate(newconversation);
+        UserManager.saveChats();
     }
 
     private void ConversationPanelCreate(Conversation conversation) throws IOException {

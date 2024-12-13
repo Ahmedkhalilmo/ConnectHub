@@ -31,6 +31,4 @@ public class Message extends Text implements Serializable {
     public void displayMessage(){
         System.out.println(getUser().getUsername()+":"+getContent());
     }
-
-
 }

@@ -2,7 +2,7 @@ package com.example.ConnectHub;
 
 import java.io.Serializable;
 
-public abstract class Text implements Serializable{
+public abstract class Text implements Serializable {
     public String content;
     public User user;
 
@@ -17,4 +17,5 @@ public abstract class Text implements Serializable{
     public void editContent(String newContent) {
         this.content = newContent;
     }
+
 }
