@@ -118,7 +118,7 @@
                         </LinearGradient>
                      </textFill>
                         </Label>
-                        <Label fx:id="GenderL" layoutX="118.0" layoutY="162.0" prefHeight="50.0" prefWidth="193.0" text="Male">
+                        <Label fx:id="GenderL" layoutX="110.0" layoutY="162.0" prefHeight="50.0" prefWidth="193.0" text="Male">
                             <font>
                                 <Font name="TimeBurner Bold" size="24.0" />
                             </font>
@@ -216,7 +216,7 @@
          </textFill>
         </Label>
         <Circle fx:id="CircleImageView" fill="#f0f1f2" layoutX="165.0" layoutY="162.0" radius="140.0" stroke="BLACK" strokeType="INSIDE" />
-      <ImageView fitHeight="50.0" fitWidth="61.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="50.0" fitWidth="61.0" layoutY="6.0" onMouseClicked="#returntoHomepage" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@return.png" />
          </image>

@@ -70,7 +70,6 @@ public class Home {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("ProfilePage.fxml")));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene=new Scene(root);
-        //scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("CreateAccount.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }

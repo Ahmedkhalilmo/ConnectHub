@@ -23,6 +23,14 @@ public class User implements Serializable {
         this.imageUrl = imageUrl;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public LocalDate getUserBirthDate() {
+        return userBirthDate;
+    }
+
     public String getUsername() {
         return username;
     }
