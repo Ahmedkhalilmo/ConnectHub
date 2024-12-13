@@ -58,16 +58,14 @@ public class UserManager {
     {
         chats.add(conversation);
     }
-    public static User IsUser(String Username,String Password)
-    {
-        for(User user: users)
-        {
-            if(Username.equals(user.getUsername())&&Password.equals(user.getPassword()))
-            {
-                curr_user = user;
-                return user;
+
+    public static List<User> getUsers(String username) {
+        SearchResults.usersearch.clear();
+        for (User user : users) {
+            if (username.equals(user.getUsername())) {
+                SearchResults.usersearch.add(user);
             }
         }
-        return null;
+        return SearchResults.usersearch;
     }
 }

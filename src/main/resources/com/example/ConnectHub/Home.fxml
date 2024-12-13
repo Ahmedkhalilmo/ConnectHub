@@ -48,16 +48,17 @@
                         <Font name="TimeBurner Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="59.0" prefWidth="414.0" promptText="Search" translateX="50.0" />
+                  <TextField fx:id="searchBar" prefHeight="59.0" prefWidth="414.0" promptText="Search" translateX="50.0" />
+                  <Button mnemonicParsing="false" onAction="#switchtoresult">
+                     <graphic>
 
-                  <ImageView fx:id="SearchBTN" fitHeight="37.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@SearchIcon.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets top="4.0" />
-                     </HBox.margin>
-                  </ImageView>
+                        <ImageView fx:id="SearchBTN" fitHeight="37.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@SearchIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="74.0" prefWidth="131.0">

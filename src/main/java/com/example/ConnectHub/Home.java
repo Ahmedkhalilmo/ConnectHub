@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import javafx.scene.input.MouseEvent;
 
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,6 +37,8 @@ public class Home {
     private String imgUrl = user.getImageUrl();
     @FXML
     private TextField postContentArea;
+    @FXML
+    private TextField searchBar ;
     @FXML
     private VBox postsContainer;
     @FXML
@@ -77,6 +80,7 @@ public class Home {
         stage.setScene(scene);
         stage.show();
     }
+
 
     public void createPost() {
         if (PostCardLayout != null) {
@@ -196,5 +200,38 @@ public class Home {
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
+
+    public void switchtoresult(javafx.event.ActionEvent e) throws IOException {
+        String search= searchBar.getText();
+        UserManager.getUsers(search);
+        if(SearchResults.usersearch.isEmpty()) {
+//            noFriends.setText("User not found");
+            SearchResults.isEmpty = true;
+        }
+
+        Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("SearchResults.fxml")));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+//        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("CreateAccount.css")).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+//
+//    String selectedUsername = listView.getSelectionModel().getSelectedItem();
+//
+//        if(usersearch.isEmpty()) {
+//        noFriends.setText("User not found");
+//    }
+//        if (selectedUsername != null) {
+//
+//        for (User user : usersearch) {
+//            if (user.getUsername().equals(selectedUsername)) {
+//                friendUser = user;
+//                break;
+//            }
+//        }
+//        noFriends.setVisible(false);
+//        switchToFriendProfile();
+//    }
 }
 

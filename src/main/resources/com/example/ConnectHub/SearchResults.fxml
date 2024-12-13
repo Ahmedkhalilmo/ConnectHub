@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.SearchResults">
+
+    <ListView fx:id="listView" layoutX="140.0" layoutY="50.0" prefHeight="649.0" prefWidth="1100.0" style="-fx-background-radius: 20;" />
+   <Label fx:id="noFriends" layoutX="217.0" layoutY="167.0" prefHeight="43.0" prefWidth="127.0" />
+   <ImageView fitHeight="55.0" fitWidth="66.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#returntoHomepage" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@return.png" />
+      </image>
+   </ImageView>
+
+</AnchorPane>
