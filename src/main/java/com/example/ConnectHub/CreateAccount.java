@@ -1,6 +1,6 @@
 package com.example.ConnectHub;
 
-
+import javafx.geometry.Rectangle2D;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -74,6 +74,11 @@ public class CreateAccount {
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Login.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        double centerX = (screenBounds.getWidth() - stage.getWidth()) / 2;
+        double centerY = (screenBounds.getHeight() - stage.getHeight()) / 2;
+        stage.setX(centerX);
+        stage.setY(centerY);
     }
     public void setCreateAccount(ActionEvent e) throws IOException {
 
