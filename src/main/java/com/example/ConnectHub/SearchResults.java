@@ -35,11 +35,14 @@ public class SearchResults {
         }
 
         listView.setItems(usernames);
-        if(isEmpty)
+        if(isEmpty) {
             noFriends.setText("User not found");
-        else
+            isEmpty = false;
+        }
+        else {
             noFriends.setVisible(false);
 
+        }
         listView.setOnMouseClicked(this::onUserClick);
     }
 
