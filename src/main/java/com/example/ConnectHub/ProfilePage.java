@@ -1,5 +1,6 @@
 package com.example.ConnectHub;
 
+import javafx.geometry.Rectangle2D;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -64,5 +66,14 @@ public class ProfilePage {
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Login.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        // Calculate center position
+        double centerX = (screenBounds.getWidth() - stage.getWidth()) / 2;
+        double centerY = (screenBounds.getHeight() - stage.getHeight()) / 2;
+
+        // Apply the position
+        stage.setX(centerX);
+        stage.setY(centerY);
+
     }
 }

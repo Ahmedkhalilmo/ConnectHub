@@ -5,7 +5,9 @@ import javafx.scene.control.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.geometry.Rectangle2D;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
@@ -33,6 +35,15 @@ public class Login {
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Home.css")).toExternalForm());
             stage.setScene(scene);
             stage.show();
+            Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+            // Calculate center position
+            double centerX = (screenBounds.getWidth() - stage.getWidth()) / 2;
+            double centerY = (screenBounds.getHeight() - stage.getHeight()) / 2;
+
+            // Apply the position
+            stage.setX(centerX);
+            stage.setY(centerY);
+
         }
         else
         {
