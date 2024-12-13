@@ -12,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
@@ -21,10 +20,7 @@ import javafx.stage.Stage;
 
 import javafx.scene.input.MouseEvent;
 
-import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -32,13 +28,14 @@ import java.util.Objects;
 public class Home {
     private Stage stage;
     private Scene scene;
-    private User user = UserManager.curr_user;
+    private User user = UserManager.curr_user;  // Using the logged-in user from UserManager
     private List<Post> posts = new ArrayList<>();
     private String imgUrl = user.getImageUrl();
+
     @FXML
     private TextField postContentArea;
     @FXML
-    private TextField searchBar ;
+    private TextField searchBar;
     @FXML
     private VBox postsContainer;
     @FXML
@@ -51,15 +48,17 @@ public class Home {
     @FXML
     private Circle ProfileImageView;
 
-
     public void initialize() {
         UsernameLabel.setText(user.getUsername());
         Image image = new Image(getClass().getResourceAsStream(user.getImageUrl()));
         ProfileImageView.setFill(new ImagePattern(image));
-        System.out.println(user.getPassword());
+
+        loadPostsFromFile(); // Load saved posts
+
+        Runtime.getRuntime().addShutdownHook(new Thread(this::savePostsToFile)); // Save posts on shutdown
     }
 
-    public void OpenChat(javafx.scene.input.MouseEvent e) throws IOException {
+    public void OpenChat(MouseEvent e) throws IOException {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Chat.fxml")));
             stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -81,7 +80,6 @@ public class Home {
         stage.show();
     }
 
-
     public void createPost() {
         if (PostCardLayout != null) {
             String content = postContentArea.getText();
@@ -89,10 +87,12 @@ public class Home {
             if (!content.trim().isEmpty()) {
                 Image currentPostImage = postImage;
                 postImage = null;
-                Post newPost = new Post(content, currentPostImage);
+                // Now passing the current user who is creating the post
+                Post newPost = new Post(content, currentPostImage, user);
                 posts.add(newPost);
                 postContentArea.clear();
                 displayPosts();
+                savePostsToFile(); // Save posts after creation
             } else {
                 System.out.println("Cannot create an empty post.");
             }
@@ -114,7 +114,6 @@ public class Home {
         }
     }
 
-
     public void displayPosts() {
         postsContainer.getChildren().clear();
 
@@ -124,7 +123,7 @@ public class Home {
             postBox.setStyle("-fx-background-color: white; -fx-background-radius: 10px; -fx-padding: 10px; -fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-effect: dropshadow(gaussian, #000000, 10, 0.2, 0, 0);");
 
             HBox postHeader = new HBox();
-            postHeader.setSpacing(30);
+            postHeader.setSpacing(10);
             postHeader.setStyle("-fx-alignment: center-left;");
 
             ImageView profileImage = new ImageView();
@@ -137,13 +136,13 @@ public class Home {
             profileImageMask.setCenterY(20);
 
             // Set the image inside the circular mask
-            if (imgUrl != null && !imgUrl.isEmpty()) {
+            if (post.getPoster() != null && post.getPoster().getImageUrl() != null) {
                 try {
-                    InputStream imageStream = getClass().getResourceAsStream(imgUrl);
+                    InputStream imageStream = getClass().getResourceAsStream(post.getPoster().getImageUrl());
                     if (imageStream != null) {
                         profileImage.setImage(new Image(imageStream));
                     } else {
-                        System.err.println("Image not found: " + imgUrl);
+                        System.err.println("Image not found: " + post.getPoster().getImageUrl());
                         profileImage.setImage(new Image("file:default-profile-image.png"));  // Fallback default image
                     }
                 } catch (Exception e) {
@@ -154,13 +153,11 @@ public class Home {
                 profileImage.setImage(new Image("file:default-profile-image.png"));
             }
 
-
             profileImage.setClip(profileImageMask);
 
             postHeader.getChildren().add(profileImage);
 
-
-            Label userNameLabel = new Label(UsernameLabel.getText());
+            Label userNameLabel = new Label(post.getPoster().getUsername()); // Display the username of the post creator
             userNameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
             postHeader.getChildren().add(userNameLabel);
 
@@ -184,7 +181,6 @@ public class Home {
         }
     }
 
-
     public void openNotificationPanel(MouseEvent e) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("NotificationBar.fxml")));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -201,37 +197,37 @@ public class Home {
         this.imgUrl = imgUrl;
     }
 
+    public void savePostsToFile() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("posts.dat"))) {
+            oos.writeObject(posts);
+            System.out.println("Posts saved successfully.");
+        } catch (IOException e) {
+            System.err.println("Error saving posts: " + e.getMessage());
+        }
+    }
+
+    public void loadPostsFromFile() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("posts.dat"))) {
+            posts = (List<Post>) ois.readObject();
+            displayPosts(); // Refresh the UI with loaded posts
+            System.out.println("Posts loaded successfully.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error loading posts: " + e.getMessage());
+        }
+    }
+
     public void switchtoresult(javafx.event.ActionEvent e) throws IOException {
-        String search= searchBar.getText();
+        String search = searchBar.getText();
         UserManager.getUsers(search);
-        if(SearchResults.usersearch.isEmpty()) {
-//            noFriends.setText("User not found");
+        if (SearchResults.usersearch.isEmpty()) {
             SearchResults.isEmpty = true;
         }
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("SearchResults.fxml")));
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene=new Scene(root);
-       scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("SearchResults.css")).toExternalForm());
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("SearchResults.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
-//
-//    String selectedUsername = listView.getSelectionModel().getSelectedItem();
-//
-//        if(usersearch.isEmpty()) {
-//        noFriends.setText("User not found");
-//    }
-//        if (selectedUsername != null) {
-//
-//        for (User user : usersearch) {
-//            if (user.getUsername().equals(selectedUsername)) {
-//                friendUser = user;
-//                break;
-//            }
-//        }
-//        noFriends.setVisible(false);
-//        switchToFriendProfile();
-//    }
 }
-
