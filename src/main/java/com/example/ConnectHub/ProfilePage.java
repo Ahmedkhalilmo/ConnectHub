@@ -33,6 +33,9 @@ public class ProfilePage {
     @FXML
     private Label GenderL;
 
+    @FXML
+    private Label EmailL;
+
     public void initialize() {
         nameLabel.setText(user.getUsername());
         Image image = new Image(getClass().getResourceAsStream(user.getImageUrl()));
@@ -40,8 +43,10 @@ public class ProfilePage {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String formattedDateString = user.getUserBirthDate().format(formatter);
+
         BirthDateL.setText(formattedDateString);
         GenderL.setText(user.getGender());
+        EmailL.setText(user.getEmail());
     }
 
     public void returntoHomepage(MouseEvent e) throws IOException {

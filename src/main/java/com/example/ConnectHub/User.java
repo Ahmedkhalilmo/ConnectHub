@@ -39,6 +39,10 @@ public class User implements Serializable {
         return gender;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public LocalDate getUserBirthDate() {
         return userBirthDate;
     }
