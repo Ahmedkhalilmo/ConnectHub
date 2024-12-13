@@ -26,7 +26,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="70.0" prefWidth="191.0">
                <children>
-                  <ImageView fitHeight="103.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" translateX="-150.0">
+                  <ImageView fx:id="logo" fitHeight="103.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" translateX="-150.0">
                      <image>
                         <Image url="@icon.png" />
                      </image>
@@ -34,7 +34,7 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="59.0" fitWidth="53.0" onMouseClicked="#OpenChat" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="OpenChat" fitHeight="59.0" fitWidth="53.0" onMouseClicked="#OpenChat" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@bubble-chat.png" />
                      </image>
@@ -66,7 +66,7 @@
                   <Separator opacity="0.0" orientation="VERTICAL" prefHeight="48.0" prefWidth="13.0" />
                </children>
             </HBox>
-            <ImageView fitHeight="57.0" fitWidth="61.0" onMouseClicked="#openNotificationPanel" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="openNotificationPanel" fitHeight="57.0" fitWidth="61.0" onMouseClicked="#openNotificationPanel" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@notification.png" />
                </image>
@@ -119,7 +119,7 @@
                            <HBox alignment="CENTER_LEFT" prefHeight="100.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10px;">
                               <children>
                                  <!-- Image icon -->
-                                 <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#uploadImage" preserveRatio="true">
+                                 <ImageView fx:id="uploadImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#uploadImage" preserveRatio="true">
                                     <image>
                                        <Image url="@ImageIcon.png" />
                                     </image>

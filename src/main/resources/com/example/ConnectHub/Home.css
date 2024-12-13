@@ -129,3 +129,69 @@
     -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
+#OpenChat {
+  -fx-cursor: hand;
+      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 2);
+      -fx-background-radius: 50%;
+  }
+
+
+#OpenChat:hover {
+     -fx-opacity: 0.8;
+       -fx-scale-x: 1.1;
+       -fx-scale-y: 1.1;
+       -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 15, 0.5, 0, 4);
+}
+#openNotificationPanel {
+  -fx-cursor: hand;
+      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 2);
+      -fx-background-radius: 50%;
+  }
+
+
+#openNotificationPanel:hover {
+     -fx-opacity: 0.8;
+       -fx-scale-x: 1.1;
+       -fx-scale-y: 1.1;
+       -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 15, 0.5, 0, 4);
+}
+#uploadImage {
+  -fx-cursor: hand;
+      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 2);
+      -fx-background-radius: 50%;
+  }
+
+
+#uploadImage:hover {
+     -fx-opacity: 0.8;
+       -fx-scale-x: 1.1;
+       -fx-scale-y: 1.1;
+       -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 15, 0.5, 0, 4);
+}
+#logo {
+  -fx-cursor: hand;
+      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 2);
+      -fx-background-radius: 50%;
+  }
+
+
+#logo:hover {
+     -fx-opacity: 0.8;
+       -fx-scale-x: 1.1;
+       -fx-scale-y: 1.1;
+       -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 15, 0.5, 0, 4);
+}
+#ProfileImageView {
+  -fx-cursor: hand;
+      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 2);
+      -fx-background-radius: 50%;
+  }
+
+
+#ProfileImageView:hover {
+     -fx-opacity: 0.8;
+       -fx-scale-x: 1.1;
+       -fx-scale-y: 1.1;
+       -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 15, 0.5, 0, 4);
+}
+

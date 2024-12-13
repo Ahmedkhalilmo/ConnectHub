@@ -2,14 +2,19 @@ package com.example.ConnectHub;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ListCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,58 +28,78 @@ public class SearchResults {
     public static List<User> usersearch = new ArrayList<>();
     public static User friendUser;
     public static boolean isEmpty = false;
+
     @FXML
-    private ListView<String> listView;
+    private ListView<User> listView;
     @FXML
     private Label noFriends;
 
     public void initialize() {
-        ObservableList<String> usernames = FXCollections.observableArrayList();
-        for (User user : usersearch) {
-            usernames.add(user.getUsername());
-        }
+        ObservableList<User> users = FXCollections.observableArrayList(usersearch);
+        listView.setItems(users);
 
-        listView.setItems(usernames);
-        if(isEmpty) {
+        if (isEmpty) {
             noFriends.setText("User not found");
             isEmpty = false;
-        }
-        else {
+        } else {
             noFriends.setVisible(false);
-
         }
+
+        listView.setCellFactory(param -> new ListCell<User>() {
+            private final ImageView imageView = new ImageView();
+            private final Label label = new Label();
+
+            {
+                imageView.setFitHeight(40);
+                imageView.setFitWidth(40);
+                label.setStyle("-fx-padding: 10;");
+            }
+
+            @Override
+            protected void updateItem(User user, boolean empty) {
+                super.updateItem(user, empty);
+                if (empty || user == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    imageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getImageUrl()))));
+                    label.setText(user.getUsername());
+                    setGraphic(new HBox(imageView, label));
+                }
+            }
+        });
+
         listView.setOnMouseClicked(this::onUserClick);
     }
 
-
     private void onUserClick(MouseEvent event) {
-        String selectedUsername = listView.getSelectionModel().getSelectedItem();
-
-        if (selectedUsername != null) {
-
-            for (User user : usersearch) {
-                if (user.getUsername().equals(selectedUsername)) {
-                    friendUser = user;
-                    break;
-                }
-            }
-
-            switchToFriendProfile();
+        User selectedUser = listView.getSelectionModel().getSelectedItem();
+        if (selectedUser != null) {
+            System.out.println("Selected user: " + selectedUser.getUsername());
+            friendUser = selectedUser; // Set the selected user as friendUser
+            switchToFriendProfile(); // Navigate to the friend's profile
+        } else {
+            System.out.println("No user selected!");
         }
     }
 
     private void switchToFriendProfile() {
         try {
+            // Load the FriendProfile FXML and create the new scene
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FriendProfileController.fxml"));
-            Scene scene = new Scene(loader.load());
-            Stage stage = (Stage) listView.getScene().getWindow();
-            stage.setScene(scene);
+            Parent root = loader.load();
+            stage = (Stage) listView.getScene().getWindow(); // Get the current stage
+            scene = new Scene(root); // Create a new scene
+            stage.setScene(scene); // Set the new scene
+            stage.show(); // Show the stage
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Print stack trace for debugging
         }
     }
+
     public void returntoHomepage(MouseEvent e) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Home.fxml")));
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("Home.fxml")));
+        Parent root = loader.load();
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Home.css")).toExternalForm());
