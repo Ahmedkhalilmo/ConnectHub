@@ -174,6 +174,10 @@ public class CreateAccount {
 
         if (selectedFile != null) {
             try {
+                if (!Verification.isImageFile(selectedFile)) {
+                    ErrorLabel.setText("The selected file is not \na valid image");
+                    return;
+                }
 
                 String relativePath = "src/main/resources/com/example/ConnectHub/ProfileImages";
 
