@@ -52,7 +52,7 @@ public class Home {
         UsernameLabel.setText(user.getUsername());
         Image image = new Image(getClass().getResourceAsStream(user.getImageUrl()));
         ProfileImageView.setFill(new ImagePattern(image));
-
+        System.out.println( user.getPassword());
         loadPostsFromFile(); // Load saved posts
 
         Runtime.getRuntime().addShutdownHook(new Thread(this::savePostsToFile)); // Save posts on shutdown

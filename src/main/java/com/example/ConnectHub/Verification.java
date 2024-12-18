@@ -1,7 +1,10 @@
 package com.example.ConnectHub;
 
- 
 
+
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.nio.charset.StandardCharsets;
@@ -11,39 +14,39 @@ import java.security.SecureRandom;
 import java.util.Base64;
 
 public class Verification {
- 
-    private static final Pattern CAPITAL_LETTER_PATTERN = Pattern.compile("[A-Z]");
-    private static final Pattern SMALL_LETTER_PATTERN = Pattern.compile("[a-z]");
-    private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d");
-    private static final Pattern SYMBOL_PATTERN = Pattern.compile("[^\\w\\s]");
-    private static final Pattern EmailPattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+
+    private static final Pattern capitalPattern = Pattern.compile("[A-Z]");
+    private static final Pattern smallPattern = Pattern.compile("[a-z]");
+    private static final Pattern  numberPattern = Pattern.compile("\\d");
+    private static final Pattern symbolPattern = Pattern.compile("[^\\w\\s]");
+    private static final Pattern emailPattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
     public static boolean hasCapitalLetter(String string) {
 
-        return CAPITAL_LETTER_PATTERN.matcher(string).find();
+        return capitalPattern.matcher(string).find();
     }
- 
+
     public static boolean hasSmallLetter(String string) {
 
-        return SMALL_LETTER_PATTERN.matcher(string).find();
+        return smallPattern.matcher(string).find();
     }
- 
+
     public static boolean hasNumber(String string) {
 
-        return NUMBER_PATTERN.matcher(string).find();
+        return   numberPattern.matcher(string).find();
     }
- 
+
     public static boolean hasSymbol(String string) {
 
-        return SYMBOL_PATTERN.matcher(string).find();
+        return symbolPattern.matcher(string).find();
     }
 
     public static boolean hasAll(String string) {
         return hasCapitalLetter(string) && hasSmallLetter(string) && hasNumber(string) && hasSymbol(string);
     }
- 
+
     public static boolean checkpassword(String password)
     {
- 
+
         if (hasAll(password))
         {
             return true;
@@ -55,13 +58,20 @@ public class Verification {
     }
     public static boolean checkemail(String email)
     {
-        Matcher mat = EmailPattern.matcher(email);
+        Matcher mat = emailPattern.matcher(email);
         if(mat.matches())
         {
             return true;
         }
 
         return false;
+    }
+    public static boolean isImageFile(File file) {
+        try {
+            return ImageIO.read(file) != null;
+        } catch (IOException e) {
+            return false;
+        }
     }
     public static String hashPassword(String password) {
         try {

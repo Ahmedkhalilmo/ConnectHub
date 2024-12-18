@@ -44,7 +44,7 @@ public class UserManager {
         }
     }
 
-    public static User isUser(String username, String password) {
+    public static User getUsers(String username, String password) {
         for (User user : users) {
             if (username.equals(user.getUsername()) && Verification.verifyPassword(password, user.getPassword())) {
                 curr_user = user;

@@ -26,7 +26,7 @@ public class Login {
     public void setLogin(ActionEvent e) throws IOException  {
         String userNameValue = username.getText();
         String passwordValue = password.getText();
-        User user = UserManager.isUser(userNameValue,passwordValue);
+        User user = UserManager.getUsers(userNameValue,passwordValue);
         if(user != null)
         {
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
