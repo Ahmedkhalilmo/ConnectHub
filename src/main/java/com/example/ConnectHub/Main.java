@@ -32,6 +32,12 @@ public class Main extends Application {
         double centerY = (screenBounds.getHeight() - stage.getHeight()) / 2;
         stage.setX(centerX);
         stage.setY(centerY);
+        stage.setOnCloseRequest(event ->
+        {
+            event.consume();
+            UserManager.saveUsers();
+            stage.close();
+        });
 
     }
 

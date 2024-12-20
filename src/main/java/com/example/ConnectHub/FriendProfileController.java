@@ -24,7 +24,7 @@ import java.util.Objects;
 public class FriendProfileController {
     private Stage stage;
     private Scene scene;
-    private User user = SearchResults.friendUser;
+    private User user ;
     private User Myuser = UserManager.curr_user;
 
     FriendsManager friends_manager = new FriendsManager();
@@ -48,6 +48,14 @@ public class FriendProfileController {
     private ListView<String> MutualfriendsListView;
 
     public void initialize() {
+        if(SearchResults.friendUser == null)
+        {
+            user = ProfilePage.friendUser;
+        }
+        else
+        {
+            user = SearchResults.friendUser;
+        }
         nameLabel.setText(user.getUsername());
         Image image = new Image(getClass().getResourceAsStream(user.getImageUrl()));
         CircleImageView.setFill(new ImagePattern(image));
@@ -63,17 +71,30 @@ public class FriendProfileController {
         List<String> Userfriends = friendsManager.getUserFriends(user.getUsername());
         List<String> Myfriends = friendsManager.getUserFriends(Myuser.getUsername());
 
-        Userfriends.retainAll(Myfriends);
+        Myfriends.retainAll(Userfriends);
         MutualfriendsListView.getItems().addAll(Userfriends);
     }
 
     public void returntoHomepage(MouseEvent e) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Home.fxml")));
-        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Home.css")).toExternalForm());
-        stage.setScene(scene);
-        stage.show();
+        if(SearchResults.friendUser == null)
+        {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("ProfilePage.fxml")));
+            stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("profile.css")).toExternalForm());
+            stage.setScene(scene);
+            stage.show();
+        }
+        else
+        {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Home.fxml")));
+            stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Home.css")).toExternalForm());
+            stage.setScene(scene);
+            stage.show();
+        }
+
     }
     public void addFriend(ActionEvent e){
         User user2 = user;

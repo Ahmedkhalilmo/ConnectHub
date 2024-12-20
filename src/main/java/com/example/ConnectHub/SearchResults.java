@@ -76,8 +76,8 @@ public class SearchResults {
         User selectedUser = listView.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
             System.out.println("Selected user: " + selectedUser.getUsername());
-            friendUser = selectedUser; // Set the selected user as friendUser
-            switchToFriendProfile(); // Navigate to the friend's profile
+            friendUser = selectedUser;
+            switchToFriendProfile();
         } else {
             System.out.println("No user selected!");
         }
@@ -85,15 +85,16 @@ public class SearchResults {
 
     private void switchToFriendProfile() {
         try {
-            // Load the FriendProfile FXML and create the new scene
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FriendProfileController.fxml"));
             Parent root = loader.load();
-            stage = (Stage) listView.getScene().getWindow(); // Get the current stage
-            scene = new Scene(root); // Create a new scene
-            stage.setScene(scene); // Set the new scene
-            stage.show(); // Show the stage
+            stage = (Stage) listView.getScene().getWindow();
+            scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("profile.css")).toExternalForm());
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
-            e.printStackTrace(); // Print stack trace for debugging
+            e.printStackTrace();
         }
     }
 

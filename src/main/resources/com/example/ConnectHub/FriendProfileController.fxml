@@ -258,7 +258,7 @@
             </textFill>
         </Label>
         <Circle fx:id="CircleImageView" fill="#f0f1f2" layoutX="165.0" layoutY="162.0" radius="140.0" stroke="BLACK" strokeType="INSIDE" />
-        <ImageView fitHeight="50.0" fitWidth="61.0" layoutY="6.0" onMouseClicked="#returntoHomepage" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="returntimage" fitHeight="50.0" fitWidth="61.0" layoutY="6.0" onMouseClicked="#returntoHomepage" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@return.png" />
             </image>
