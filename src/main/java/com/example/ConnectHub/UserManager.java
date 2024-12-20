@@ -4,7 +4,9 @@ import javafx.scene.image.Image;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserManager {
     public static List<User> users = new ArrayList<>();
@@ -12,6 +14,7 @@ public class UserManager {
     private static final String userfilepath = "users.dat";
     protected static String ChatsFilePath = "chats.dat";
     public static List<Conversation> chats = new ArrayList<>();
+    private static final Map<User, List<Notification>> notifications = new HashMap<>();
 
     public static void addUser(User user) {
         users.add(user);
@@ -54,6 +57,15 @@ public class UserManager {
         return null;
     }
 
+    public static User getFriend(String username) {
+        for (User user : users) {
+            if (username.equals(user.getUsername())) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     public static void addConversation(Conversation conversation)
     {
         chats.add(conversation);
@@ -87,6 +99,35 @@ public class UserManager {
             }
         } else {
             System.out.println("No chat data file found. Starting with an empty chat list.");
+        }
+    }
+    public static void sendRequestNotification(User sender, User receiver) {
+        Notification notification = new FriendRequestNotification(
+                sender.getUsername() + " sent you a friend request!",
+                sender
+        );
+        notifications.computeIfAbsent(receiver, k -> new ArrayList<>()).add(notification);
+    }
+
+    public static boolean hasPendingRequest(User sender, User receiver) {
+        List<Notification> receiverNotifications = notifications.getOrDefault(receiver, new ArrayList<>());
+        for (Notification notification : receiverNotifications) {
+            if (notification instanceof FriendRequestNotification &&
+                    ((FriendRequestNotification) notification).getSender().equals(sender)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static List<Notification> getUserNotifications(User user) {
+        return notifications.getOrDefault(user, new ArrayList<>());
+    }
+
+    public static void removeNotification(User user, Notification notification) {
+        List<Notification> userNotifications = notifications.get(user);
+        if (userNotifications != null) {
+            userNotifications.remove(notification);
         }
     }
 }

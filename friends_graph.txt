@@ -1,1 +1,2 @@
-Adham -> Ahmed
+a -> s
+s -> a

@@ -9,15 +9,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Objects;
 
 public class ProfilePage {
@@ -40,6 +41,9 @@ public class ProfilePage {
     @FXML
     private Label EmailL;
 
+    @FXML
+    private ListView<String> friendsListView;
+
     public void initialize() {
         nameLabel.setText(user.getUsername());
         Image image = new Image(getClass().getResourceAsStream(user.getImageUrl()));
@@ -51,6 +55,10 @@ public class ProfilePage {
         BirthDateL.setText(formattedDateString);
         GenderL.setText(user.getGender());
         EmailL.setText(user.getEmail());
+
+        FriendsManager friendsManager = new FriendsManager();
+        List<String> friends = friendsManager.getUserFriends(user.getUsername());
+        friendsListView.getItems().addAll(friends);
     }
 
     public void returntoHomepage(MouseEvent e) throws IOException {
@@ -61,10 +69,11 @@ public class ProfilePage {
         stage.setScene(scene);
         stage.show();
     }
+
     public void LogOut(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("login.fxml")));
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        scene=new Scene(root);
+        scene = new Scene(root);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Login.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
@@ -78,5 +87,6 @@ public class ProfilePage {
         stage.setY(centerY);
 
     }
+
 
 }
