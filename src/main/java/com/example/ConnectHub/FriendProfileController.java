@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
@@ -17,12 +18,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Objects;
 
 public class FriendProfileController {
     private Stage stage;
     private Scene scene;
     private User user = SearchResults.friendUser;
+    private User Myuser = UserManager.curr_user;
+
     FriendsManager friends_manager = new FriendsManager();
 
     @FXML
@@ -40,6 +44,9 @@ public class FriendProfileController {
     @FXML
     private Label EmailL;
 
+    @FXML
+    private ListView<String> MutualfriendsListView;
+
     public void initialize() {
         nameLabel.setText(user.getUsername());
         Image image = new Image(getClass().getResourceAsStream(user.getImageUrl()));
@@ -51,6 +58,13 @@ public class FriendProfileController {
         BirthDateL.setText(formattedDateString);
         GenderL.setText(user.getGender());
         EmailL.setText(user.getEmail());
+
+        FriendsManager friendsManager = new FriendsManager();
+        List<String> Userfriends = friendsManager.getUserFriends(user.getUsername());
+        List<String> Myfriends = friendsManager.getUserFriends(Myuser.getUsername());
+
+        Userfriends.retainAll(Myfriends);
+        MutualfriendsListView.getItems().addAll(Userfriends);
     }
 
     public void returntoHomepage(MouseEvent e) throws IOException {
