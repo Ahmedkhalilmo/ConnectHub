@@ -32,7 +32,7 @@ public class NotificationBar implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
-            for (Notification notification : UserManager.curr_user.getCurrentNotifications()) {
+            for (Notification notification : UserManager.getUserNotifications(UserManager.curr_user)) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 Parent root;
                 fxmlLoader.setLocation(getClass().getResource("NotificationPanel.fxml"));

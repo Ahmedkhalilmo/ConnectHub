@@ -30,6 +30,6 @@ public class NotificationPanel {
     public void DeleteNotification(MouseEvent e)
     {
         notificationBar.getChildren().remove(NotificationBox);
-        UserManager.curr_user.RemoveNotification(curr_notification);
+        UserManager.removeNotification(UserManager.curr_user,curr_notification);
     }
 }
