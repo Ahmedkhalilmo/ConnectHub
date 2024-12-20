@@ -22,13 +22,19 @@ public class FriendsManager {
         // Add user1 and user2 to the graph if they don't exist
         System.out.println("started");
         friendsGraph.putIfAbsent(user1, new HashSet<>());
-
+        sendRequestNotification(UserManager.curr_user,UserManager.curr_user);
         System.out.println("initialzed");
         // Add the friendship connection
         friendsGraph.get(user1).add(user2);
 
         System.out.println("friend added");
         saveToFile();
+    }
+
+    public static void sendRequestNotification(User sender,User reciever)
+    {
+        Notification notification = new FriendRequestNotification(sender.getUsername()+" sent you a friend request!",sender);
+        reciever.addNotifications(notification);
     }
 
     // removes the friends connection

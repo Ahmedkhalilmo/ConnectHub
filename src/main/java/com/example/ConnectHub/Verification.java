@@ -73,6 +73,7 @@ public class Verification {
             return false;
         }
     }
+
     public static String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
