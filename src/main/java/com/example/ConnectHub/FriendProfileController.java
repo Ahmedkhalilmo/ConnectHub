@@ -76,8 +76,8 @@ public class FriendProfileController {
         stage.show();
     }
     public void addFriend(ActionEvent e){
-        String user2 = user.getUsername();
-        String user1 = UserManager.curr_user.getUsername();
+        User user2 = user;
+        User user1 = UserManager.curr_user;
         friends_manager.addFriend(user1,user2);
     }
 

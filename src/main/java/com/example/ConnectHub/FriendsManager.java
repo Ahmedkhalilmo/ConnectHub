@@ -18,23 +18,28 @@ public class FriendsManager {
     }
 
     // add new friend connection between users
-    public void addFriend(String user1, String user2) {
+    public void addFriend(User sender, User receiver) {
         // Add user1 and user2 to the graph if they don't exist
         System.out.println("started");
-        friendsGraph.putIfAbsent(user1, new HashSet<>());
-        sendRequestNotification(UserManager.curr_user,UserManager.curr_user);
-        System.out.println("initialzed");
-        // Add the friendship connection
-        friendsGraph.get(user1).add(user2);
+        sendRequestNotification(sender, receiver);
+        System.out.println("notification sent");
 
-        System.out.println("friend added");
         saveToFile();
     }
+    public void accept_request(User sender, User receiver){
+        String sender_username = sender.getUsername();
+        String reciever_username = receiver.getUsername();
+        friendsGraph.putIfAbsent(sender_username, new HashSet<>());
+        friendsGraph.putIfAbsent(reciever_username, new HashSet<>());
+        friendsGraph.get(sender_username).add(reciever_username);
+        friendsGraph.get(reciever_username).add(sender_username);
+        System.out.println("friend added");
+    }
 
-    public static void sendRequestNotification(User sender,User reciever)
+    public static void sendRequestNotification(User sender,User receiver)
     {
         Notification notification = new FriendRequestNotification(sender.getUsername()+" sent you a friend request!",sender);
-        reciever.addNotifications(notification);
+        receiver.addNotifications(notification);
     }
 
     // removes the friends connection
