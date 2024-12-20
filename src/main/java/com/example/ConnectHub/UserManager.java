@@ -56,34 +56,14 @@ public class UserManager {
         }
         return null;
     }
-    public static void sendRequestNotification(User sender, User receiver) {
-        Notification notification = new FriendRequestNotification(
-                sender.getUsername() + " sent you a friend request!",
-                sender
-        );
-        notifications.computeIfAbsent(receiver, k -> new ArrayList<>()).add(notification);
-    }
 
-    public static boolean hasPendingRequest(User sender, User receiver) {
-        List<Notification> receiverNotifications = notifications.getOrDefault(receiver, new ArrayList<>());
-        for (Notification notification : receiverNotifications) {
-            if (notification instanceof FriendRequestNotification &&
-                    ((FriendRequestNotification) notification).getSender().equals(sender)) {
-                return true;
+    public static User getFriend(String username) {
+        for (User user : users) {
+            if (username.equals(user.getUsername())) {
+                return user;
             }
         }
-        return false;
-    }
-
-    public static List<Notification> getUserNotifications(User user) {
-        return notifications.getOrDefault(user, new ArrayList<>());
-    }
-
-    public static void removeNotification(User user, Notification notification) {
-        List<Notification> userNotifications = notifications.get(user);
-        if (userNotifications != null) {
-            userNotifications.remove(notification);
-        }
+        return null;
     }
 
     public static void addConversation(Conversation conversation)
@@ -119,6 +99,35 @@ public class UserManager {
             }
         } else {
             System.out.println("No chat data file found. Starting with an empty chat list.");
+        }
+    }
+    public static void sendRequestNotification(User sender, User receiver) {
+        Notification notification = new FriendRequestNotification(
+                sender.getUsername() + " sent you a friend request!",
+                sender
+        );
+        notifications.computeIfAbsent(receiver, k -> new ArrayList<>()).add(notification);
+    }
+
+    public static boolean hasPendingRequest(User sender, User receiver) {
+        List<Notification> receiverNotifications = notifications.getOrDefault(receiver, new ArrayList<>());
+        for (Notification notification : receiverNotifications) {
+            if (notification instanceof FriendRequestNotification &&
+                    ((FriendRequestNotification) notification).getSender().equals(sender)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static List<Notification> getUserNotifications(User user) {
+        return notifications.getOrDefault(user, new ArrayList<>());
+    }
+
+    public static void removeNotification(User user, Notification notification) {
+        List<Notification> userNotifications = notifications.get(user);
+        if (userNotifications != null) {
+            userNotifications.remove(notification);
         }
     }
 }
