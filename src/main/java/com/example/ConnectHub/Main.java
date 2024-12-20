@@ -36,7 +36,7 @@ public class Main extends Application {
         {
             event.consume();
             UserManager.saveUsers();
-            stage.close();
+                stage.close();
         });
 
     }

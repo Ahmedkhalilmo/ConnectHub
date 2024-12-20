@@ -77,7 +77,7 @@ public class ProfilePage {
 
     private void switchToFriendProfile() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FriendProfileController.fxml"));            Parent root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Friend.fxml"));            Parent root = loader.load();
             stage = (Stage) friendsListView.getScene().getWindow();
             scene = new Scene(root);
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("profile.css")).toExternalForm());
