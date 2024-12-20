@@ -25,14 +25,10 @@ public class NotificationBar implements Initializable {
     private Stage stage;
     private Scene scene;
     @FXML
-    void returnToHomepage(MouseEvent event) {
-        StackPane StartUpPane = (StackPane)((Node)event.getSource()).getScene().getRoot();
-        StartUpPane.getChildren().remove(PostSelectedPanel);
-    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
-            for (Notification notification : UserManager.curr_user.getCurrentNotifications()) {
+            for (Notification notification : UserManager.getUserNotifications(UserManager.curr_user)) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 Parent root;
                 fxmlLoader.setLocation(getClass().getResource("NotificationPanel.fxml"));
@@ -46,7 +42,7 @@ public class NotificationBar implements Initializable {
             e.printStackTrace();
         }
     }
-    public void returntoHomepage(MouseEvent e) throws IOException {
+    public void returnToHomepage(MouseEvent e) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Home.fxml")));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene=new Scene(root);
@@ -54,6 +50,7 @@ public class NotificationBar implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
 
     public void openNotificationPanel(MouseEvent mouseEvent) {
     }

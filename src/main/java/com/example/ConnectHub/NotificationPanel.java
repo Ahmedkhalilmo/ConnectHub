@@ -1,4 +1,5 @@
 package com.example.ConnectHub;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -7,6 +8,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+
+import java.io.IOException;
 
 public class NotificationPanel {
     @FXML
@@ -27,9 +30,16 @@ public class NotificationPanel {
         Image image = new Image(getClass().getResourceAsStream(notification.getSender().getImageUrl()));
         ProfileImageView.setFill(new ImagePattern(image));
     }
-    public void DeleteNotification(MouseEvent e)
+    public void DeleteNotification(ActionEvent e)
     {
         notificationBar.getChildren().remove(NotificationBox);
-        UserManager.curr_user.RemoveNotification(curr_notification);
+        UserManager.removeNotification(UserManager.curr_user,curr_notification);
+    }
+
+    public void acceptNotification(ActionEvent e) throws IOException {
+        FriendsManager friendsManager = new FriendsManager();
+        friendsManager.acceptRequest(curr_notification.sender, UserManager.curr_user);
+        notificationBar.getChildren().remove(NotificationBox);
+        UserManager.removeNotification(UserManager.curr_user,curr_notification);
     }
 }
