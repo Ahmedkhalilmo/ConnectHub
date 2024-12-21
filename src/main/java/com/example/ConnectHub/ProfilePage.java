@@ -23,45 +23,26 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
-public class ProfilePage {
-    private Stage stage;
-    private Scene scene;
-    private User user = UserManager.curr_user;
+public class ProfilePage extends Profile {
+
     public static User friendUser;
 
-    @FXML
-    private Label nameLabel;
-
-    @FXML
-    private Circle CircleImageView;
-
-    @FXML
-    private Label BirthDateL;
-
-    @FXML
-    private Label GenderL;
-
-    @FXML
-    private Label EmailL;
-
-    @FXML
-    private ListView<String> friendsListView;
 
     public void initialize() {
-        nameLabel.setText(user.getUsername());
-        Image image = new Image(getClass().getResourceAsStream(user.getImageUrl()));
+        nameLabel.setText(myUser.getUsername());
+        Image image = new Image(getClass().getResourceAsStream(myUser.getImageUrl()));
         CircleImageView.setFill(new ImagePattern(image));
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String formattedDateString = user.getUserBirthDate().format(formatter);
+        String formattedDateString = myUser.getUserBirthDate().format(formatter);
 
         BirthDateL.setText(formattedDateString);
-        GenderL.setText(user.getGender());
-        EmailL.setText(user.getEmail());
+        GenderL.setText(myUser.getGender());
+        EmailL.setText(myUser.getEmail());
 
         FriendsManager friendsManager = new FriendsManager();
-        List<String> friends = friendsManager.getUserFriends(user.getUsername());
-        friends.removeIf(friend -> friend.equals(user.getUsername()));
+        List<String> friends = friendsManager.getUserFriends(myUser.getUsername());
+        friends.removeIf(friend -> friend.equals(myUser.getUsername()));
         friendsListView.getItems().addAll(friends);
         friendsListView.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
@@ -107,7 +88,7 @@ public class ProfilePage {
         }
     }
 
-    private void switchToFriendProfile() {
+    protected void switchToFriendProfile() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Friend.fxml"));            Parent root = loader.load();
             stage = (Stage) friendsListView.getScene().getWindow();

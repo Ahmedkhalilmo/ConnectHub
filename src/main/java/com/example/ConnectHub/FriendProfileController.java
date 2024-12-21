@@ -24,51 +24,31 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
-public class FriendProfileController {
-    private Stage stage;
-    private Scene scene;
-    private User user = SearchResults.friendUser;
-    private User Myuser = UserManager.curr_user;
+public class FriendProfileController extends Profile {
 
+    private User friendUser= SearchResults.friendUser;
     FriendsManager friends_manager = new FriendsManager();
 
-    @FXML
-    private Label nameLabel;
-
-    @FXML
-    private Circle CircleImageView;
-
-    @FXML
-    private Label BirthDateL;
-
-    @FXML
-    private Label GenderL;
-
-    @FXML
-    private Label EmailL;
-
-    @FXML
-    private ListView<String> MutualfriendsListView;
 
     public void initialize() {
 
 
-        nameLabel.setText(user.getUsername());
-        Image image = new Image(getClass().getResourceAsStream(user.getImageUrl()));
+        nameLabel.setText(friendUser.getUsername());
+        Image image = new Image(getClass().getResourceAsStream(friendUser.getImageUrl()));
         CircleImageView.setFill(new ImagePattern(image));
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String formattedDateString = user.getUserBirthDate().format(formatter);
+        String formattedDateString = friendUser.getUserBirthDate().format(formatter);
 
         BirthDateL.setText(formattedDateString);
-        GenderL.setText(user.getGender());
-        EmailL.setText(user.getEmail());
+        GenderL.setText(friendUser.getGender());
+        EmailL.setText(friendUser.getEmail());
 
         FriendsManager friendsManager = new FriendsManager();
-        List<String> Userfriends = friendsManager.getUserFriends(user.getUsername());
-        List<String> Myfriends = friendsManager.getUserFriends(Myuser.getUsername());
+        List<String> Userfriends = friendsManager.getUserFriends(friendUser.getUsername());
+        List<String> Myfriends = friendsManager.getUserFriends(myUser.getUsername());
         Userfriends.retainAll(Myfriends);
-        Userfriends.removeIf(friend -> friend.equals(user.getUsername()) || friend.equals(Myuser.getUsername()));
+        Userfriends.removeIf(friend -> friend.equals(friendUser.getUsername()) || friend.equals(myUser.getUsername()));
         MutualfriendsListView.getItems().addAll(Userfriends);
         MutualfriendsListView.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
@@ -113,8 +93,8 @@ public class FriendProfileController {
 
     }
     public void addFriend(ActionEvent e){
-        User user2 = user;
-        User user1 = UserManager.curr_user;
+        User user2 =friendUser;
+        User user1 = myUser;
         friends_manager.addFriend(user1,user2);
     }
 
