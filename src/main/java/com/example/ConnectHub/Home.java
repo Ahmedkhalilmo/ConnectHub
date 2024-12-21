@@ -19,7 +19,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
 import javafx.scene.input.MouseEvent;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,11 +40,9 @@ public class Home {
     private VBox postsContainer;
     @FXML
     private VBox PostCardLayout;
-
     private Image postImage;
     @FXML
     private Label UsernameLabel;
-
     @FXML
     private Circle ProfileImageView;
 
@@ -120,15 +117,23 @@ public class Home {
 
         File selectedFile = fileChooser.showOpenDialog(stage); // Use the current stage
         if (selectedFile != null) {
-            String relativePath = "src/main/resources/com/example/ConnectHub/PostsPics";
+            String relativePath = "src/main/resources/com/example/ConnectHub/PostPics";
             postImage = new Image(selectedFile.toURI().toString());
             Path from = Paths.get(selectedFile.toURI());
             String name = String.valueOf(posts.size());
             Path to = Paths.get(relativePath, name + ".png");
-            System.out.println(to.toString());
-            if (!Files.exists(to)) {
-                Files.copy(from, to);
+            System.out.println("saving path 1: " + to.toString());
+            System.out.println("saving path 2: " + from.toString());
+            try {
+                if (!Files.exists(to)) {
+                    Files.copy(from, to);
+                } else {
+                    System.out.println("File already exists: " + to);
+                }
+            } catch (IOException e) {
+                System.err.println("Error copying file: " + e.getMessage());
             }
+
             System.out.println("Image uploaded: " + selectedFile.getName());
         }
     }
@@ -216,13 +221,11 @@ public class Home {
         Button likeButton = new Button("Like");
         likeButton.setStyle("-fx-background-color: #4CAF50; -fx-padding: 10px 10px; -fx-font-size: 14px;");
         likeButton.setOnAction(event -> likePost(post, likeButton));
-
         // Set the initial button state depending on whether the current user liked the post
         if (post.isLikedByCurrentUser()) {
             likeButton.setText("Liked");
             likeButton.setStyle("-fx-background-color: #f44336; -fx-text-fill: white; -fx-border-radius: 5px;");
         }
-
         return likeButton;
     }
 
@@ -259,9 +262,10 @@ public class Home {
             post.addLike(user); // Add current user to the likers set
             likeButton.setText("Liked");
             likeButton.setStyle("-fx-background-color: #f44336; -fx-text-fill: white; -fx-border-radius: 5px;");
-            UserManager.sendNotification(user , post.getPoster(), 2);
+            if(user.getUsername() != post.getPoster().getUsername())
+                UserManager.sendNotification(user , post.getPoster(), 2);
         }
-        savePostsToFile(); // Save posts after liking/unliking
+        savePostsToFile();
     }
 
 
@@ -320,10 +324,16 @@ public class Home {
                         post = new Post(postData[1], UserManager.getFriend(postData[0]));
                     }
                     else {
-                        String path = "/com/example/ConnectHub/PostPics/" + id + ".png";
-                        System.out.println(path);
-                        Image img = new Image(Home.class.getResourceAsStream(path));
-                        post = new Post(postData[1], img, UserManager.getFriend(postData[0]));
+                        String path = "src/main/resources/com/example/ConnectHub/PostPics/" + id + ".png";
+                        System.out.println("Reading resource: " + path);
+                        File imageFile = new File(path);
+                        if (imageFile.exists()) {
+                            Image img = new Image(imageFile.toURI().toString());
+                            post = new Post(postData[1], img, UserManager.getFriend(postData[0]));
+                        } else {
+                            System.err.println("Image file not found: " + path);
+                            post = new Post(postData[1], UserManager.getFriend(postData[0]));
+                        }
                     }
                     System.out.println("debug 3");
                     HashSet<User> likers = new HashSet<>();
