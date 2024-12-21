@@ -13,7 +13,7 @@ public class UserManager {
     protected static String ChatsFilePath = "chats.dat";
     private static final String notificationFilePath = "notifications.txt";
     public static List<Conversation> chats = new ArrayList<>();
-    private static Map<User, List<Notification>> notifications = new HashMap<>();
+    public static Map<User, List<Notification>> notifications = new HashMap<>();
 
 
     public static void loadNotifications() {

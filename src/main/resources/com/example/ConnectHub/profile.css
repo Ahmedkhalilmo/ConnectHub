@@ -1,5 +1,5 @@
 .button {
-    -fx-background-color: linear-gradient(to right, #6a11cb, #2575fc);
+    -fx-background-color: grey;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 16px;
@@ -11,14 +11,8 @@
 }
 
 .button:hover {
-    -fx-background-color: linear-gradient(to right, #2575fc, #6a11cb);
+    -fx-background-color: grey;
 }
-
-.button:pressed {
-    -fx-background-color: #1e5ab5;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 3, 0.5, 0, 2);
-}
-
 
 #returntimage {
   -fx-cursor: hand;

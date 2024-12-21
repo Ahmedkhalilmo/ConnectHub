@@ -26,11 +26,6 @@ public class Friend extends Profile {
 
     private User friendUser = ProfilePage.friendUser;
 
-
-
-
-
-
     public void initialize() {
         nameLabel.setText(friendUser.getUsername());
         Image image = new Image(getClass().getResourceAsStream(friendUser.getImageUrl()));

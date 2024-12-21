@@ -7,6 +7,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -21,22 +22,21 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class FriendProfileController extends Profile {
-
-    private User friendUser= SearchResults.friendUser;
+    @FXML
+    private Button connectButton;
+    private User friendUser = SearchResults.friendUser;
     FriendsManager friends_manager = new FriendsManager();
 
-
     public void initialize() {
-
-
         nameLabel.setText(friendUser.getUsername());
         Image image = new Image(getClass().getResourceAsStream(friendUser.getImageUrl()));
         CircleImageView.setFill(new ImagePattern(image));
-
+        updateConnectButton();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String formattedDateString = friendUser.getUserBirthDate().format(formatter);
 
@@ -81,14 +81,52 @@ public class FriendProfileController extends Profile {
             }
         });
     }
+    private void updateConnectButton() {
+        if(UserManager.hasPendingRequest(UserManager.curr_user, friendUser)) {
+            connectButton.setText("Pending");
+            connectButton.setStyle("-fx-background-color: grey; -fx-text-fill: white;");
+            connectButton.setDisable(true);
+        }
+        else if(UserManager.hasPendingRequest(friendUser, UserManager.curr_user)) {
+            connectButton.setText("Accept");
+            connectButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+            connectButton.setOnAction(event -> acceptConnection());
+        }
+        else if(friends_manager.getUserFriends(UserManager.curr_user.getUsername()).contains(friendUser.getUsername())) {
+            connectButton.setText("Connected");
+            connectButton.setStyle("-fx-background-color: grey; -fx-text-fill: white;");
+            connectButton.setDisable(true);
+        }
+        else {
+            connectButton.setText("Connect");
+            connectButton.setStyle("-fx-background-color: blue; -fx-text-fill: white;");
+            connectButton.setOnAction(event -> sendConnectionRequest());
+        }
+    }
 
+    private void acceptConnection() {
+        friends_manager.acceptRequest(friendUser, UserManager.curr_user);
+        System.out.println(friendUser.getUsername() + "sent" +  UserManager.curr_user.getUsername());
+        List<Notification> lst = UserManager.notifications.get( UserManager.curr_user);
+        for(Notification n : lst) {
+            if(n.sender.getUsername().equals(friendUser.getUsername()) && n instanceof FriendRequestNotification) {
+                UserManager.removeNotification(myUser,n);
+                break;
+            }
+        }
+        updateConnectButton();
+    }
+
+    private void sendConnectionRequest() {
+        friends_manager.addFriend(myUser, friendUser);
+        updateConnectButton();
+    }
     public void returntoHomepage(MouseEvent e) throws IOException {
-
-            Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Home.fxml")));
-            stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Home.css")).toExternalForm());
-            stage.setScene(scene);
+        Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Home.fxml")));
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Home.css")).toExternalForm());
+        stage.setScene(scene);
 
 
     }
@@ -96,6 +134,7 @@ public class FriendProfileController extends Profile {
         User user2 =friendUser;
         User user1 = myUser;
         friends_manager.addFriend(user1,user2);
+        updateConnectButton();
     }
 
 }

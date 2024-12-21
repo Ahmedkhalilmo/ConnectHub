@@ -208,7 +208,7 @@
                         </LinearGradient>
                     </textFill>
                 </Label>
-            <Button layoutX="1054.0" layoutY="44.0" mnemonicParsing="false" onAction="#addFriend" prefHeight="38.0" prefWidth="119.0" text="Connect" textFill="#0a60fa">
+            <Button fx:id="connectButton" layoutX="1022.0" layoutY="44.0" mnemonicParsing="false" onAction="#addFriend" prefHeight="38.0" prefWidth="176.0" text="Connect" textFill="#0a60fa">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
