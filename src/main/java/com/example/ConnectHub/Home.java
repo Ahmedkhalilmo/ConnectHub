@@ -21,17 +21,18 @@ import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class Home {
     private Stage stage;
     private Scene scene;
     private User user = UserManager.curr_user;  // Using the logged-in user from UserManager
-    private List<Post> posts = new ArrayList<>();
+    public static List<Post> posts = new ArrayList<>();
     private String imgUrl = user.getImageUrl();
-
+    private static final String postFilePath = "posts.txt" ;
     @FXML
     private TextField postContentArea;
     @FXML
@@ -49,10 +50,12 @@ public class Home {
     private Circle ProfileImageView;
 
     public void initialize() {
+        loadPostsFromFile(); // Load saved posts from 'posts.txt'
         UsernameLabel.setText(user.getUsername());
+        displayPosts();
         loadUserProfileImage();
-        loadPostsFromFile(); // Load saved posts from 'posts.dat'
-        Runtime.getRuntime().addShutdownHook(new Thread(this::savePostsToFile)); // Save posts on shutdown
+        System.out.println("init");
+//        Runtime.getRuntime().addShutdownHook(new Thread(this::savePostsToFile)); // Save posts on shutdown
     }
 
     private void loadUserProfileImage() {
@@ -95,21 +98,20 @@ public class Home {
             postImage = null;
             Post newPost = new Post(content, currentPostImage, user);
 
-            // Add the current user to the likers set if they liked the post
             if (newPost.isLikedByCurrentUser()) {
                 newPost.addLike(user);  // Ensure the user is added to the likers set
             }
 
             posts.add(newPost);
             postContentArea.clear();
-            displayPosts();
             savePostsToFile(); // Save posts after creation
+            displayPosts();
         } else {
             System.out.println("Cannot create an empty post.");
         }
     }
 
-    public void uploadImage() {
+    public void uploadImage() throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image");
         fileChooser.getExtensionFilters().add(
@@ -117,13 +119,22 @@ public class Home {
 
         File selectedFile = fileChooser.showOpenDialog(stage); // Use the current stage
         if (selectedFile != null) {
+            String relativePath = "src/main/resources/com/example/ConnectHub/PostsPics";
             postImage = new Image(selectedFile.toURI().toString());
+            Path from = Paths.get(selectedFile.toURI());
+            String name = String.valueOf(posts.size());
+            Path to = Paths.get(relativePath, name + ".png");
+            System.out.println(to.toString());
+            if (!Files.exists(to)) {
+                Files.copy(from, to);
+            }
             System.out.println("Image uploaded: " + selectedFile.getName());
         }
     }
 
     public void displayPosts() {
         postsContainer.getChildren().clear();
+        loadPostsFromFile();
         for (Post post : posts) {
             VBox postBox = createPostBox(post);
 
@@ -247,28 +258,85 @@ public class Home {
             post.addLike(user); // Add current user to the likers set
             likeButton.setText("Liked");
             likeButton.setStyle("-fx-background-color: #f44336; -fx-text-fill: white; -fx-border-radius: 5px;");
+            UserManager.sendNotification(user , post.getPoster(), 2);
         }
-
         savePostsToFile(); // Save posts after liking/unliking
     }
 
 
     private void savePostsToFile() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("posts.dat"))) {
-            oos.writeObject(posts);  // Save the posts list to the 'posts.dat' file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(postFilePath, false))) {
+                for (Post post : posts) {
+                    StringBuilder postBuilder = new StringBuilder();
+                    postBuilder.append(post.id)
+                            .append("->")
+                            .append(post.getPoster().getUsername())
+                            .append("/")
+                            .append(post.getTextContent())
+                            .append("/")
+                            .append(post.getlikers().size())
+                            .append("/")
+                            .append(post.getImageUrl()==null?"-":post.id)
+                            .append(",");
+
+                    for(User liker : post.getlikers()){
+                        postBuilder.append(liker.getUsername())
+                                .append("/");
+                    }
+
+                    String line = postBuilder.toString();
+                    writer.write(line);
+                    writer.newLine();
+                }
+            System.out.println("posts saved successfully.");
         } catch (IOException e) {
-            System.err.println("Error saving posts to file: " + e.getMessage());
-            e.printStackTrace();
+            System.err.println("Error saving posts: " + e.getMessage());
         }
     }
 
-    private void loadPostsFromFile() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("posts.dat"))) {
-            posts = (List<Post>) ois.readObject();  // Load the list of posts
-            displayPosts();
-        } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Error loading posts from file: " + e.getMessage());
-            e.printStackTrace();
+    private static void loadPostsFromFile() {
+        posts.clear();
+        try (BufferedReader reader = new BufferedReader(new FileReader(postFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("->");
+                if (parts.length == 2) {
+                    int id = Integer.parseInt(parts[0]);
+                    String[] parts2 = parts[1].split(",");
+                    String[] postData = parts2[0].split("/");
+
+                    String[] likersData;
+                    String path = null;
+                    if(!postData[2].equals("0")) {
+                        likersData = parts2[1].split("/");
+                        path = "src/main/resources/com/example/ConnectHub/PostPics/" + id + ".png";
+                        System.out.println("a7a");System.out.println("a7a3");System.out.println("a7a4");System.out.println("a7a5");
+                        System.out.println(path);
+
+                    }
+                    else likersData = new String[0];
+
+                    Post post = new Post(null, null);
+                    if(postData[3].equals("-")) {
+                        post = new Post(postData[1], UserManager.getFriend(postData[0]));
+                    }
+                    else {
+                        Image img = new Image(path);
+                        post = new Post(postData[1], img, UserManager.getFriend(postData[0]));
+                    }
+                    HashSet<User> likers = new HashSet<>();
+                    for(String username : likersData){
+                        likers.add(UserManager.getFriend(username));
+                    }
+                    post.setLikers(likers);
+                    post.id = id;
+                    posts.add(post);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("No files detected.");
+        } catch (IOException e) {
+            System.err.println("Error loading from file: " + e.getMessage());
         }
     }
 }

@@ -2,6 +2,7 @@ package com.example.ConnectHub;
 
 import javafx.scene.image.Image;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +14,8 @@ class Post implements Serializable {
     private int likeCount; // Add like count
     private Set<User> likers;
     private boolean likedByCurrentUser; // To track the "liked" status for the current user
+    public static int counter =0;
+    public int id;
 
     // Constructor for posts without an image
     public Post(String textContent, User poster) {
@@ -23,6 +26,7 @@ class Post implements Serializable {
         this.likeCount = 0;  // Initialize like count
         this.likers = new HashSet<>();
         this.likedByCurrentUser = false; // Default to false
+        this.id = Home.posts.size();
     }
 
     // Constructor for posts with an image
@@ -34,13 +38,17 @@ class Post implements Serializable {
         this.likeCount = 0;  // Initialize like count
         this.likers = new HashSet<>();
         this.likedByCurrentUser = false; // Default to false
+        this.id = Home.posts.size();
     }
 
     // Set the like status for the current user
     public void setLikedByCurrentUser(boolean liked) {
         this.likedByCurrentUser = liked;
     }
-
+    public void setLikers(HashSet<User> liker){
+        this.likeCount = liker.size();
+        likers = liker;
+    }
     public void addLike(User user) {
         this.likers.add(user);  // Add the user to the likers set
         setLikedByCurrentUser(true); // Set as liked by current user

@@ -7,7 +7,7 @@ import java.util.*;
 import java.time.LocalDateTime;
 
 public class UserManager {
-    public static List<User> users = new ArrayList<>();
+    public static ArrayList<User> users = new ArrayList<>();
     public static User curr_user;
     private static final String userfilepath = "users.dat";
     protected static String ChatsFilePath = "chats.dat";
@@ -74,7 +74,6 @@ public class UserManager {
                             .append(notification.timestamp.toString())
                             .append(",");
                 }
-
                 // Remove the trailing comma
                 if (notificationsBuilder.length() > 0) {
                     notificationsBuilder.setLength(notificationsBuilder.length() - 1);
@@ -111,7 +110,7 @@ public class UserManager {
         File file = new File(userfilepath);
         if (file.exists()) {
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
-                users = (List<User>) in.readObject();
+                users = (ArrayList<User>) in.readObject();
                 System.out.println("Users loaded successfully.");
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();

@@ -132,6 +132,10 @@ public class CreateAccount {
                 ErrorLabel.setText("Please enter a birthdate");
                 return;
             }
+            if (userBirthDate.isAfter(LocalDate.of(2010, 12, 31))) {
+                ErrorLabel.setText("You must be at least 14 years old");
+                return;
+            }
             if (!password.equals(password2)) {
                 ErrorLabel.setText("Passwords don't match!");
                 return;
