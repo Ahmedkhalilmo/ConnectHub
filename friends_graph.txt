@@ -1,3 +1,7 @@
 aa -> a
 aaa -> a
 a -> aa,aaa
+b -> kareem
+kareem -> b,adham,saad
+adham -> kareem
+saad -> kareem

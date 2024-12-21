@@ -7,12 +7,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 
 
@@ -64,20 +66,26 @@ public class ConversationPanel {
         UserManager.saveChats();
     }
 
-    //public void addUser(MouseEvent e) throws IOException {
-    //StackPane StartUpPane = (StackPane)((Node)e.getSource()).getScene().getRoot();
-    //if(StartUpPane.getChildren().size() >= 2)
-    //{
-    //    return;
-    //}
-    //FXMLLoader fxmlLoader = new FXMLLoader();
-    //Parent root;
-    // fxmlLoader.setLocation(getClass().getResource("FriendsListGUI.fxml"));
-    //root = fxmlLoader.load();
-    //FriendsListGUI friendsListGUI = fxmlLoader.getController();
-    //friendsListGUI.setData(curr_conversation,root);
-    //StartUpPane.getChildren().add(root);
-    //}
+    public void addUser(MouseEvent e) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL fxmlLocation = getClass().getResource("FriendListGUI.fxml");
+        fxmlLoader.setLocation(fxmlLocation);
+        Parent root = fxmlLoader.load();
+
+// Get the controller for FriendsListGUI and set data
+        FriendsListGUI friendsListGUI = fxmlLoader.getController();
+        friendsListGUI.setData(curr_conversation, root);
+
+// Optionally, you can set the scene for the stage (if needed)
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+
     public void returnToChats(MouseEvent e) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Chat.fxml")));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();

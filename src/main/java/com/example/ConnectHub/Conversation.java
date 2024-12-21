@@ -38,34 +38,25 @@ public class Conversation implements Serializable{
     public void sendMessage(User current, Message message){
         allMessages.add(message);
     }
+
     public void addUser(User user) {
-        if(usersOfConcervation.contains(user)){
-            System.out.println("user already exists");
+        boolean userExists = false;
+
+        // Check if the user already exists using a for loop
+        for (User u : usersOfConcervation) {
+            if (u.equals(user)) {  // Assuming User class has properly overridden equals() method
+                userExists = true;
+                break;
+            }
         }
-        else
-        {
+
+        if (userExists) {
+            System.out.println("User already exists");
+        } else {
             usersOfConcervation.add(user);
             UsernamesOfParticipants.add(user.getUsername().toLowerCase());
         }
     }
-    public void displayConservation(){
-        for (Message item:allMessages) {
-            item.displayMessage();
-        }
-    }
-    public void showFriends(){
-        for (User item:usersOfConcervation) {
-            System.out.println(item.getUsername());
-        }
-    }
-    //public void DisplayFriend(User curr){
-        //for (User friend: curr.getFriends()) {
-           // if(!usersOfConcervation.contains(friend)){
-               // System.out.println(friend.getUsername());
-            //}
-
-        //}
-    //}
 
     public String getNameOfChat() {
         return nameOfChat;

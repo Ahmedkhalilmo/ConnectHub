@@ -89,7 +89,7 @@
                 </Pane>
             </children>
         </HBox>
-        <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="967.0" layoutY="632.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="967.0" layoutY="632.0" onMouseClicked="#addUser" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@adduser.png" />
             </image>

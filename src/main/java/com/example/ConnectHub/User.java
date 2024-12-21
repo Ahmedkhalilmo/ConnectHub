@@ -50,4 +50,6 @@ public class User implements Serializable {
     public String getImageUrl() {
         return imageUrl;
     }
+
+
 }
