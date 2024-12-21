@@ -8,7 +8,10 @@ public abstract class Notification implements Serializable{
     protected String message;
     LocalDateTime timestamp;
     User sender;
-
+    int type;
+    // 1 -> Friend Request
+    // 2 -> Like
+    // 3 -> Comment
 
     public User getSender() {
         return sender;

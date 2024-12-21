@@ -16,7 +16,7 @@ public class UserManager {
     private static Map<User, List<Notification>> notifications = new HashMap<>();
 
 
-    public static void loadNotifications(){
+    public static void loadNotifications() {
         try (BufferedReader reader = new BufferedReader(new FileReader(notificationFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -25,12 +25,13 @@ public class UserManager {
                     User user = UserManager.getFriend(parts[0]);
                     Set<String> curNotifications = new HashSet<>(Arrays.asList(parts[1].split(",")));
                     List<Notification> notificationList = new ArrayList<>();
-                    for(String notification : curNotifications){
+                    for (String notification : curNotifications) {
                         String[] notifData = notification.split("/");
                         Notification notify = new FriendRequestNotification(null, null);
                         System.out.println(1);
                         notify.message = notifData[0];
                         notify.sender = UserManager.getFriend(notifData[1]);
+                        notify.type = Integer.parseInt(notifData[3]);
                         notify.timestamp = LocalDateTime.parse(notifData[2]);
                         notificationList.add(notify);
                         System.out.println(2);
@@ -46,7 +47,8 @@ public class UserManager {
             System.err.println("Error loading from file: " + e.getMessage());
         }
     }
-    public static void saveNotifications(){
+
+    public static void saveNotifications() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(notificationFilePath))) {
             for (Map.Entry<User, List<Notification>> entry : notifications.entrySet()) {
                 User user = entry.getKey();
@@ -57,6 +59,8 @@ public class UserManager {
                     notificationsBuilder.append(notification.message)
                             .append("/")
                             .append(notification.sender.getUsername())
+                            .append("/")
+                            .append(notification.type)
                             .append("/")
                             .append(notification.timestamp.toString())
                             .append(",");
@@ -127,8 +131,7 @@ public class UserManager {
         return null;
     }
 
-    public static void addConversation(Conversation conversation)
-    {
+    public static void addConversation(Conversation conversation) {
         chats.add(conversation);
     }
 
@@ -141,6 +144,7 @@ public class UserManager {
         }
         return SearchResults.usersearch;
     }
+
     public static void saveChats() {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(ChatsFilePath))) {
             out.writeObject(chats);
@@ -149,6 +153,7 @@ public class UserManager {
             e.printStackTrace();
         }
     }
+
     public static void loadChats() {
         File file = new File(ChatsFilePath);
         if (file.exists()) {
@@ -162,14 +167,22 @@ public class UserManager {
             System.out.println("No chat data file found. Starting with an empty chat list.");
         }
     }
-    public static void sendRequestNotification(User sender, User receiver) {
-        Notification notification = new FriendRequestNotification(
-                sender.getUsername() + " sent you a friend request!",
-                sender
-        );
+
+    public static void sendNotification(User sender, User receiver, int type) {
+        Notification notification = new FriendRequestNotification(null, sender);
+        if (type == 1) {
+            notification.message =sender.getUsername() + " Sent You a Connection Request";
+        }
+        else if (type == 2) {
+            notification.message =sender.getUsername() + " Liked Your Post";
+        }
+        else if (type == 3) {
+            notification.message =sender.getUsername() + " Commented Your Post";
+        }
         notifications.computeIfAbsent(receiver, k -> new ArrayList<>()).add(notification);
         saveNotifications();
     }
+
 
     public static boolean hasPendingRequest(User sender, User receiver) {
         List<Notification> receiverNotifications = notifications.getOrDefault(receiver, new ArrayList<>());
