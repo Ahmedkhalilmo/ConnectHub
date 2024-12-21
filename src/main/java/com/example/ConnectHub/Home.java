@@ -120,15 +120,23 @@ public class Home {
 
         File selectedFile = fileChooser.showOpenDialog(stage); // Use the current stage
         if (selectedFile != null) {
-            String relativePath = "src/main/resources/com/example/ConnectHub/PostsPics";
+            String relativePath = "src/main/resources/com/example/ConnectHub/PostPics";
             postImage = new Image(selectedFile.toURI().toString());
             Path from = Paths.get(selectedFile.toURI());
             String name = String.valueOf(posts.size());
             Path to = Paths.get(relativePath, name + ".png");
-            System.out.println(to.toString());
-            if (!Files.exists(to)) {
-                Files.copy(from, to);
+            System.out.println("saving path 1: " + to.toString());
+            System.out.println("saving path 2: " + from.toString());
+            try {
+                if (!Files.exists(to)) {
+                    Files.copy(from, to);
+                } else {
+                    System.out.println("File already exists: " + to);
+                }
+            } catch (IOException e) {
+                System.err.println("Error copying file: " + e.getMessage());
             }
+
             System.out.println("Image uploaded: " + selectedFile.getName());
         }
     }
@@ -321,7 +329,7 @@ public class Home {
                     }
                     else {
                         String path = "/com/example/ConnectHub/PostPics/" + id + ".png";
-                        System.out.println(path);
+                        System.out.println("Reading resource: " + path);
                         Image img = new Image(Home.class.getResourceAsStream(path));
                         post = new Post(postData[1], img, UserManager.getFriend(postData[0]));
                     }
