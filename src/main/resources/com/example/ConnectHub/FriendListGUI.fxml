@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
@@ -48,6 +49,32 @@
                                                 </Label>
                                             </children>
                                         </HBox>
+                              <Label fx:id="ErrorLabel" alignment="CENTER" prefHeight="144.0" prefWidth="532.0">
+                                 <textFill>
+                                    <RadialGradient centerX="0.01933701657458564" centerY="0.6350710900473934" radius="0.9482758620689655">
+                                       <stops>
+                                          <Stop>
+                                             <color>
+                                                <Color />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="0.042682926829268296">
+                                             <color>
+                                                <Color red="0.95686274766922" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="1.0">
+                                             <color>
+                                                <Color red="0.30588236451148987" green="0.08235294371843338" blue="0.08235294371843338" />
+                                             </color>
+                                          </Stop>
+                                       </stops>
+                                    </RadialGradient>
+                                 </textFill>
+                                 <font>
+                                    <Font size="37.0" />
+                                 </font>
+                              </Label>
                                     </children>
                                 </VBox>
                             </children>
