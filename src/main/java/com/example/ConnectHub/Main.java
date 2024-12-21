@@ -38,7 +38,6 @@ public class Main extends Application {
             UserManager.saveUsers();
                 stage.close();
         });
-
     }
 
     public static void main(String[] args) {
