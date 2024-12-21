@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.FriendProfileController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.Friend">
     <children>
         <ImageView fitHeight="134.0" fitWidth="554.0" layoutX="534.2" layoutY="11.2" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="574.8" AnchorPane.leftAnchor="534.2" AnchorPane.rightAnchor="237.07856445312495" AnchorPane.topAnchor="11.2">
             <image>
@@ -208,11 +208,11 @@
                         </LinearGradient>
                     </textFill>
                 </Label>
-            <Button layoutX="1054.0" layoutY="44.0" mnemonicParsing="false" onAction="#addFriend" prefHeight="38.0" prefWidth="119.0" text="Connect" textFill="#0a60fa">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Button>
+                <Button layoutX="1054.0" layoutY="44.0" mnemonicParsing="false" onAction="#addFriend" prefHeight="38.0" prefWidth="119.0" text="Connect" textFill="#0a60fa">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
                 <Pane fx:id="MyFriends" layoutX="978.0" layoutY="107.0" prefHeight="467.0" prefWidth="271.0" style="-fx-background-color: D3D3D3;" />
                 <VBox fx:id="MyFriendsBox" layoutX="978.0" layoutY="107.0" prefHeight="467.0" prefWidth="271.0" style="-fx-background-color: D3D3D3;">
                     <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Mutual Friends">

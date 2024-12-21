@@ -1,2 +1,3 @@
-a -> s
-s -> a
+aa -> a
+aaa -> a
+a -> aa,aaa

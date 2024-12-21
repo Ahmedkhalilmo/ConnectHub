@@ -130,4 +130,5 @@ public class UserManager {
             userNotifications.remove(notification);
         }
     }
+
 }
