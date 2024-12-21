@@ -14,7 +14,7 @@ class Post implements Serializable {
     private int likeCount; // Add like count
     private Set<User> likers;
     private boolean likedByCurrentUser; // To track the "liked" status for the current user
-    private static int counter =0;
+    public static int counter =0;
     public int id;
 
     // Constructor for posts without an image
@@ -26,7 +26,7 @@ class Post implements Serializable {
         this.likeCount = 0;  // Initialize like count
         this.likers = new HashSet<>();
         this.likedByCurrentUser = false; // Default to false
-        this.id = counter++;
+        this.id = Home.posts.size();
     }
 
     // Constructor for posts with an image
@@ -38,7 +38,7 @@ class Post implements Serializable {
         this.likeCount = 0;  // Initialize like count
         this.likers = new HashSet<>();
         this.likedByCurrentUser = false; // Default to false
-        this.id = counter++;
+        this.id = Home.posts.size();
     }
 
     // Set the like status for the current user

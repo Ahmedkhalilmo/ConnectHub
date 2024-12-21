@@ -21,13 +21,16 @@ import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Home {
     private Stage stage;
     private Scene scene;
     private User user = UserManager.curr_user;  // Using the logged-in user from UserManager
-    private static List<Post> posts = new ArrayList<>();
+    public static List<Post> posts = new ArrayList<>();
     private String imgUrl = user.getImageUrl();
     private static final String postFilePath = "posts.txt" ;
     @FXML
@@ -95,7 +98,6 @@ public class Home {
             postImage = null;
             Post newPost = new Post(content, currentPostImage, user);
 
-            // Add the current user to the likers set if they liked the post
             if (newPost.isLikedByCurrentUser()) {
                 newPost.addLike(user);  // Ensure the user is added to the likers set
             }
@@ -109,7 +111,7 @@ public class Home {
         }
     }
 
-    public void uploadImage() {
+    public void uploadImage() throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image");
         fileChooser.getExtensionFilters().add(
@@ -117,7 +119,15 @@ public class Home {
 
         File selectedFile = fileChooser.showOpenDialog(stage); // Use the current stage
         if (selectedFile != null) {
+            String relativePath = "src/main/resources/com/example/ConnectHub/PostsPics";
             postImage = new Image(selectedFile.toURI().toString());
+            Path from = Paths.get(selectedFile.toURI());
+            String name = String.valueOf(posts.size());
+            Path to = Paths.get(relativePath, name + ".png");
+            System.out.println(to.toString());
+            if (!Files.exists(to)) {
+                Files.copy(from, to);
+            }
             System.out.println("Image uploaded: " + selectedFile.getName());
         }
     }
@@ -266,7 +276,7 @@ public class Home {
                             .append("/")
                             .append(post.getlikers().size())
                             .append("/")
-                            .append(post.getImageUrl()==null?"-":post.getImageUrl())
+                            .append(post.getImageUrl()==null?"-":post.id)
                             .append(",");
 
                     for(User liker : post.getlikers()){
@@ -296,8 +306,14 @@ public class Home {
                     String[] postData = parts2[0].split("/");
 
                     String[] likersData;
-                    if(!postData[2].equals("0"))
+                    String path = null;
+                    if(!postData[2].equals("0")) {
                         likersData = parts2[1].split("/");
+                        path = "src/main/resources/com/example/ConnectHub/PostPics/" + id + ".png";
+                        System.out.println("a7a");System.out.println("a7a3");System.out.println("a7a4");System.out.println("a7a5");
+                        System.out.println(path);
+
+                    }
                     else likersData = new String[0];
 
                     Post post = new Post(null, null);
@@ -305,7 +321,7 @@ public class Home {
                         post = new Post(postData[1], UserManager.getFriend(postData[0]));
                     }
                     else {
-                        Image img = new Image(postData[2]);
+                        Image img = new Image(path);
                         post = new Post(postData[1], img, UserManager.getFriend(postData[0]));
                     }
                     HashSet<User> likers = new HashSet<>();
