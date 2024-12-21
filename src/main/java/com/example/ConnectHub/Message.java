@@ -9,7 +9,6 @@ import java.io.Serializable;
 public class Message extends Text implements Serializable {
     private String currentDateTime;
 
-
     public Message( User sender, String content) {
         super(content,sender);
         LocalDateTime currentDate = LocalDateTime.now();
@@ -26,7 +25,6 @@ public class Message extends Text implements Serializable {
     public String getCurrentDateTime() {
         return currentDateTime;
     }
-
 
     public void displayMessage(){
         System.out.println(getUser().getUsername()+":"+getContent());

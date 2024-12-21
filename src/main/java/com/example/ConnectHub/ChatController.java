@@ -27,7 +27,7 @@ public class ChatController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        UserManager.loadChats(); // Load chats when the controller is initialized
+        UserManager.loadChats();
         for (Conversation conversation : UserManager.chats) {
             if (!conversation.getUsernamesOfParticipants().contains(UserManager.curr_user.getUsername().toLowerCase())) {
                 continue;

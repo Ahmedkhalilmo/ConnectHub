@@ -53,12 +53,12 @@
                 </StackPane>
             </content>
         </ScrollPane>
-        <ImageView fitHeight="93.0" fitWidth="117.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#returntoHomepage" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="returnimage" fitHeight="93.0" fitWidth="117.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#returntoHomepage" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@return.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="94.0" fitWidth="93.0" layoutX="845.0" layoutY="31.0" onMouseClicked="#addChat" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="addchat" fitHeight="94.0" fitWidth="93.0" layoutX="845.0" layoutY="31.0" onMouseClicked="#addChat" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@AddChat.png" />
             </image>

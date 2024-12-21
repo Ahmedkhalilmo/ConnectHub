@@ -29,14 +29,14 @@
                         <Font name="TimeBurner Bold" size="18.0" />
                     </font>
                 </TextField>
-                <ImageView fitHeight="80.0" fitWidth="100.0" layoutX="552.0" layoutY="2.0" onMouseClicked="#createNewMsg" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="returnimage" fitHeight="80.0" fitWidth="100.0" layoutX="552.0" layoutY="2.0" onMouseClicked="#createNewMsg" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@sendmsg.png" />
                     </image>
                 </ImageView>
             </children>
         </Pane>
-        <ImageView fitHeight="93.0" fitWidth="117.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#returnToChats" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="returnimage" fitHeight="93.0" fitWidth="117.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#returnToChats" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@return.png" />
             </image>
@@ -89,7 +89,7 @@
                 </Pane>
             </children>
         </HBox>
-        <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="967.0" layoutY="632.0" onMouseClicked="#addUser" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="returnimage" fitHeight="80.0" fitWidth="80.0" layoutX="967.0" layoutY="632.0" onMouseClicked="#addUser" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@adduser.png" />
             </image>
