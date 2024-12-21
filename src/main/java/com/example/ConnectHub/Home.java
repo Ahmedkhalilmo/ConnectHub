@@ -277,7 +277,7 @@ public class Home {
                             .append("/")
                             .append(post.getlikers().size())
                             .append("/")
-                            .append(post.getImageUrl()==null?"-":post.id)
+                            .append(post.getImage()==null?"-":post.id)
                             .append(",");
 
                     for(User liker : post.getlikers()){
@@ -307,24 +307,25 @@ public class Home {
                     String[] postData = parts2[0].split("/");
 
                     String[] likersData;
-                    String path = null;
+                    System.out.println("debug 1");
                     if(!postData[2].equals("0")) {
                         likersData = parts2[1].split("/");
-                        path = "src/main/resources/com/example/ConnectHub/PostPics/" + id + ".png";
-                        System.out.println("a7a");System.out.println("a7a3");System.out.println("a7a4");System.out.println("a7a5");
-                        System.out.println(path);
-
                     }
                     else likersData = new String[0];
 
+                    System.out.println("debug 2");
                     Post post = new Post(null, null);
+                    System.out.println(postData[3]);
                     if(postData[3].equals("-")) {
                         post = new Post(postData[1], UserManager.getFriend(postData[0]));
                     }
                     else {
-                        Image img = new Image(path);
+                        String path = "/com/example/ConnectHub/PostPics/" + id + ".png";
+                        System.out.println(path);
+                        Image img = new Image(Home.class.getResourceAsStream(path));
                         post = new Post(postData[1], img, UserManager.getFriend(postData[0]));
                     }
+                    System.out.println("debug 3");
                     HashSet<User> likers = new HashSet<>();
                     for(String username : likersData){
                         likers.add(UserManager.getFriend(username));
