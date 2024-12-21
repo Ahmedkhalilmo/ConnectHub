@@ -8,9 +8,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="NotificationBox" style="-fx-background-color: Transparent;" stylesheets="@NotificationPanelCss.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.NotificationPanel">
+<BorderPane fx:id="NotificationBox" onMouseClicked="#DeletePostNotification" style="-fx-background-color: Transparent;" stylesheets="@NotificationPanelCss.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.NotificationPanel">
    <center>
-      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#DeleteNotification" prefWidth="450.0" style="-fx-background-color: #3a3b3c; -fx-background-radius: 25;">
+      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#DeletePostNotification" prefWidth="450.0" style="-fx-background-color: #3a3b3c; -fx-background-radius: 25;">
          <children>
             <Circle fx:id="ProfileImageView" fill="DODGERBLUE" radius="37.0" stroke="BLACK" strokeType="INSIDE">
                <HBox.margin>

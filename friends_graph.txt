@@ -1,4 +1,5 @@
 a -> s
 s -> a
-Adham -> Venom
+Adham -> Venom,a7a
 Venom -> Adham
+a7a -> Adham

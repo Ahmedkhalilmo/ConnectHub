@@ -45,7 +45,12 @@ public class NotificationPanel {
         UserManager.removeNotification(UserManager.curr_user, curr_notification);
     }
 
-    public void acceptNotification(ActionEvent e) throws IOException {
+    public void DeletePostNotification(MouseEvent e) {
+        notificationBar.getChildren().remove(NotificationBox);
+        UserManager.removeNotification(UserManager.curr_user, curr_notification);
+    }
+
+    public void acceptNotification(ActionEvent e) {
         FriendsManager friendsManager = new FriendsManager();
         friendsManager.acceptRequest(curr_notification.sender, UserManager.curr_user);
         notificationBar.getChildren().remove(NotificationBox);
