@@ -41,10 +41,8 @@ public class Conversation implements Serializable{
 
     public void addUser(User user) {
         boolean userExists = false;
-
-        // Check if the user already exists using a for loop
         for (User u : usersOfConcervation) {
-            if (u.equals(user)) {  // Assuming User class has properly overridden equals() method
+            if (u.equals(user)) {
                 userExists = true;
                 break;
             }

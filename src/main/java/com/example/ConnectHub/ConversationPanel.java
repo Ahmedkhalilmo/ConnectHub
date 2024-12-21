@@ -72,12 +72,8 @@ public class ConversationPanel {
         URL fxmlLocation = getClass().getResource("FriendListGUI.fxml");
         fxmlLoader.setLocation(fxmlLocation);
         Parent root = fxmlLoader.load();
-
-// Get the controller for FriendsListGUI and set data
         FriendsListGUI friendsListGUI = fxmlLoader.getController();
         friendsListGUI.setData(curr_conversation, root);
-
-// Optionally, you can set the scene for the stage (if needed)
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -90,7 +86,6 @@ public class ConversationPanel {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Chat.fxml")));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene=new Scene(root);
-        //scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("CreateAccount.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }

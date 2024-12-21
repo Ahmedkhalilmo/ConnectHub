@@ -14,7 +14,7 @@ import java.util.Objects;
 
 public class ChatPanel {
     @FXML
-    private Label ChatNameTF; // Ensure fx:id matches
+    private Label ChatNameTF;
     private Conversation curr_conversation;
     private Stage stage;
     private Scene scene;
@@ -26,13 +26,9 @@ public class ChatPanel {
 
     public void openChat(MouseEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ConnectHub/Conversation.fxml"));
-        Parent root = loader.load();  // Load the FXML file
-
-        // Get the controller and set data
+        Parent root = loader.load();
         ConversationPanel conversationPanel = loader.getController();
-        conversationPanel.setData(curr_conversation);  // Pass the conversation data
-
-        // Set up the stage and scene
+        conversationPanel.setData(curr_conversation);
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

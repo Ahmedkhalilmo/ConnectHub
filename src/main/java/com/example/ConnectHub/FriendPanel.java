@@ -39,12 +39,9 @@ public class FriendPanel {
 
     public void addToConversation(MouseEvent e) throws IOException {
         if (!curr_conversation.getUsersOfConversation().contains(user)) {
-            curr_conversation.addUser(user);  // Add user to conversation
-            UserManager.saveChats();  // Save the updated chat list
-            friendVBox.getChildren().remove(friendPanel);  // Remove the current panel from the friend list
-
-            // Optionally refresh the conversation view or reload the conversation screen
-
+            curr_conversation.addUser(user);
+            UserManager.saveChats();
+            friendVBox.getChildren().remove(friendPanel);
             System.out.println(user.getUsername() + " added to the conversation.");
         } else {
             System.out.println(user.getUsername() + " is already in the conversation.");
