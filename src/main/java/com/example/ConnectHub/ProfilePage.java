@@ -61,10 +61,42 @@ public class ProfilePage {
 
         FriendsManager friendsManager = new FriendsManager();
         List<String> friends = friendsManager.getUserFriends(user.getUsername());
+        friends.removeIf(friend -> friend.equals(user.getUsername()));
         friendsListView.getItems().addAll(friends);
         friendsListView.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+
+        friendsListView.setCellFactory(param -> new ListCell<String>() {
+            private final HBox hbox = new HBox();
+            private final ImageView imageView = new ImageView();
+            private final Label label = new Label();
+
+            {
+                hbox.setSpacing(10);
+                imageView.setFitHeight(40);
+                imageView.setFitWidth(40);
+                hbox.getChildren().addAll(imageView, label);
+            }
+
+            @Override
+            protected void updateItem(String username, boolean empty)
+            {
+                super.updateItem(username, empty);
+
+                if (empty || username == null) {
+                    setGraphic(null);
+                } else {
+                    User friend = UserManager.getFriend(username); // Assuming this retrieves friend info
+                    Image image = new Image(getClass().getResourceAsStream(friend.getImageUrl()));
+                    imageView.setImage(image);
+                    label.setText(username);
+                    setGraphic(hbox);
+                }
+            }
+        });
+
         friendsListView.setOnMouseClicked(this::onUserClick);
     }
+
 
     private void onUserClick(MouseEvent event) {
         String selectedUsername = friendsListView.getSelectionModel().getSelectedItem();

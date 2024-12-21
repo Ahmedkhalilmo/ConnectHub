@@ -3,11 +3,11 @@ package com.example.ConnectHub;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class FriendRequestNotification extends Notification implements Serializable{
-   public FriendRequestNotification(String message, User sender)
+public class ReactNotification extends Notification implements Serializable{
+    public ReactNotification(String message, User sender, int type)
     {
 
-        super(message,sender, 1);
+        super(message,sender, type);
     }
 
     public String getMessage() {
@@ -19,3 +19,4 @@ public class FriendRequestNotification extends Notification implements Serializa
     }
 
 }
+

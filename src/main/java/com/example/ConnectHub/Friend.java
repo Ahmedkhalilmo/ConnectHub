@@ -7,9 +7,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -22,7 +25,7 @@ import java.util.Objects;
 public class Friend {
     private Stage stage;
     private Scene scene;
-    private User  user = ProfilePage.friendUser;
+    private User user = ProfilePage.friendUser;
     private User Myuser = UserManager.curr_user;
 
     FriendsManager friends_manager = new FriendsManager();
@@ -46,7 +49,6 @@ public class Friend {
     private ListView<String> MutualfriendsListView;
 
     public void initialize() {
-
         nameLabel.setText(user.getUsername());
         Image image = new Image(getClass().getResourceAsStream(user.getImageUrl()));
         CircleImageView.setFill(new ImagePattern(image));
@@ -61,19 +63,49 @@ public class Friend {
         FriendsManager friendsManager = new FriendsManager();
         List<String> Userfriends = friendsManager.getUserFriends(user.getUsername());
         List<String> Myfriends = friendsManager.getUserFriends(Myuser.getUsername());
-
         Myfriends.retainAll(Userfriends);
+        Userfriends.removeIf(friend -> friend.equals(user.getUsername()) || friend.equals(Myuser.getUsername()));
         MutualfriendsListView.getItems().addAll(Userfriends);
+        MutualfriendsListView.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+
+        MutualfriendsListView.setCellFactory(param -> new ListCell<String>() {
+            private final HBox hbox = new HBox();
+            private final ImageView imageView = new ImageView();
+            private final Label label = new Label();
+
+            {
+                hbox.setSpacing(10);
+                imageView.setFitHeight(40);
+                imageView.setFitWidth(40);
+                hbox.getChildren().addAll(imageView, label);
+            }
+
+            @Override
+            protected void updateItem(String username, boolean empty)
+            {
+                super.updateItem(username, empty);
+
+                if (empty || username == null) {
+                    setGraphic(null);
+                } else {
+                    User friend = UserManager.getFriend(username); // Assuming this retrieves friend info
+                    Image image = new Image(getClass().getResourceAsStream(friend.getImageUrl()));
+                    imageView.setImage(image);
+                    label.setText(username);
+                    setGraphic(hbox);
+                }
+            }
+        });
     }
 
     public void returntoHomepage(MouseEvent e) throws IOException {
 
-            Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("ProfilePage.fxml")));
-            stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("profile.css")).toExternalForm());
-            stage.setScene(scene);
-            stage.show();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("ProfilePage.fxml")));
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("profile.css")).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
 
 
 
