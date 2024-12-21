@@ -29,6 +29,7 @@ public class Login {
         User user = UserManager.getUsers(userNameValue,passwordValue);
         if(user != null)
         {
+            UserManager.loadNotifications();
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             Parent root = FXMLLoader.load(this.getClass().getResource("Home.fxml"));
             scene = new Scene(root);

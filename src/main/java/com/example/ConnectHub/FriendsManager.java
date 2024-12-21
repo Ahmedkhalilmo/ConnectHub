@@ -24,7 +24,7 @@ public class FriendsManager {
             return;
         }
 
-        UserManager.sendRequestNotification(sender, receiver);
+        UserManager.sendNotification(sender, receiver,1);
         System.out.println("Notification sent.");
         saveToFile();
     }

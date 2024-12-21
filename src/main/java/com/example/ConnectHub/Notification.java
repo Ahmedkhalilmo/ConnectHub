@@ -5,14 +5,17 @@ import java.time.LocalDateTime;
 
 public abstract class Notification implements Serializable{
 
-     protected String message;
-     LocalDateTime timestamp;
+    protected String message;
+    LocalDateTime timestamp;
+    User sender;
+    int type;
+    // 1 -> Friend Request
+    // 2 -> Like
+    // 3 -> Comment
 
     public User getSender() {
         return sender;
     }
-
-    User sender;
 
     public Notification(String message, User sender) {
         this.message = message;

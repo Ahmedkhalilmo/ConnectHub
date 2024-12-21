@@ -45,7 +45,7 @@ public class NotificationBar implements Initializable {
     public void returnToHomepage(MouseEvent e) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Home.fxml")));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene=new Scene(root);
+        scene= new Scene(root);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Home.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
