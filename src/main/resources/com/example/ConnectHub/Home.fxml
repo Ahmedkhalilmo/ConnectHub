@@ -100,7 +100,10 @@
 
    <!-- Left and Right Bar Section -->
    <left>
-      <VBox fx:id="LeftBar" prefHeight="647.0" prefWidth="200.0" style="-fx-background-color: #d3d3d3;" />
+      <VBox fx:id="LeftBar" prefHeight="647.0" prefWidth="200.0" style="-fx-background-color: #d3d3d3;">
+         <children>
+            <VBox prefHeight="663.0" prefWidth="200.0" style="-fx-background-color: #8F00FF;" />
+         </children></VBox>
    </left>
    <right>
       <VBox fx:id="RightBar" prefHeight="636.0" prefWidth="0.0" style="-fx-background-color: #ffffff;" />
@@ -133,7 +136,7 @@
                      <!-- Button to Submit Post -->
                      <HBox alignment="CENTER" prefHeight="40.0">
                         <children>
-                           <Button mnemonicParsing="false" onAction="#createPost" onMouseClicked="#createPost" prefHeight="30.0" prefWidth="144.0" style="-fx-background-radius: 100px;" text="Post" translateX="-150.0">
+                           <Button mnemonicParsing="false" onAction="#createPost" onMouseClicked="#createPost" prefHeight="81.0" prefWidth="144.0" style="-fx-background-radius: 100px;" text="Post" translateX="-150.0">
                               <font>
                                  <Font name="TimeBurner Bold" size="18.0" />
                               </font>

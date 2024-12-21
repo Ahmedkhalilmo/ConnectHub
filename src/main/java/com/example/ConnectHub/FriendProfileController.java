@@ -3,36 +3,40 @@ package com.example.ConnectHub;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class FriendProfileController extends Profile {
     @FXML
     private Button connectButton;
+    @FXML
+    public VBox ProfilePostsContainer2;
     private User friendUser = SearchResults.friendUser;
     FriendsManager friends_manager = new FriendsManager();
 
+    public FriendProfileController() {
+        super();
+    }
+
     public void initialize() {
+        loadprofileposts(friendUser);
+        displayPosts(ProfilePostsContainer2);
         nameLabel.setText(friendUser.getUsername());
         Image image = new Image(getClass().getResourceAsStream(friendUser.getImageUrl()));
         CircleImageView.setFill(new ImagePattern(image));

@@ -269,7 +269,7 @@ public class Home {
     }
 
 
-    private void savePostsToFile() {
+    static void savePostsToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(postFilePath, false))) {
                 for (Post post : posts) {
                     StringBuilder postBuilder = new StringBuilder();

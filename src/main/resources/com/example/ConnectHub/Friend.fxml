@@ -31,7 +31,8 @@
                         <StackPane>
                             <children>
                                 <Pane prefHeight="520.0" prefWidth="200.0" />
-                                <VBox fx:id="VprofilrPost" alignment="CENTER" prefWidth="578.0" style="-fx-background-color: D3D3D3;" />
+                                <VBox fx:id="ProfilePostsContainer" alignment="CENTER" prefWidth="578.0" style="-fx-background-color: D3D3D3;" />
+                        <VBox fx:id="ProfilePostsContainer1" prefHeight="650.0" prefWidth="500.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #d3d3d3; -fx-padding: 10px; -fx-spacing: 10px;" />
                             </children>
                         </StackPane>
                     </content>

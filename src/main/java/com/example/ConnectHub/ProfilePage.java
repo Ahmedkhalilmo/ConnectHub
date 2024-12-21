@@ -1,20 +1,19 @@
 package com.example.ConnectHub;
 
-import javafx.geometry.Rectangle2D;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -26,9 +25,15 @@ import java.util.Objects;
 public class ProfilePage extends Profile {
 
     public static User friendUser;
-
+    @FXML
+    public VBox ProfilePostsContainer;
+    public ProfilePage() {
+        super();
+    }
 
     public void initialize() {
+        loadprofileposts(myUser);
+        displayPosts(ProfilePostsContainer);
         nameLabel.setText(myUser.getUsername());
         Image image = new Image(getClass().getResourceAsStream(myUser.getImageUrl()));
         CircleImageView.setFill(new ImagePattern(image));

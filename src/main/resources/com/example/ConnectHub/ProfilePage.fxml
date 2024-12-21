@@ -19,11 +19,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.ProfilePage">
     <children>
-      <ImageView fitHeight="134.0" fitWidth="554.0" layoutX="534.2" layoutY="11.2" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="574.8" AnchorPane.leftAnchor="534.2" AnchorPane.rightAnchor="237.07856445312495" AnchorPane.topAnchor="11.2">
-         <image>
-            <Image url="@wallpaper.jpg" />
-         </image>
-      </ImageView>
+        <ImageView fitHeight="134.0" fitWidth="554.0" layoutX="534.2" layoutY="11.2" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="574.8" AnchorPane.leftAnchor="534.2" AnchorPane.rightAnchor="237.07856445312495" AnchorPane.topAnchor="11.2">
+            <image>
+                <Image url="@wallpaper.jpg" />
+            </image>
+        </ImageView>
         <Pane layoutY="147.0" prefHeight="573.0" prefWidth="1280.0" style="-fx-background-color: white;">
             <children>
                 <ScrollPane hbarPolicy="NEVER" layoutX="374.0" layoutY="56.0" prefHeight="518.0" prefWidth="578.0" style="-fx-background-color: #242526;" vbarPolicy="NEVER">
@@ -31,7 +31,7 @@
                         <StackPane>
                             <children>
                                 <Pane prefHeight="520.0" prefWidth="200.0" />
-                                <VBox fx:id="VprofilrPost" alignment="CENTER" prefWidth="578.0" style="-fx-background-color: D3D3D3;" />
+                                <VBox fx:id="ProfilePostsContainer" prefHeight="650.0" prefWidth="575.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #d3d3d3; -fx-padding: 10px; -fx-spacing: 10px;"/>
                             </children>
                         </StackPane>
                     </content>
@@ -186,7 +186,8 @@
                                 </LinearGradient>
                             </textFill>
                         </Label>
-                    </children></Pane>
+                    </children>
+                </Pane>
                 <Label layoutX="609.0" layoutY="15.0" text="Posts">
                     <font>
                         <Font name="TimeBurner Bold" size="26.0" />
@@ -209,28 +210,28 @@
                     </textFill>
                 </Label>
                 <Button layoutX="74.0" layoutY="483.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="35.0" prefWidth="193.0" text="Logout" />
-            <Pane fx:id="MyFriends" layoutX="978.0" layoutY="56.0" prefHeight="518.0" prefWidth="271.0" style="-fx-background-color: D3D3D3;" />
+                <Pane fx:id="MyFriends" layoutX="978.0" layoutY="56.0" prefHeight="518.0" prefWidth="271.0" style="-fx-background-color: D3D3D3;" />
                 <VBox fx:id="MyFriendsBox" layoutX="978.0" layoutY="56.0" prefHeight="518.0" prefWidth="271.0" style="-fx-background-color: D3D3D3;">
                     <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="My Friends">
-                  <textFill>
-                     <LinearGradient endX="1.0" endY="1.0">
-                        <stops>
-                           <Stop>
-                              <color>
-                                 <Color red="0.14509804546833038" green="0.4588235318660736" blue="0.9882352948188782" />
-                              </color>
-                           </Stop>
-                           <Stop offset="1.0">
-                              <color>
-                                 <Color red="0.4156862795352936" green="0.06666667014360428" blue="0.7960784435272217" />
-                              </color>
-                           </Stop>
-                        </stops>
-                     </LinearGradient>
-                  </textFill></Label>
+                        <textFill>
+                            <LinearGradient endX="1.0" endY="1.0">
+                                <stops>
+                                    <Stop>
+                                        <color>
+                                            <Color red="0.14509804546833038" green="0.4588235318660736" blue="0.9882352948188782" />
+                                        </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                        <color>
+                                            <Color red="0.4156862795352936" green="0.06666667014360428" blue="0.7960784435272217" />
+                                        </color>
+                                    </Stop>
+                                </stops>
+                            </LinearGradient>
+                        </textFill></Label>
                     <ListView fx:id="friendsListView" prefHeight="490.0" prefWidth="271.0" />
                 </VBox>
-            <Pane />
+                <Pane />
             </children></Pane>
         <Label fx:id="nameLabel" layoutX="319.0" layoutY="96.0" prefHeight="66.0" prefWidth="507.0" text="Name">
             <font>
