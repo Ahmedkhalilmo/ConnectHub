@@ -24,7 +24,9 @@ public class FriendsManager {
             return;
         }
 
-        UserManager.sendRequestNotification(sender, receiver);
+        UserManager.sendNotification(sender, receiver,1);
+        UserManager.sendNotification(sender, receiver,2);
+        UserManager.sendNotification(sender, receiver,3);
         System.out.println("Notification sent.");
         saveToFile();
     }
@@ -73,6 +75,7 @@ public class FriendsManager {
             System.err.println("Error saving to file: " + e.getMessage());
         }
     }
+
 
     // Reads the graph from the file
     private void loadFromFile() {

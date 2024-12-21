@@ -23,7 +23,7 @@
                </image>
             </ImageView>
          </children></VBox>
-      <VBox alignment="BOTTOM_CENTER" maxHeight="600.0" maxWidth="649.0" prefHeight="600.0" prefWidth="649.0" style="-fx-background-color: #D3D3D3; -fx-background-radius: 20;">
+      <VBox alignment="BOTTOM_CENTER" maxHeight="648.0" maxWidth="650.0" prefHeight="648.0" prefWidth="650.0" style="-fx-background-color: #D3D3D3; -fx-background-radius: 20;">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -60,7 +60,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox prefWidth="649.0" style="-fx-background-color: #D3D3D3;">
+            <HBox prefHeight="606.0" prefWidth="650.0" style="-fx-background-color: #D3D3D3;">
                <children>
                   <ScrollPane hbarPolicy="NEVER" maxHeight="500.0" maxWidth="649.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="649.0" style="-fx-background-color: Transparent; -fx-focus-color: Transparent;" vbarPolicy="NEVER">
                      <content>

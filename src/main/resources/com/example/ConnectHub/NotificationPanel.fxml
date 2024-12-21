@@ -18,19 +18,24 @@
                   <Insets bottom="25.0" left="10.0" right="25.0" top="25.0" />
                </HBox.margin>
             </Circle>
-            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="341.0">
+            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="341.0" translateX="-10.0" translateY="-15.0">
                <children>
-                  <Label fx:id="UsernameTF" alignment="TOP_LEFT" prefHeight="27.0" prefWidth="389.0" text="test test test" textFill="#cccccc" translateY="23.0" wrapText="true">
+                  <Label fx:id="UsernameTF" alignment="TOP_LEFT" prefHeight="27.0" prefWidth="389.0" text="Massage" textFill="#cccccc" translateY="28.0" wrapText="true">
                      <font>
                         <Font name="TimeBurner Bold" size="18.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" translateX="-95.0" translateY="12.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" translateX="-95.0" translateY="28.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#acceptNotification" text="Accept" translateX="23.0" />
                         <Button mnemonicParsing="false" onAction="#DeleteNotification" text="Reject" translateX="120.0" />
                      </children>
                   </HBox>
+                  <Label fx:id="DateLabel" alignment="TOP_RIGHT" prefHeight="27.0" prefWidth="389.0" text="Date" textFill="#cccccc" translateY="15.0" wrapText="true">
+                     <font>
+                        <Font name="TimeBurner Bold" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </VBox>
          </children>
