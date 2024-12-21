@@ -8,9 +8,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Screen;
@@ -64,9 +67,39 @@ public class FriendProfileController {
         FriendsManager friendsManager = new FriendsManager();
         List<String> Userfriends = friendsManager.getUserFriends(user.getUsername());
         List<String> Myfriends = friendsManager.getUserFriends(Myuser.getUsername());
-
-        Myfriends.retainAll(Userfriends);
+        Userfriends.retainAll(Myfriends);
+        Userfriends.removeIf(friend -> friend.equals(user.getUsername()) || friend.equals(Myuser.getUsername()));
         MutualfriendsListView.getItems().addAll(Userfriends);
+        MutualfriendsListView.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+
+        MutualfriendsListView.setCellFactory(param -> new ListCell<String>() {
+            private final HBox hbox = new HBox();
+            private final ImageView imageView = new ImageView();
+            private final Label label = new Label();
+
+            {
+                hbox.setSpacing(10);
+                imageView.setFitHeight(40);
+                imageView.setFitWidth(40);
+                hbox.getChildren().addAll(imageView, label);
+            }
+
+            @Override
+            protected void updateItem(String username, boolean empty)
+            {
+                super.updateItem(username, empty);
+
+                if (empty || username == null) {
+                    setGraphic(null);
+                } else {
+                    User friend = UserManager.getFriend(username); // Assuming this retrieves friend info
+                    Image image = new Image(getClass().getResourceAsStream(friend.getImageUrl()));
+                    imageView.setImage(image);
+                    label.setText(username);
+                    setGraphic(hbox);
+                }
+            }
+        });
     }
 
     public void returntoHomepage(MouseEvent e) throws IOException {

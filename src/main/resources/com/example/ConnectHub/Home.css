@@ -195,3 +195,16 @@
        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 15, 0.5, 0, 4);
 }
 
+.like-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: green;
+    -fx-border-radius: 5px;
+}
+
+.liked-button {
+    -fx-background-color: #f44336;
+    -fx-text-fill: red;
+    -fx-border-radius: 5px;
+}
+
+
