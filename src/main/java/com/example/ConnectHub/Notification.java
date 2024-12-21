@@ -17,10 +17,11 @@ public abstract class Notification implements Serializable{
         return sender;
     }
 
-    public Notification(String message, User sender) {
+    public Notification(String message, User sender, int type) {
         this.message = message;
-        this.timestamp = LocalDateTime.now();
         this.sender = sender;
+        this.type = type;
+        this.timestamp = LocalDateTime.now();
     }
 
     public abstract String getMessage();

@@ -27,17 +27,26 @@ public class UserManager {
                     List<Notification> notificationList = new ArrayList<>();
                     for (String notification : curNotifications) {
                         String[] notifData = notification.split("/");
-                        Notification notify = new FriendRequestNotification(null, null);
-                        System.out.println(1);
+                        Notification notify;
+                        if(notifData[2].equals("1"))
+                            notify = new FriendRequestNotification(null, null);
+                        else
+                            notify = new ReactNotification(null, null, 2);
+//                        System.out.println(1);
+//                        System.out.println(notifData[2]);
                         notify.message = notifData[0];
                         notify.sender = UserManager.getFriend(notifData[1]);
-                        notify.type = Integer.parseInt(notifData[3]);
-                        notify.timestamp = LocalDateTime.parse(notifData[2]);
+                        notify.type = Integer.parseInt(notifData[2]);
+                        notify.timestamp = LocalDateTime.parse(notifData[3]);
                         notificationList.add(notify);
-                        System.out.println(2);
+//                        System.out.println(2);
                     }
                     notifications.put(user, notificationList);
-                    System.out.println(3);
+//                    System.out.println(3);
+                    for (Notification notification : notifications.get(user)) {
+                        System.out.println(notification.message);
+                        System.out.println(notification instanceof ReactNotification);
+                    }
                 }
             }
             System.out.println("notifications loaded successfully");
@@ -169,7 +178,10 @@ public class UserManager {
     }
 
     public static void sendNotification(User sender, User receiver, int type) {
-        Notification notification = new FriendRequestNotification(null, sender);
+        Notification notification;
+        if(type == 1) notification = new FriendRequestNotification(null, sender);
+        else notification = new ReactNotification(null, sender, type);
+
         if (type == 1) {
             notification.message =sender.getUsername() + " Sent You a Connection Request";
         }
@@ -182,8 +194,6 @@ public class UserManager {
         notifications.computeIfAbsent(receiver, k -> new ArrayList<>()).add(notification);
         saveNotifications();
     }
-
-
     public static boolean hasPendingRequest(User sender, User receiver) {
         List<Notification> receiverNotifications = notifications.getOrDefault(receiver, new ArrayList<>());
         for (Notification notification : receiverNotifications) {
@@ -204,6 +214,7 @@ public class UserManager {
         if (userNotifications != null) {
             userNotifications.remove(notification);
         }
+        saveNotifications();
     }
 
 }

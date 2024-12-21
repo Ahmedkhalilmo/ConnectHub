@@ -1,6 +1,2 @@
 aa -> a
-aaa -> a
-a -> aa,aaa
-s -> samir,sam
-samir -> s,sam
-sam -> s,samir
+a -> aa

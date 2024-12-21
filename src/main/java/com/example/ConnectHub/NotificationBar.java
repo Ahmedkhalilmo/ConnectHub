@@ -31,7 +31,12 @@ public class NotificationBar implements Initializable {
             for (Notification notification : UserManager.getUserNotifications(UserManager.curr_user)) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 Parent root;
-                fxmlLoader.setLocation(getClass().getResource("NotificationPanel.fxml"));
+                System.out.println(notification.type);
+                System.out.println(notification instanceof ReactNotification);
+                fxmlLoader.setLocation(getClass().getResource("NotificationPanel2.fxml"));
+                if(notification.type==1) {
+                    fxmlLoader.setLocation(getClass().getResource("NotificationPanel.fxml"));
+                }
                 root = fxmlLoader.load();
                 NotificationPanel notificationPanel = fxmlLoader.getController();
                 notificationPanel.setData(notification,root,NotificationVBox);
