@@ -1,8 +1,2 @@
-0->x/asdasd/1/-,x/
-1->x/da mtnak/2/1,x/a/
-2->a/cvxcfd/0/-,
-3->x/a7a/1/3,x/
-4->a/dsasad/0/-,
-5->a/sdsadsa/0/-,
-6->a/dasdsa/0/-,
-7->a/sdas/0/-,
+0->aa/asdfasdf/1/-,aaa/
+1->aa/asdf/1/1,aaa/

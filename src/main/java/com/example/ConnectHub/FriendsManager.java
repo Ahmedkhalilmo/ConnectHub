@@ -19,6 +19,9 @@ public class FriendsManager {
 
     // Adds a new friend connection between users
     public void addFriend(User sender, User receiver) {
+        if(sender.getUsername().equals(receiver.getUsername())){
+            System.out.println("you can't send friend to your self!.");
+        }
         if (UserManager.hasPendingRequest(sender, receiver)) {
             System.out.println("Friend request already sent.");
             return;
