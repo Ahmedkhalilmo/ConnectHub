@@ -51,8 +51,7 @@ public class NotificationPanel {
     }
 
     public void acceptNotification(ActionEvent e) {
-        FriendsManager friendsManager = new FriendsManager();
-        friendsManager.acceptRequest(curr_notification.sender, UserManager.curr_user);
+        FriendsManager.acceptRequest(curr_notification.sender, UserManager.curr_user);
         notificationBar.getChildren().remove(NotificationBox);
         UserManager.removeNotification(UserManager.curr_user, curr_notification);
     }

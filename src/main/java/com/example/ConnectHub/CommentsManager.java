@@ -1,6 +1,8 @@
 package com.example.ConnectHub;
 
+import javax.print.attribute.UnmodifiableSetException;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,7 +52,10 @@ public class CommentsManager {
             comments.add(comment);
             commentsMap.put(postID, comments);
         }
-        saveCommentsToFile();
+        if(!UserManager.curr_user.equals(Home.posts.get(postID).getPoster())){
+            UserManager.sendNotification(comment.getCommenter(), Home.posts.get(postID).getPoster(), 3);
+        }
+//        saveCommentsToFile();
     }
 
     public static void removeComment(int postID, Comment comment){
@@ -65,50 +70,42 @@ public class CommentsManager {
 
     public static void saveCommentsToFile(){
         // Save the commentsMap to a file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("comments.txt", false))) {
-            String line;
-            for (int postID : commentsMap.keySet()) {
-                for (Comment comment : commentsMap.get(postID)) {
-                    line = postID + " -> " + comment.getCommenter().getUsername() + "-separator-" + comment.getCommentText() + "-separator-" + comment.getTime();
-                    writer.write(line);
-                    writer.newLine();
-                }
+        ArrayList<String> lines = new ArrayList<>();
+        for (int postID : commentsMap.keySet()) {
+            for (Comment comment : commentsMap.get(postID)) {
+                String line = postID + " -> " + comment.getCommenter().getUsername() + "-separator-" + comment.getCommentText() + "-separator-" + comment.getTime();
+                lines.add(line);
             }
-
-        }catch (IOException e) {
-            System.err.println("Error saving notifications: " + e.getMessage());
         }
+        FilesRW.writeToFile("comments.txt", lines);
+
     }
     public static void loadCommentsFromFile(){
         // Load the commentsMap from a file
         commentsMap.clear();
-        try (BufferedReader reader = new BufferedReader(new FileReader("comments.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(" -> ");
-                if (parts.length == 2) {
-                    int postID = Integer.parseInt(parts[0]);
-                    String[] commentParts = parts[1].split("-separator-");
-                    User commenter = UserManager.getFriend(commentParts[0]);
-                    String commentText = commentParts[1];
-                    LocalDateTime time = LocalDateTime.parse(commentParts[2]);
-                    Comment comment = new Comment(commentText, commenter);
-                    comment.time = time;
-                    if(commentsMap.containsKey(postID)){
-                        commentsMap.get(postID).add(comment);
-                    }else{
-                        ArrayList<Comment> comments = new ArrayList<>();
-                        comments.add(comment);
-                        commentsMap.put(postID, comments);
-                    }
+        ArrayList<String> data = FilesRW.readFromFile("comments.txt");
+        if(data == null) {
+            commentsMap = new HashMap<>();
+            return;
+        }
+        for (String line : data) {
+            String[] parts = line.split(" -> ");
+            if (parts.length == 2) {
+                int postID = Integer.parseInt(parts[0]);
+                String[] commentParts = parts[1].split("-separator-");
+                User commenter = UserManager.getFriend(commentParts[0]);
+                String commentText = commentParts[1];
+                LocalDateTime time = LocalDateTime.parse(commentParts[2]);
+                Comment comment = new Comment(commentText, commenter);
+                comment.time = time;
+                if(commentsMap.containsKey(postID)){
+                    commentsMap.get(postID).add(comment);
+                }else{
+                    ArrayList<Comment> comments = new ArrayList<>();
+                    comments.add(comment);
+                    commentsMap.put(postID, comments);
                 }
             }
-            System.out.println("Comments loaded successfully");
-            System.out.println(commentsMap);
-        } catch (FileNotFoundException e) {
-            System.err.println("No files detected.");
-        } catch (IOException e) {
-            System.err.println("Error loading from file: " + e.getMessage());
         }
     }
 

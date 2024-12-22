@@ -45,8 +45,7 @@ public class ProfilePage extends Profile {
         GenderL.setText(myUser.getGender());
         EmailL.setText(myUser.getEmail());
 
-        FriendsManager friendsManager = new FriendsManager();
-        List<String> friends = friendsManager.getUserFriends(myUser.getUsername());
+        List<String> friends = FriendsManager.getUserFriends(myUser.getUsername());
         friends.removeIf(friend -> friend.equals(myUser.getUsername()));
         friendsListView.getItems().addAll(friends);
         friendsListView.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");

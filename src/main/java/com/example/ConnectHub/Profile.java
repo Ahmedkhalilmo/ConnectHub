@@ -52,7 +52,7 @@ public abstract class Profile {
             if(post.getPoster().getUsername().equals(user.getUsername()))
                 profileposts.add(post);
         }
-        CommentsManager.loadCommentsFromFile();
+//        CommentsManager.loadCommentsFromFile();
     }
 
     private VBox createPostBox(Post post) {
@@ -204,7 +204,7 @@ public abstract class Profile {
             if(myUser.getUsername() != post.getPoster().getUsername())
                 UserManager.sendNotification(myUser , post.getPoster(), 2);
         }
-        Home.savePostsToFile();
+//        Home.savePostsToFile();
     }
     public void displayPosts(VBox ProfilePostsContainer) {
         ProfilePostsContainer.getChildren().clear();

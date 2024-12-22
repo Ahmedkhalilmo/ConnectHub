@@ -152,7 +152,7 @@ public class CreateAccount {
 
              User newUser = new User(username, hashedPassword, email, gender, userBirthDate, ImageUrl);
              UserManager.addUser(newUser);
-             UserManager.saveUsers();
+//             UserManager.saveUsers();
 
         User NewUser = new User(username,password,email,gender,userBirthDate,ImageUrl);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

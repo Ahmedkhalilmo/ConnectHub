@@ -17,76 +17,61 @@ public class UserManager {
 
 
     public static void loadNotifications() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(notificationFilePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(" -> ");
-                if (parts.length == 2) {
-                    User user = UserManager.getFriend(parts[0]);
-                    Set<String> curNotifications = new HashSet<>(Arrays.asList(parts[1].split(",")));
-                    List<Notification> notificationList = new ArrayList<>();
-                    for (String notification : curNotifications) {
-                        String[] notifData = notification.split("/");
-                        Notification notify;
-                        if(notifData[2].equals("1"))
-                            notify = new FriendRequestNotification(null, null);
-                        else
-                            notify = new ReactNotification(null, null, 2);
-//                        System.out.println(1);
-//                        System.out.println(notifData[2]);
-                        notify.message = notifData[0];
-                        notify.sender = UserManager.getFriend(notifData[1]);
-                        notify.type = Integer.parseInt(notifData[2]);
-                        notify.timestamp = LocalDateTime.parse(notifData[3]);
-                        notificationList.add(notify);
-//                        System.out.println(2);
-                    }
-                    notifications.put(user, notificationList);
-//                    System.out.println(3);
-                    for (Notification notification : notifications.get(user)) {
-                        System.out.println(notification.message);
-                        System.out.println(notification instanceof ReactNotification);
-                    }
+        ArrayList<String> lines = FilesRW.readFromFile(notificationFilePath);
+        if(lines == null) {
+            notifications = new HashMap<>();
+            return;
+        }
+        for (String line : lines) {
+            String[] parts = line.split(" -> ");
+            if (parts.length == 2) {
+                User user = UserManager.getFriend(parts[0]);
+                Set<String> curNotifications = new HashSet<>(Arrays.asList(parts[1].split(",")));
+                List<Notification> notificationList = new ArrayList<>();
+                for (String notification : curNotifications) {
+                    String[] notifData = notification.split("/");
+                    Notification notify;
+                    if(notifData[2].equals("1"))
+                        notify = new FriendRequestNotification(null, null);
+                    else
+                        notify = new ReactNotification(null, null, 2);
+                    notify.message = notifData[0];
+                    notify.sender = UserManager.getFriend(notifData[1]);
+                    notify.type = Integer.parseInt(notifData[2]);
+                    notify.timestamp = LocalDateTime.parse(notifData[3]);
+                    notificationList.add(notify);
                 }
+                notifications.put(user, notificationList);
             }
-            System.out.println("notifications loaded successfully");
-        } catch (FileNotFoundException e) {
-            System.err.println("No files detected.");
-        } catch (IOException e) {
-            System.err.println("Error loading from file: " + e.getMessage());
         }
     }
 
     public static void saveNotifications() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(notificationFilePath))) {
-            for (Map.Entry<User, List<Notification>> entry : notifications.entrySet()) {
-                User user = entry.getKey();
-                List<Notification> notificationList = entry.getValue();
+        ArrayList<String> lines = new ArrayList<>();
+        for (Map.Entry<User, List<Notification>> entry : notifications.entrySet()) {
+            User user = entry.getKey();
+            List<Notification> notificationList = entry.getValue();
 
-                StringBuilder notificationsBuilder = new StringBuilder();
-                for (Notification notification : notificationList) {
-                    notificationsBuilder.append(notification.message)
-                            .append("/")
-                            .append(notification.sender.getUsername())
-                            .append("/")
-                            .append(notification.type)
-                            .append("/")
-                            .append(notification.timestamp.toString())
-                            .append(",");
-                }
-                // Remove the trailing comma
-                if (notificationsBuilder.length() > 0) {
-                    notificationsBuilder.setLength(notificationsBuilder.length() - 1);
-                }
-
-                String line = user.getUsername() + " -> " + notificationsBuilder;
-                writer.write(line);
-                writer.newLine();
+            StringBuilder notificationsBuilder = new StringBuilder();
+            for (Notification notification : notificationList) {
+                notificationsBuilder.append(notification.message)
+                        .append("/")
+                        .append(notification.sender.getUsername())
+                        .append("/")
+                        .append(notification.type)
+                        .append("/")
+                        .append(notification.timestamp.toString())
+                        .append(",");
             }
-            System.out.println("Notifications saved successfully.");
-        } catch (IOException e) {
-            System.err.println("Error saving notifications: " + e.getMessage());
+            // Remove the trailing comma
+            if (notificationsBuilder.length() > 0) {
+                notificationsBuilder.setLength(notificationsBuilder.length() - 1);
+            }
+
+            String line = user.getUsername() + " -> " + notificationsBuilder;
+            lines.add(line);
         }
+        FilesRW.writeToFile(notificationFilePath, lines);
     }
 
     public static void addUser(User user) {
@@ -194,7 +179,7 @@ public class UserManager {
             notification.message =sender.getUsername() + " Tagged You In Post";
         }
         notifications.computeIfAbsent(receiver, k -> new ArrayList<>()).add(notification);
-        saveNotifications();
+//        saveNotifications();
     }
     public static boolean hasPendingRequest(User sender, User receiver) {
         List<Notification> receiverNotifications = notifications.getOrDefault(receiver, new ArrayList<>());
@@ -216,7 +201,7 @@ public class UserManager {
         if (userNotifications != null) {
             userNotifications.remove(notification);
         }
-        saveNotifications();
+//        saveNotifications();
     }
 
 }

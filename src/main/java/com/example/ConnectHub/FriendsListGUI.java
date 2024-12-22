@@ -22,7 +22,6 @@ public class FriendsListGUI {
     private Scene scene;
     @FXML
     VBox FriendVBox;
-    FriendsManager friendsManager = new FriendsManager();
     User curruser = UserManager.curr_user;
     @FXML
     Parent FriendPanel;
@@ -53,7 +52,7 @@ public class FriendsListGUI {
     }
 
     private void loadFriends() throws IOException {
-        List<String> friends = friendsManager.getUserFriends(curruser.getUsername());
+        List<String> friends = FriendsManager.getUserFriends(curruser.getUsername());
         if (friends.isEmpty()) {
             ErrorLabel.setText("You dont have any friends");
         } else {

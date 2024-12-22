@@ -50,7 +50,7 @@ public class Home {
     private Circle ProfileImageView;
 
     public void initialize() {
-        loadPostsFromFile(); // Load saved posts from 'posts.txt'
+//        loadPostsFromFile(); // Load saved posts from 'posts.txt'
         UsernameLabel.setText(user.getUsername());
         displayPosts();
         loadUserProfileImage();
@@ -104,7 +104,7 @@ public class Home {
 
             posts.add(newPost);
             postContentArea.clear();
-            savePostsToFile(); // Save posts after creation
+//            savePostsToFile(); // Save posts after creation
             displayPosts();
             System.out.println("*****======================");
             String tag = extractTag(content);
@@ -169,8 +169,8 @@ public class Home {
 
     public void displayPosts() {
         postsContainer.getChildren().clear();
-        loadPostsFromFile();
-        CommentsManager.loadCommentsFromFile();
+//        loadPostsFromFile();
+//        CommentsManager.loadCommentsFromFile();
         for (Post post : posts) {
             VBox postBox = createPostBox(post);
 
@@ -343,88 +343,79 @@ public class Home {
             if (user.getUsername() != post.getPoster().getUsername())
                 UserManager.sendNotification(user, post.getPoster(), 2);
         }
-        savePostsToFile();
+//        savePostsToFile();
     }
 
 
     static void savePostsToFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(postFilePath, false))) {
-            for (Post post : posts) {
-                StringBuilder postBuilder = new StringBuilder();
-                postBuilder.append(post.id)
-                        .append("->")
-                        .append(post.getPoster().getUsername())
-                        .append("/")
-                        .append(post.getTextContent())
-                        .append("/")
-                        .append(post.getlikers().size())
-                        .append("/")
-                        .append(post.getImage() == null ? "-" : post.id)
-                        .append(",");
 
-                for (User liker : post.getlikers()) {
-                    postBuilder.append(liker.getUsername())
-                            .append("/");
-                }
+        ArrayList<String> lines = new ArrayList<>();
+        for (Post post : posts) {
+            StringBuilder postBuilder = new StringBuilder();
+            postBuilder.append(post.id)
+                    .append("->")
+                    .append(post.getPoster().getUsername())
+                    .append("/")
+                    .append(post.getTextContent())
+                    .append("/")
+                    .append(post.getlikers().size())
+                    .append("/")
+                    .append(post.getImage() == null ? "-" : post.id)
+                    .append(",");
 
-                String line = postBuilder.toString();
-                writer.write(line);
-                writer.newLine();
+            for (User liker : post.getlikers()) {
+                postBuilder.append(liker.getUsername())
+                        .append("/");
             }
-            System.out.println("posts saved successfully.");
-        } catch (IOException e) {
-            System.err.println("Error saving posts: " + e.getMessage());
+
+            String line = postBuilder.toString();
+            lines.add(line);
         }
+        FilesRW.writeToFile(postFilePath, lines);
     }
 
-    private static void loadPostsFromFile() {
+    public static void loadPostsFromFile() {
         posts.clear();
-        try (BufferedReader reader = new BufferedReader(new FileReader(postFilePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("->");
-                if (parts.length == 2) {
-                    int id = Integer.parseInt(parts[0]);
-                    String[] parts2 = parts[1].split(",");
-                    String[] postData = parts2[0].split("/");
+        ArrayList<String> data = FilesRW.readFromFile(postFilePath);
+        if (data == null) {
+            posts = new ArrayList<>();
+            return;
+        }
+        for (String line : data) {
+            String[] parts = line.split("->");
+            if (parts.length == 2) {
+                int id = Integer.parseInt(parts[0]);
+                String[] parts2 = parts[1].split(",");
+                String[] postData = parts2[0].split("/");
 
-                    String[] likersData;
-                    System.out.println("debug 1");
-                    if (!postData[2].equals("0")) {
-                        likersData = parts2[1].split("/");
-                    } else likersData = new String[0];
+                String[] likersData;
+                if (!postData[2].equals("0")) {
+                    likersData = parts2[1].split("/");
+                } else likersData = new String[0];
 
-                    System.out.println("debug 2");
-                    Post post = new Post(null, null);
-                    System.out.println(postData[3]);
-                    if (postData[3].equals("-")) {
-                        post = new Post(postData[1], UserManager.getFriend(postData[0]));
+                Post post = new Post(null, null);
+                if (postData[3].equals("-")) {
+                    post = new Post(postData[1], UserManager.getFriend(postData[0]));
+                } else {
+                    String path = "src/main/resources/com/example/ConnectHub/PostPics/" + id + ".png";
+                    File imageFile = new File(path);
+                    if (imageFile.exists()) {
+                        Image img = new Image(imageFile.toURI().toString());
+                        post = new Post(postData[1], img, UserManager.getFriend(postData[0]));
                     } else {
-                        String path = "src/main/resources/com/example/ConnectHub/PostPics/" + id + ".png";
-                        System.out.println("Reading resource: " + path);
-                        File imageFile = new File(path);
-                        if (imageFile.exists()) {
-                            Image img = new Image(imageFile.toURI().toString());
-                            post = new Post(postData[1], img, UserManager.getFriend(postData[0]));
-                        } else {
-                            System.err.println("Image file not found: " + path);
-                            post = new Post(postData[1], UserManager.getFriend(postData[0]));
-                        }
+                        System.err.println("Image file not found: " + path);
+                        post = new Post(postData[1], UserManager.getFriend(postData[0]));
                     }
-                    System.out.println("debug 3");
-                    HashSet<User> likers = new HashSet<>();
-                    for (String username : likersData) {
-                        likers.add(UserManager.getFriend(username));
-                    }
-                    post.setLikers(likers);
-                    post.id = id;
-                    posts.add(post);
                 }
+
+                HashSet<User> likers = new HashSet<>();
+                for (String username : likersData) {
+                    likers.add(UserManager.getFriend(username));
+                }
+                post.setLikers(likers);
+                post.id = id;
+                posts.add(post);
             }
-        } catch (FileNotFoundException e) {
-            System.err.println("No files detected.");
-        } catch (IOException e) {
-            System.err.println("Error loading from file: " + e.getMessage());
         }
     }
 }
