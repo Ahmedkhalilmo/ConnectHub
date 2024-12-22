@@ -33,7 +33,7 @@ public class NotificationPanel {
         this.notificationBar = notificationBar;
         UsernameTF.setText(notification.getMessage());
         LocalDateTime timestamp = notification.getTimestamp();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         DateLabel.setText(timestamp.format(formatter).toString());
         System.out.println(timestamp.format(formatter));
         Image image = new Image(getClass().getResourceAsStream(notification.getSender().getImageUrl()));

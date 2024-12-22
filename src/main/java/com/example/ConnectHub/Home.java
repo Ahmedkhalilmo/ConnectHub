@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
 import javafx.scene.input.MouseEvent;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -31,7 +32,7 @@ public class Home {
     private User user = UserManager.curr_user;  // Using the logged-in user from UserManager
     public static List<Post> posts = new ArrayList<>();
     private String imgUrl = user.getImageUrl();
-    private static final String postFilePath = "posts.txt" ;
+    private static final String postFilePath = "posts.txt";
     @FXML
     private TextField postContentArea;
     @FXML
@@ -90,7 +91,6 @@ public class Home {
 
     public void createPost() {
         String content = postContentArea.getText();
-
         if (!content.trim().isEmpty()) {
             Image currentPostImage = postImage;
             postImage = null;
@@ -104,9 +104,36 @@ public class Home {
             postContentArea.clear();
             savePostsToFile(); // Save posts after creation
             displayPosts();
+            System.out.println("*****======================");
+            String tag = extractTag(content);
+            User taggeduser = UserManager.getFriend(tag);
+            System.out.println(content);
+            System.out.println(tag);
+            System.out.println(taggeduser);
+            UserManager.sendNotification(user, taggeduser,4);
+            System.out.println("======================");
         } else {
             System.out.println("Cannot create an empty post.");
         }
+    }
+
+    public static String extractTag(String input) {
+        if (input == null || input.isEmpty()) {
+            return null; // Return null if the input is empty
+        }
+
+        int atIndex = input.indexOf('@');
+        if (atIndex == -1) {
+            return null; // Return null if no '@' is found
+        }
+
+        // Find the end of the tag
+        int endIndex = input.indexOf(' ', atIndex);
+        if (endIndex == -1) {
+            endIndex = input.length(); // If no space, take the rest of the string
+        }
+
+        return input.substring(atIndex + 1, endIndex); // Extract the tag
     }
 
     public void uploadImage() throws IOException {
@@ -253,6 +280,7 @@ public class Home {
         stage.setScene(scene);
         stage.show();
     }
+
     private void likePost(Post post, Button likeButton) {
         if (post.isLikedByCurrentUser()) {
             post.removeLike(user); // Remove current user from the likers set
@@ -262,8 +290,8 @@ public class Home {
             post.addLike(user); // Add current user to the likers set
             likeButton.setText("Liked");
             likeButton.setStyle("-fx-background-color: #f44336; -fx-text-fill: white; -fx-border-radius: 5px;");
-            if(user.getUsername() != post.getPoster().getUsername())
-                UserManager.sendNotification(user , post.getPoster(), 2);
+            if (user.getUsername() != post.getPoster().getUsername())
+                UserManager.sendNotification(user, post.getPoster(), 2);
         }
         savePostsToFile();
     }
@@ -271,28 +299,28 @@ public class Home {
 
     static void savePostsToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(postFilePath, false))) {
-                for (Post post : posts) {
-                    StringBuilder postBuilder = new StringBuilder();
-                    postBuilder.append(post.id)
-                            .append("->")
-                            .append(post.getPoster().getUsername())
-                            .append("/")
-                            .append(post.getTextContent())
-                            .append("/")
-                            .append(post.getlikers().size())
-                            .append("/")
-                            .append(post.getImage()==null?"-":post.id)
-                            .append(",");
+            for (Post post : posts) {
+                StringBuilder postBuilder = new StringBuilder();
+                postBuilder.append(post.id)
+                        .append("->")
+                        .append(post.getPoster().getUsername())
+                        .append("/")
+                        .append(post.getTextContent())
+                        .append("/")
+                        .append(post.getlikers().size())
+                        .append("/")
+                        .append(post.getImage() == null ? "-" : post.id)
+                        .append(",");
 
-                    for(User liker : post.getlikers()){
-                        postBuilder.append(liker.getUsername())
-                                .append("/");
-                    }
-
-                    String line = postBuilder.toString();
-                    writer.write(line);
-                    writer.newLine();
+                for (User liker : post.getlikers()) {
+                    postBuilder.append(liker.getUsername())
+                            .append("/");
                 }
+
+                String line = postBuilder.toString();
+                writer.write(line);
+                writer.newLine();
+            }
             System.out.println("posts saved successfully.");
         } catch (IOException e) {
             System.err.println("Error saving posts: " + e.getMessage());
@@ -312,18 +340,16 @@ public class Home {
 
                     String[] likersData;
                     System.out.println("debug 1");
-                    if(!postData[2].equals("0")) {
+                    if (!postData[2].equals("0")) {
                         likersData = parts2[1].split("/");
-                    }
-                    else likersData = new String[0];
+                    } else likersData = new String[0];
 
                     System.out.println("debug 2");
                     Post post = new Post(null, null);
                     System.out.println(postData[3]);
-                    if(postData[3].equals("-")) {
+                    if (postData[3].equals("-")) {
                         post = new Post(postData[1], UserManager.getFriend(postData[0]));
-                    }
-                    else {
+                    } else {
                         String path = "src/main/resources/com/example/ConnectHub/PostPics/" + id + ".png";
                         System.out.println("Reading resource: " + path);
                         File imageFile = new File(path);
@@ -337,7 +363,7 @@ public class Home {
                     }
                     System.out.println("debug 3");
                     HashSet<User> likers = new HashSet<>();
-                    for(String username : likersData){
+                    for (String username : likersData) {
                         likers.add(UserManager.getFriend(username));
                     }
                     post.setLikers(likers);

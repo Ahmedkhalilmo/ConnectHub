@@ -190,6 +190,9 @@ public class UserManager {
         else if (type == 3) {
             notification.message =sender.getUsername() + " Commented Your Post";
         }
+        else if (type == 4) {
+            notification.message =sender.getUsername() + " Tagged You In Post";
+        }
         notifications.computeIfAbsent(receiver, k -> new ArrayList<>()).add(notification);
         saveNotifications();
     }
