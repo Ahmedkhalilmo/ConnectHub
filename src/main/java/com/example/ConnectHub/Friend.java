@@ -43,9 +43,8 @@ public class Friend extends Profile {
         GenderL.setText(friendUser.getGender());
         EmailL.setText(friendUser.getEmail());
 
-        FriendsManager friendsManager = new FriendsManager();
-        List<String> Userfriends = friendsManager.getUserFriends(friendUser.getUsername());
-        List<String> Myfriends = friendsManager.getUserFriends(myUser.getUsername());
+        List<String> Userfriends = FriendsManager.getUserFriends(friendUser.getUsername());
+        List<String> Myfriends = FriendsManager.getUserFriends(myUser.getUsername());
         Myfriends.retainAll(Userfriends);
         Userfriends.removeIf(friend -> friend.equals(friendUser.getUsername()) || friend.equals(myUser.getUsername()));
         MutualfriendsListView.getItems().addAll(Userfriends);
@@ -91,8 +90,5 @@ public class Friend extends Profile {
         stage.show();
 
 
-
     }
-
-
 }

@@ -22,16 +22,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
-public class ProfilePage extends Profile {
+public class ProfilePage extends Profile
+{
 
     public static User friendUser;
+
     @FXML
     public VBox ProfilePostsContainer;
+
     public ProfilePage() {
         super();
     }
 
-    public void initialize() {
+    public void initialize()
+    {
         loadprofileposts(myUser);
         displayPosts(ProfilePostsContainer);
         nameLabel.setText(myUser.getUsername());
@@ -45,13 +49,13 @@ public class ProfilePage extends Profile {
         GenderL.setText(myUser.getGender());
         EmailL.setText(myUser.getEmail());
 
-        FriendsManager friendsManager = new FriendsManager();
-        List<String> friends = friendsManager.getUserFriends(myUser.getUsername());
+        List<String> friends = FriendsManager.getUserFriends(myUser.getUsername());
         friends.removeIf(friend -> friend.equals(myUser.getUsername()));
         friendsListView.getItems().addAll(friends);
         friendsListView.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
-        friendsListView.setCellFactory(param -> new ListCell<String>() {
+        friendsListView.setCellFactory(param -> new ListCell<String>()
+        {
             private final HBox hbox = new HBox();
             private final ImageView imageView = new ImageView();
             private final Label label = new Label();
@@ -68,9 +72,12 @@ public class ProfilePage extends Profile {
             {
                 super.updateItem(username, empty);
 
-                if (empty || username == null) {
+                if (empty || username == null)
+                {
                     setGraphic(null);
-                } else {
+                }
+                else
+                {
                     User friend = UserManager.getFriend(username); // Assuming this retrieves friend info
                     Image image = new Image(getClass().getResourceAsStream(friend.getImageUrl()));
                     imageView.setImage(image);
@@ -84,17 +91,21 @@ public class ProfilePage extends Profile {
     }
 
 
-    private void onUserClick(MouseEvent event) {
+    private void onUserClick(MouseEvent event)
+    {
         String selectedUsername = friendsListView.getSelectionModel().getSelectedItem();
-        if (selectedUsername != null) {
+        if (selectedUsername != null)
+        {
             System.out.println("Selected user: " + selectedUsername);
             friendUser = UserManager.getFriend(selectedUsername);
             switchToFriendProfile();
         }
     }
 
-    protected void switchToFriendProfile() {
-        try {
+    protected void switchToFriendProfile()
+    {
+        try
+        {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Friend.fxml"));            Parent root = loader.load();
             stage = (Stage) friendsListView.getScene().getWindow();
             scene = new Scene(root);
@@ -102,12 +113,14 @@ public class ProfilePage extends Profile {
             stage.setScene(scene);
             stage.show();
         }
-        catch (IOException e) {
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
 
-    public void returntoHomepage(MouseEvent e) throws IOException {
+    public void returntoHomepage(MouseEvent e) throws IOException
+    {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Home.fxml")));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -116,7 +129,8 @@ public class ProfilePage extends Profile {
         stage.show();
     }
 
-    public void LogOut(javafx.event.ActionEvent actionEvent) throws IOException {
+    public void LogOut(javafx.event.ActionEvent actionEvent) throws IOException
+    {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("login.fxml")));
         stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);

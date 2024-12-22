@@ -5,10 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -21,6 +18,7 @@ import javafx.stage.Stage;
 
 import javafx.scene.input.MouseEvent;
 
+import java.awt.event.ActionEvent;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,6 +36,8 @@ public class Home {
     @FXML
     private TextField postContentArea;
     @FXML
+    private RadioButton isPrivateButton;
+    @FXML
     private TextField searchBar;
     @FXML
     private VBox postsContainer;
@@ -50,7 +50,7 @@ public class Home {
     private Circle ProfileImageView;
 
     public void initialize() {
-        loadPostsFromFile(); // Load saved posts from 'posts.txt'
+//        loadPostsFromFile(); // Load saved posts from 'posts.txt'
         UsernameLabel.setText(user.getUsername());
         displayPosts();
         loadUserProfileImage();
@@ -66,7 +66,6 @@ public class Home {
             ProfileImageView.setFill(new ImagePattern(new Image("file:default-profile-image.png")));
         }
     }
-
 
     public void OpenChat(MouseEvent e) throws IOException {
         try {
@@ -93,10 +92,11 @@ public class Home {
 
     public void createPost() {
         String content = postContentArea.getText();
+        boolean isPrivate = isPrivateButton.isSelected();
         if (!content.trim().isEmpty()) {
             Image currentPostImage = postImage;
             postImage = null;
-            Post newPost = new Post(content, currentPostImage, user);
+            Post newPost = new Post(content, currentPostImage, user, isPrivate);
 
             if (newPost.isLikedByCurrentUser()) {
                 newPost.addLike(user);  // Ensure the user is added to the likers set
@@ -104,7 +104,7 @@ public class Home {
 
             posts.add(newPost);
             postContentArea.clear();
-            savePostsToFile(); // Save posts after creation
+//            savePostsToFile(); // Save posts after creation
             displayPosts();
             System.out.println("*****======================");
             String tag = extractTag(content);
@@ -169,9 +169,15 @@ public class Home {
 
     public void displayPosts() {
         postsContainer.getChildren().clear();
-        loadPostsFromFile();
-        CommentsManager.loadCommentsFromFile();
+//        loadPostsFromFile();
+//        CommentsManager.loadCommentsFromFile();
         for (Post post : posts) {
+            System.out.println(post.getIsPrivate());
+            System.out.println((FriendsManager.getUserFriends(post.getPoster().getUsername()).contains(UserManager.curr_user.getUsername())));
+            System.out.println(!(post.getPoster().getUsername().equals(UserManager.curr_user.getUsername())));
+            if(post.getIsPrivate() &&
+                    !(FriendsManager.getUserFriends(post.getPoster().getUsername()).contains(UserManager.curr_user.getUsername()))
+                    && !(post.getPoster().getUsername().equals(UserManager.curr_user.getUsername()))) continue;
             VBox postBox = createPostBox(post);
 
             // Create like button and set its state depending on whether the current user liked the post
@@ -343,88 +349,81 @@ public class Home {
             if (user.getUsername() != post.getPoster().getUsername())
                 UserManager.sendNotification(user, post.getPoster(), 2);
         }
-        savePostsToFile();
+//        savePostsToFile();
     }
 
 
     static void savePostsToFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(postFilePath, false))) {
-            for (Post post : posts) {
-                StringBuilder postBuilder = new StringBuilder();
-                postBuilder.append(post.id)
-                        .append("->")
-                        .append(post.getPoster().getUsername())
-                        .append("/")
-                        .append(post.getTextContent())
-                        .append("/")
-                        .append(post.getlikers().size())
-                        .append("/")
-                        .append(post.getImage() == null ? "-" : post.id)
-                        .append(",");
 
-                for (User liker : post.getlikers()) {
-                    postBuilder.append(liker.getUsername())
-                            .append("/");
-                }
+        ArrayList<String> lines = new ArrayList<>();
+        for (Post post : posts) {
+            StringBuilder postBuilder = new StringBuilder();
+            postBuilder.append(post.id)
+                    .append("->")
+                    .append(post.getPoster().getUsername())
+                    .append("/")
+                    .append(post.getTextContent())
+                    .append("/")
+                    .append(post.getlikers().size())
+                    .append("/")
+                    .append(post.getIsPrivate())
+                    .append("/")
+                    .append(post.getImage() == null ? "-" : post.id)
+                    .append(",");
 
-                String line = postBuilder.toString();
-                writer.write(line);
-                writer.newLine();
+            for (User liker : post.getlikers()) {
+                postBuilder.append(liker.getUsername())
+                        .append("/");
             }
-            System.out.println("posts saved successfully.");
-        } catch (IOException e) {
-            System.err.println("Error saving posts: " + e.getMessage());
+
+            String line = postBuilder.toString();
+            lines.add(line);
         }
+        FilesRW.writeToFile(postFilePath, lines);
     }
 
-    private static void loadPostsFromFile() {
+    public static void loadPostsFromFile() {
         posts.clear();
-        try (BufferedReader reader = new BufferedReader(new FileReader(postFilePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("->");
-                if (parts.length == 2) {
-                    int id = Integer.parseInt(parts[0]);
-                    String[] parts2 = parts[1].split(",");
-                    String[] postData = parts2[0].split("/");
+        ArrayList<String> data = FilesRW.readFromFile(postFilePath);
+        if (data == null) {
+            posts = new ArrayList<>();
+            return;
+        }
+        for (String line : data) {
+            String[] parts = line.split("->");
+            if (parts.length == 2) {
+                int id = Integer.parseInt(parts[0]);
+                String[] parts2 = parts[1].split(",");
+                String[] postData = parts2[0].split("/");
 
-                    String[] likersData;
-                    System.out.println("debug 1");
-                    if (!postData[2].equals("0")) {
-                        likersData = parts2[1].split("/");
-                    } else likersData = new String[0];
+                String[] likersData;
+                if (!postData[2].equals("0")) {
+                    likersData = parts2[1].split("/");
+                } else likersData = new String[0];
 
-                    System.out.println("debug 2");
-                    Post post = new Post(null, null);
-                    System.out.println(postData[3]);
-                    if (postData[3].equals("-")) {
-                        post = new Post(postData[1], UserManager.getFriend(postData[0]));
+                Post post = new Post(null, null, false);
+                if (postData[4].equals("-")) {
+                    post = new Post(postData[1], UserManager.getFriend(postData[0]), postData[3].equals("true") );
+                } else {
+                    String path = "src/main/resources/com/example/ConnectHub/PostPics/" + id + ".png";
+                    File imageFile = new File(path);
+                    if (imageFile.exists()) {
+                        Image img = new Image(imageFile.toURI().toString());
+                        post = new Post(postData[1], img, UserManager.getFriend(postData[0]), postData[3].equals("true"));
                     } else {
-                        String path = "src/main/resources/com/example/ConnectHub/PostPics/" + id + ".png";
-                        System.out.println("Reading resource: " + path);
-                        File imageFile = new File(path);
-                        if (imageFile.exists()) {
-                            Image img = new Image(imageFile.toURI().toString());
-                            post = new Post(postData[1], img, UserManager.getFriend(postData[0]));
-                        } else {
-                            System.err.println("Image file not found: " + path);
-                            post = new Post(postData[1], UserManager.getFriend(postData[0]));
-                        }
+                        System.err.println("Image file not found: " + path);
+                        post = new Post(postData[1], UserManager.getFriend(postData[0]), postData[3].equals("true"));
                     }
-                    System.out.println("debug 3");
-                    HashSet<User> likers = new HashSet<>();
-                    for (String username : likersData) {
-                        likers.add(UserManager.getFriend(username));
-                    }
-                    post.setLikers(likers);
-                    post.id = id;
-                    posts.add(post);
                 }
+
+                HashSet<User> likers = new HashSet<>();
+                for (String username : likersData) {
+                    likers.add(UserManager.getFriend(username));
+                }
+                post.setLikers(likers);
+                post.id = id;
+                posts.add(post);
             }
-        } catch (FileNotFoundException e) {
-            System.err.println("No files detected.");
-        } catch (IOException e) {
-            System.err.println("Error loading from file: " + e.getMessage());
         }
     }
 }

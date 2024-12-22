@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -20,152 +21,153 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="MyBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #18191a;" stylesheets="@Home.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.Home">
-   <!-- Top Bar Section -->
-   <top>
-      <HBox fx:id="HBoxTop" alignment="CENTER" prefHeight="70.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="191.0">
-               <children>
-                  <ImageView fx:id="logo" fitHeight="103.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" translateX="-150.0">
-                     <image>
-                        <Image url="@icon.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <ImageView fx:id="OpenChat" fitHeight="59.0" fitWidth="53.0" onMouseClicked="#OpenChat" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@bubble-chat.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="426.0">
-               <children>
-                  <Label textFill="#cccccc" translateX="15.0">
-                     <font>
-                        <Font name="TimeBurner Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="searchBar" prefHeight="59.0" prefWidth="414.0" promptText="Search" translateX="50.0" />
-                  <Button mnemonicParsing="false" onAction="#switchtoresult">
-                     <graphic>
-
-                        <ImageView fx:id="SearchBTN" fitHeight="37.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@SearchIcon.png" />
-                           </image>
+    <!-- Top Bar Section -->
+    <top>
+        <HBox fx:id="HBoxTop" alignment="CENTER" prefHeight="70.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER" prefHeight="70.0" prefWidth="191.0">
+                    <children>
+                        <ImageView fx:id="logo" fitHeight="103.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" translateX="-150.0">
+                            <image>
+                                <Image url="@icon.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets left="5.0" />
+                            </HBox.margin>
                         </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="74.0" prefWidth="131.0">
-               <children>
-                  <Separator opacity="0.0" orientation="VERTICAL" prefHeight="48.0" prefWidth="13.0" />
-               </children>
-            </HBox>
-            <ImageView fx:id="openNotificationPanel" fitHeight="57.0" fitWidth="61.0" onMouseClicked="#openNotificationPanel" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@notification.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="UsernameLabel" text="UserName" textFill="#cccccc" translateX="80.0">
-               <font>
-                  <Font name="TimeBurner Bold" size="24.0" />
-               </font>
-            </Label>
-            <Circle fx:id="ProfileImageView" onMouseClicked="#OpenProfile" radius="31.0" stroke="BLACK" strokeType="INSIDE" translateX="100.0">
-               <fill>
-                  <RadialGradient centerX="0.2569060773480663" centerY="0.509478672985782" focusAngle="-39.81" focusDistance="-0.09195402298850575" radius="0.5804597701149425">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.35653021931648254" green="0.2222222238779068" blue="0.8421052694320679" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.25" green="0.30714285373687744" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </RadialGradient>
-               </fill>
-            </Circle>
-         </children>
-      </HBox>
-   </top>
+                        <ImageView fx:id="OpenChat" fitHeight="59.0" fitWidth="53.0" onMouseClicked="#OpenChat" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@bubble-chat.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="70.0" prefWidth="426.0">
+                    <children>
+                        <Label textFill="#cccccc" translateX="15.0">
+                            <font>
+                                <Font name="TimeBurner Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="searchBar" prefHeight="59.0" prefWidth="414.0" promptText="Search" translateX="50.0" />
+                        <Button mnemonicParsing="false" onAction="#switchtoresult">
+                            <graphic>
 
-   <!-- Left and Right Bar Section -->
-   <left>
-      <VBox fx:id="LeftBar" prefHeight="647.0" prefWidth="200.0" style="-fx-background-color: #d3d3d3;">
-         <children>
-            <VBox prefHeight="663.0" prefWidth="200.0" style="-fx-background-color: #8F00FF;" />
-         </children></VBox>
-   </left>
-   <right>
-      <VBox fx:id="RightBar" prefHeight="636.0" prefWidth="0.0" style="-fx-background-color: #ffffff;" />
-   </right>
-
-   <!-- Main Content Section -->
-   <center>
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="574.0" prefWidth="930.0" style="-fx-background-color: #18191a;" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
-         <content>
-            <StackPane>
-               <VBox fx:id="PostCardLayout" prefHeight="800.0" prefWidth="1242.0" style="-fx-background-color: #ffffff;">
-                  <!-- Post Input Area -->
-                  <VBox fx:id="PostInputArea" prefHeight="142.0" prefWidth="1242.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #d3d3d3; -fx-padding: 10px; -fx-spacing: 10px;">
-                     <HBox alignment="CENTER" prefHeight="60.0" prefWidth="938.0" translateX="-150.0">
-                        <children>
-                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10px;">
-                              <children>
-                                 <!-- Image icon -->
-                                 <ImageView fx:id="uploadImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#uploadImage" preserveRatio="true">
+                                <ImageView fx:id="SearchBTN" fitHeight="37.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                       <Image url="@ImageIcon.png" />
+                                        <Image url="@SearchIcon.png" />
                                     </image>
-                                 </ImageView>
-                                 <!-- Text Field for Post -->
-                                 <TextField fx:id="postContentArea" prefHeight="44.0" prefWidth="463.0" promptText="What's on your mind?" />
-                              </children>
-                           </HBox>
-                        </children>
-                     </HBox>
-                     <!-- Button to Submit Post -->
-                     <HBox alignment="CENTER" prefHeight="40.0">
-                        <children>
-                           <Button mnemonicParsing="false" onAction="#createPost" onMouseClicked="#createPost" prefHeight="81.0" prefWidth="144.0" style="-fx-background-radius: 100px;" text="Post" translateX="-150.0">
-                              <font>
-                                 <Font name="TimeBurner Bold" size="18.0" />
-                              </font>
-                              <textFill>
-                                 <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                       <Stop>
-                                          <color>
-                                             <Color />
-                                          </color>
-                                       </Stop>
-                                       <Stop offset="1.0">
-                                          <color>
-                                             <Color red="0.5686274766921997" green="0.5607843399047852" blue="1.0" />
-                                          </color>
-                                       </Stop>
-                                    </stops>
-                                 </LinearGradient>
-                              </textFill>
-                           </Button>
-                        </children>
-                     </HBox>
-                  </VBox>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="74.0" prefWidth="131.0">
+                    <children>
+                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="48.0" prefWidth="13.0" />
+                    </children>
+                </HBox>
+                <ImageView fx:id="openNotificationPanel" fitHeight="57.0" fitWidth="61.0" onMouseClicked="#openNotificationPanel" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@notification.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="UsernameLabel" text="UserName" textFill="#cccccc" translateX="80.0">
+                    <font>
+                        <Font name="TimeBurner Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Circle fx:id="ProfileImageView" onMouseClicked="#OpenProfile" radius="31.0" stroke="BLACK" strokeType="INSIDE" translateX="100.0">
+                    <fill>
+                        <RadialGradient centerX="0.2569060773480663" centerY="0.509478672985782" focusAngle="-39.81" focusDistance="-0.09195402298850575" radius="0.5804597701149425">
+                            <stops>
+                                <Stop>
+                                    <color>
+                                        <Color red="0.35653021931648254" green="0.2222222238779068" blue="0.8421052694320679" />
+                                    </color>
+                                </Stop>
+                                <Stop offset="1.0">
+                                    <color>
+                                        <Color red="0.25" green="0.30714285373687744" blue="1.0" />
+                                    </color>
+                                </Stop>
+                            </stops>
+                        </RadialGradient>
+                    </fill>
+                </Circle>
+            </children>
+        </HBox>
+    </top>
 
-                  <!-- Posts Display Area -->
-                  <VBox fx:id="postsContainer" prefHeight="650.0" prefWidth="1211.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #d3d3d3; -fx-padding: 10px; -fx-spacing: 10px;" />
-               </VBox>
-            </StackPane>
-         </content>
-      </ScrollPane>
-   </center>
+    <!-- Left and Right Bar Section -->
+    <left>
+        <VBox fx:id="LeftBar" prefHeight="647.0" prefWidth="200.0" style="-fx-background-color: #d3d3d3;">
+            <children>
+                <VBox prefHeight="663.0" prefWidth="200.0" style="-fx-background-color: #8F00FF;" />
+            </children></VBox>
+    </left>
+    <right>
+        <VBox fx:id="RightBar" prefHeight="636.0" prefWidth="0.0" style="-fx-background-color: #ffffff;" />
+    </right>
+
+    <!-- Main Content Section -->
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="574.0" prefWidth="930.0" style="-fx-background-color: #18191a;" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+            <content>
+                <StackPane>
+                    <VBox fx:id="PostCardLayout" prefHeight="800.0" prefWidth="1242.0" style="-fx-background-color: #ffffff;">
+                        <!-- Post Input Area -->
+                        <VBox fx:id="PostInputArea" prefHeight="142.0" prefWidth="1242.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #d3d3d3; -fx-padding: 10px; -fx-spacing: 10px;">
+                            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="938.0" translateX="-150.0">
+                                <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10px;">
+                                        <children>
+                                            <!-- Image icon -->
+                                            <ImageView fx:id="uploadImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#uploadImage" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@ImageIcon.png" />
+                                                </image>
+                                            </ImageView>
+                                            <!-- Text Field for Post -->
+                                            <TextField fx:id="postContentArea" prefHeight="44.0" prefWidth="463.0" promptText="What's on your mind?" />
+                                        </children>
+                                    </HBox>
+                           <RadioButton fx:id="isPrivateButton" mnemonicParsing="false" text="friends only" />
+                                </children>
+                            </HBox>
+                            <!-- Button to Submit Post -->
+                            <HBox alignment="CENTER" prefHeight="40.0">
+                                <children>
+                                    <Button mnemonicParsing="false" onAction="#createPost" onMouseClicked="#createPost" prefHeight="81.0" prefWidth="144.0" style="-fx-background-radius: 100px;" text="Post" translateX="-150.0">
+                                        <font>
+                                            <Font name="TimeBurner Bold" size="18.0" />
+                                        </font>
+                                        <textFill>
+                                            <LinearGradient endX="1.0" endY="1.0">
+                                                <stops>
+                                                    <Stop>
+                                                        <color>
+                                                            <Color />
+                                                        </color>
+                                                    </Stop>
+                                                    <Stop offset="1.0">
+                                                        <color>
+                                                            <Color red="0.5686274766921997" green="0.5607843399047852" blue="1.0" />
+                                                        </color>
+                                                    </Stop>
+                                                </stops>
+                                            </LinearGradient>
+                                        </textFill>
+                                    </Button>
+                                </children>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Posts Display Area -->
+                        <VBox fx:id="postsContainer" prefHeight="650.0" prefWidth="1211.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #d3d3d3; -fx-padding: 10px; -fx-spacing: 10px;" />
+                    </VBox>
+                </StackPane>
+            </content>
+        </ScrollPane>
+    </center>
 </BorderPane>

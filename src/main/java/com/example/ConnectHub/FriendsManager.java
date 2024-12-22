@@ -6,19 +6,19 @@ import java.util.*;
 public class FriendsManager {
 
     // HashMap to represent the graph: user -> set of friends
-    private Map<String, Set<String>> friendsGraph;
+    public static Map<String, Set<String>> friendsGraph;
 
     // File to store the friends graph
-    private static final String FILE_NAME = "friends_graph.txt";
+    private static final String friendsFilePath = "friends_graph.txt";
 
     // Constructor
     public FriendsManager() {
         friendsGraph = new HashMap<>();
-        loadFromFile();
+//        loadFromFile();
     }
 
     // Adds a new friend connection between users
-    public void addFriend(User sender, User receiver) {
+    public static void addFriend(User sender, User receiver) {
         if(sender.getUsername().equals(receiver.getUsername())){
             System.out.println("you can't send friend to your self!.");
         }
@@ -29,10 +29,10 @@ public class FriendsManager {
 
         UserManager.sendNotification(sender, receiver,1);
         System.out.println("Notification sent.");
-        saveToFile();
+//        saveToFile();
     }
 
-    public void acceptRequest(User sender, User receiver) {
+    public static void acceptRequest(User sender, User receiver) {
         String senderUsername = sender.getUsername();
         String receiverUsername = receiver.getUsername();
 
@@ -43,7 +43,7 @@ public class FriendsManager {
         friendsGraph.get(receiverUsername).add(senderUsername);
 
         System.out.println("Friend added.");
-        saveToFile();
+//        saveToFile();
     }
 
     // Removes the friends connection
@@ -54,11 +54,14 @@ public class FriendsManager {
         if (friendsGraph.containsKey(user2)) {
             friendsGraph.get(user2).remove(user1);
         }
-        saveToFile();
+//        saveToFile();
     }
 
     // Returns all friends of the user in a list
-    public List<String> getUserFriends(String user) {
+    public static List<String> getUserFriends(String user) {
+        if(friendsGraph == null){
+            friendsGraph = new HashMap<>();
+        }
         if (!friendsGraph.containsKey(user)) {
             return Collections.emptyList();
         }
@@ -66,34 +69,30 @@ public class FriendsManager {
     }
 
     // Writes the graph into the file
-    private void saveToFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
-            for (Map.Entry<String, Set<String>> entry : friendsGraph.entrySet()) {
-                writer.write(entry.getKey() + " -> " + String.join(",", entry.getValue()));
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            System.err.println("Error saving to file: " + e.getMessage());
+    public static void saveToFile() {
+        ArrayList<String> lines = new ArrayList<>();
+        for (Map.Entry<String, Set<String>> entry : friendsGraph.entrySet()) {
+            lines.add(entry.getKey() + " -> " + String.join(",", entry.getValue()));
         }
+        FilesRW.writeToFile(friendsFilePath, lines);
     }
 
 
     // Reads the graph from the file
-    private void loadFromFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(" -> ");
-                if (parts.length == 2) {
-                    String user = parts[0];
-                    Set<String> friends = new HashSet<>(Arrays.asList(parts[1].split(",")));
-                    friendsGraph.put(user, friends);
-                }
+    public static void loadFromFile() {
+        ArrayList<String> data = FilesRW.readFromFile(friendsFilePath);
+        if(data == null) {
+            friendsGraph = new HashMap<>();
+            return;
+        }
+        friendsGraph = new HashMap<>();
+        for (String line : data) {
+            String[] parts = line.split(" -> ");
+            if (parts.length == 2) {
+                String user = parts[0];
+                Set<String> friends = new HashSet<>(Arrays.asList(parts[1].split(",")));
+                friendsGraph.put(user, friends);
             }
-        } catch (FileNotFoundException e) {
-            System.err.println("No files detected.");
-        } catch (IOException e) {
-            System.err.println("Error loading from file: " + e.getMessage());
         }
     }
 }

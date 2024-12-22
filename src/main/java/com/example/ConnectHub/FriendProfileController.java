@@ -28,7 +28,6 @@ public class FriendProfileController extends Profile {
     @FXML
     public VBox ProfilePostsContainer2;
     private User friendUser = SearchResults.friendUser;
-    FriendsManager friends_manager = new FriendsManager();
 
     public FriendProfileController() {
         super();
@@ -48,9 +47,8 @@ public class FriendProfileController extends Profile {
         GenderL.setText(friendUser.getGender());
         EmailL.setText(friendUser.getEmail());
 
-        FriendsManager friendsManager = new FriendsManager();
-        List<String> Userfriends = friendsManager.getUserFriends(friendUser.getUsername());
-        List<String> Myfriends = friendsManager.getUserFriends(myUser.getUsername());
+        List<String> Userfriends = FriendsManager.getUserFriends(friendUser.getUsername());
+        List<String> Myfriends = FriendsManager.getUserFriends(myUser.getUsername());
         Userfriends.retainAll(Myfriends);
         Userfriends.removeIf(friend -> friend.equals(friendUser.getUsername()) || friend.equals(myUser.getUsername()));
         MutualfriendsListView.getItems().addAll(Userfriends);
@@ -85,6 +83,7 @@ public class FriendProfileController extends Profile {
             }
         });
     }
+
     private void updateConnectButton() {
         if(UserManager.hasPendingRequest(UserManager.curr_user, friendUser)) {
             connectButton.setText("Pending");
@@ -96,7 +95,7 @@ public class FriendProfileController extends Profile {
             connectButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
             connectButton.setOnAction(event -> acceptConnection());
         }
-        else if(friends_manager.getUserFriends(UserManager.curr_user.getUsername()).contains(friendUser.getUsername())) {
+        else if(FriendsManager.getUserFriends(UserManager.curr_user.getUsername()).contains(friendUser.getUsername())) {
             connectButton.setText("Connected");
             connectButton.setStyle("-fx-background-color: grey; -fx-text-fill: white;");
             connectButton.setDisable(true);
@@ -109,7 +108,7 @@ public class FriendProfileController extends Profile {
     }
 
     private void acceptConnection() {
-        friends_manager.acceptRequest(friendUser, UserManager.curr_user);
+        FriendsManager.acceptRequest(friendUser, UserManager.curr_user);
         System.out.println(friendUser.getUsername() + "sent" +  UserManager.curr_user.getUsername());
         List<Notification> lst = UserManager.notifications.get( UserManager.curr_user);
         for(Notification n : lst) {
@@ -122,9 +121,10 @@ public class FriendProfileController extends Profile {
     }
 
     private void sendConnectionRequest() {
-        friends_manager.addFriend(myUser, friendUser);
+        FriendsManager.addFriend(myUser, friendUser);
         updateConnectButton();
     }
+
     public void returntoHomepage(MouseEvent e) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Home.fxml")));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -137,8 +137,7 @@ public class FriendProfileController extends Profile {
     public void addFriend(ActionEvent e){
         User user2 =friendUser;
         User user1 = myUser;
-        friends_manager.addFriend(user1,user2);
+        FriendsManager.addFriend(user1,user2);
         updateConnectButton();
     }
-
 }

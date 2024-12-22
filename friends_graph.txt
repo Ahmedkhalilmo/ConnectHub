@@ -1,2 +1,3 @@
-aa -> aaa
-aaa -> aa
+adham -> dr hazem,bebo
+dr hazem -> adham,bebo
+bebo -> adham,dr hazem

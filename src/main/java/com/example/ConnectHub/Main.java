@@ -15,6 +15,12 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         UserManager.loadUsers();
+        UserManager.loadNotifications();
+        Home.loadPostsFromFile();
+        FriendsManager.loadFromFile();
+        CommentsManager.loadCommentsFromFile();
+
+
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         Scene scene = new Scene(root);
         try {
@@ -36,6 +42,11 @@ public class Main extends Application {
         {
             event.consume();
             UserManager.saveUsers();
+            FriendsManager.saveToFile();
+            CommentsManager.saveCommentsToFile();
+            Home.savePostsToFile();
+            UserManager.saveNotifications();
+
                 stage.close();
         });
     }

@@ -18,11 +18,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Profile {
+public abstract class Profile
+{
     protected Stage stage;
+
     protected Scene scene;
+
     protected User myUser = UserManager.curr_user;
+
     public static List<Post> profileposts = new ArrayList<>();
+
     private static final String postFilePath = "posts.txt" ;
     @FXML
     protected Label nameLabel;
@@ -49,13 +54,17 @@ public abstract class Profile {
     public void loadprofileposts(User user) {
         profileposts.clear();
         for (Post post : Home.posts) {
+            if(post.getIsPrivate() &&
+                    !(FriendsManager.getUserFriends(post.getPoster().getUsername()).contains(UserManager.curr_user.getUsername()))
+                    && !(post.getPoster().getUsername().equals(UserManager.curr_user.getUsername()))) continue;
             if(post.getPoster().getUsername().equals(user.getUsername()))
                 profileposts.add(post);
         }
-        CommentsManager.loadCommentsFromFile();
+//CommentsManager.loadCommentsFromFile();
     }
 
-    private VBox createPostBox(Post post) {
+    private VBox createPostBox(Post post)
+    {
         VBox postBox = new VBox();
         postBox.setSpacing(15);
         postBox.setStyle("-fx-background-color: white; -fx-background-radius: 10px; -fx-padding: 10px; -fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-effect: dropshadow(gaussian, #000000, 10, 0.2, 0, 0);");
@@ -81,7 +90,6 @@ public abstract class Profile {
         commentsBox.setStyle("-fx-background-color: #f9f9f9; -fx-padding: 10px; -fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-border-radius: 5px;");
         commentsBox.setMaxHeight(100);
 //        refreshCommentsDisplay(commentsBox, post);
-        // Check if there are comments
 //        List<Comment> comments = CommentsManager.getComments(post.id);
 
         // Create a text box for adding new comments
@@ -204,7 +212,7 @@ public abstract class Profile {
             if(myUser.getUsername() != post.getPoster().getUsername())
                 UserManager.sendNotification(myUser , post.getPoster(), 2);
         }
-        Home.savePostsToFile();
+//        Home.savePostsToFile();
     }
     public void displayPosts(VBox ProfilePostsContainer) {
         ProfilePostsContainer.getChildren().clear();
@@ -220,7 +228,6 @@ public abstract class Profile {
     protected  void switchToFriendProfile() {};
 
     protected abstract void returntoHomepage(MouseEvent e) throws IOException ;
-
 
     protected void LogOut(javafx.event.ActionEvent actionEvent) throws IOException {};
 }

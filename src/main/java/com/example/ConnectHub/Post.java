@@ -10,6 +10,7 @@ import java.util.Set;
 
 class Post implements Serializable {
     private String textContent;
+    private boolean isPrivate;
     private transient Image image; // Marked transient as Image is not serializable
     private String imageUrl; // Used to reload the image
     private User poster;  // Added field to store the user who created the post
@@ -20,9 +21,10 @@ class Post implements Serializable {
     public int id;
 
     // Constructor for posts without an image
-    public Post(String textContent, User poster) {
+    public Post(String textContent, User poster, boolean isPrivate) {
         this.textContent = textContent;
         this.image = null;
+        this.isPrivate = isPrivate;
         this.imageUrl = null;
         this.poster = poster;  // Assign the user who created the post
         this.likeCount = 0;  // Initialize like count
@@ -32,9 +34,10 @@ class Post implements Serializable {
     }
 
     // Constructor for posts with an image
-    public Post(String textContent, Image image, User poster) {
+    public Post(String textContent, Image image, User poster, boolean isPrivate) {
         this.textContent = textContent;
         this.image = image;
+        this.isPrivate = isPrivate;
         this.imageUrl = image != null ? image.getUrl() : null;
         this.poster = poster;  // Assign the user who created the post
         this.likeCount = 0;  // Initialize like count
@@ -42,7 +45,9 @@ class Post implements Serializable {
         this.likedByCurrentUser = false; // Default to false
         this.id = Home.posts.size();
     }
-
+    public boolean getIsPrivate(){
+        return this.isPrivate;
+    }
     // Set the like status for the current user
     public void setLikedByCurrentUser(boolean liked) {
         this.likedByCurrentUser = liked;
