@@ -81,6 +81,7 @@ public class CommentsManager {
     }
     public static void loadCommentsFromFile(){
         // Load the commentsMap from a file
+        commentsMap.clear();
         try (BufferedReader reader = new BufferedReader(new FileReader("comments.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {

@@ -182,17 +182,12 @@ public class Home {
             commentsBox.setSpacing(10);
             commentsBox.setStyle("-fx-background-color: #f9f9f9; -fx-padding: 10px; -fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-border-radius: 5px;");
             commentsBox.setMaxHeight(100);
-//        refreshCommentsDisplay(commentsBox, post);
-            // Check if there are comments
-//        List<Comment> comments = CommentsManager.getComments(post.id);
 
-            // Create a text box for adding new comments
             TextField commentInput = new TextField();
             commentInput.setPromptText("Write a comment...");
             commentInput.setPrefWidth(280);
             commentInput.setStyle("-fx-font-size: 12px; -fx-padding: 5px;");
 
-// Create a button to submit the comment
             Button addCommentButton = new Button("Add Comment");
             addCommentButton.setStyle("-fx-font-size: 12px; -fx-background-color: #4CAF50; -fx-text-fill: white; "
                     + "-fx-padding: 5px; -fx-border-radius: 5px;");
@@ -200,23 +195,16 @@ public class Home {
             addCommentButton.setOnAction(e -> {
                 String newCommentText = commentInput.getText();
                 if (newCommentText != null && !newCommentText.trim().isEmpty()) {
-                    // Add the new comment to the comments list
                     CommentsManager.addComment(post.id, new Comment(newCommentText, UserManager.curr_user));
-                    // Clear the input field
                     commentInput.clear();
                     refreshCommentsDisplay(commentsBox, post);
-                    // Refresh the comments display
                 }
             });
-
-// Add the input field and button to a container
             HBox addCommentBox = new HBox(10, commentInput, addCommentButton);
             addCommentBox.setAlignment(Pos.CENTER_LEFT);
             addCommentBox.setStyle("-fx-padding: 5px;");
 
-// Add the comments box and input area to the post box
             postBox.getChildren().addAll(commentsBox, addCommentBox);
-// Ensure the commentsBox is added only once to postBox
             if (!postBox.getChildren().contains(commentsBox)) {
                 postBox.getChildren().add(commentsBox);
             }
@@ -226,8 +214,7 @@ public class Home {
 
 
     private void refreshCommentsDisplay(VBox commentsBox, Post post) {
-//        CommentsManager.loadCommentsFromFile();
-        commentsBox.getChildren().clear(); // Clear existing comments
+        commentsBox.getChildren().clear();
         ArrayList<Comment> comments = CommentsManager.getComments(post.id);
         if(comments == null || comments.size() ==0) return;
         for (Comment comment : comments) {
@@ -238,7 +225,7 @@ public class Home {
             commentLabel.setWrapText(true);
             commentLabel.setStyle("-fx-font-size: 12px; -fx-background-color: white; -fx-padding: 5px; "
                     + "-fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-border-radius: 5px;");
-            commentsBox.getChildren().add(commentLabel); // Add each comment to the VBox
+            commentsBox.getChildren().add(commentLabel);
         }
     }
 
