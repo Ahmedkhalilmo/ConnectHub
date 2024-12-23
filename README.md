@@ -1,4 +1,3 @@
-ConnectHub
 ConnectHub is a comprehensive social networking platform that empowers users to build relationships, share content, and engage interactively with ease and scalability.
 Key Features
 * User Profiles: Personalize with bios, profile pictures, and cover photos.
