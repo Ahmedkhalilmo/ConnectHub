@@ -40,8 +40,13 @@ public class Verification {
         return symbolPattern.matcher(string).find();
     }
 
+    public static boolean hassize(String string) {
+
+        return string.length()>=8;
+    }
+
     public static boolean hasAll(String string) {
-        return hasCapitalLetter(string) && hasSmallLetter(string) && hasNumber(string) && hasSymbol(string);
+        return hasCapitalLetter(string) && hasSmallLetter(string) && hasNumber(string) && hasSymbol(string)&&hassize(string);
     }
 
     public static boolean checkpassword(String password)

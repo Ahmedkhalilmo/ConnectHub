@@ -7,10 +7,10 @@ import java.util.*;
 import java.time.LocalDateTime;
 
 public class UserManager {
-    public static ArrayList<User> users = new ArrayList<>();
+    public static List<User> users = new ArrayList<>();
     public static User curr_user;
-    private static final String userfilepath = "users.dat";
-    protected static String ChatsFilePath = "chats.dat";
+    private static final String userfilepath = "users.txt";
+    protected static String ChatsFilePath = "chats.txt";
     private static final String notificationFilePath = "notifications.txt";
     public static List<Conversation> chats = new ArrayList<>();
     public static Map<User, List<Notification>> notifications = new HashMap<>();
@@ -95,7 +95,7 @@ public class UserManager {
         File file = new File(userfilepath);
         if (file.exists()) {
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
-                users = (ArrayList<User>) in.readObject();
+                users = (List<User>) in.readObject();
                 System.out.println("Users loaded successfully.");
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();

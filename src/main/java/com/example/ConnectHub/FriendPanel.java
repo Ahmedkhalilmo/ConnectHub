@@ -25,6 +25,7 @@ public class FriendPanel {
     VBox friendVBox;
     Parent friendPanel;
     Boolean isChat;
+
     public void setData(User user, Conversation conversation, VBox friendVBox, Parent root,boolean isChat)
     {
         this.isChat = isChat;

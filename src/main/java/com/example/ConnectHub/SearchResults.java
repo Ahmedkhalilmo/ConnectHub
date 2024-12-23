@@ -55,7 +55,7 @@ public class SearchResults {
                 label.setStyle("-fx-padding: 10;");
             }
 
-            @Override
+
             protected void updateItem(User user, boolean empty) {
                 super.updateItem(user, empty);
                 if (empty || user == null) {

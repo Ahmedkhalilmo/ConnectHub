@@ -141,7 +141,7 @@ public class CreateAccount {
                 return;
             }
             if (!Verification.checkpassword(password)) {
-                ErrorLabel.setText("Your password needs to contain \n a capital letter, small letter, number, and symbol");
+                ErrorLabel.setText("Your password must contain \n a capital letter, a lowercase letter, a number, a special symbol,\n and be at least 8 characters ");
                 return;
             }
             if (currentImagePath == null) {
@@ -152,7 +152,7 @@ public class CreateAccount {
 
              User newUser = new User(username, hashedPassword, email, gender, userBirthDate, ImageUrl);
              UserManager.addUser(newUser);
-//             UserManager.saveUsers();
+            UserManager.saveUsers();
 
         User NewUser = new User(username,password,email,gender,userBirthDate,ImageUrl);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

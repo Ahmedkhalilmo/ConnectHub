@@ -1,3 +1,0 @@
-0->dr hazem/sally 3al naby/2/true/-,adham/dr hazem/
-1->dr hazem/hello @adham/1/false/-,adham/
-2->bebo/dassbfa/0/false/-,

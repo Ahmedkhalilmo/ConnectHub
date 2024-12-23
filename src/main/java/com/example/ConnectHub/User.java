@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Serializable {
-
+    public static int Id;
+    private int id;
     private String username;
     private String password;
     private String email;
@@ -25,6 +26,8 @@ public class User implements Serializable {
         this.gender = gender;
         this.userBirthDate = userBirthDate;
         this.imageUrl = imageUrl;
+        id = Id;
+        Id++;
     }
 
     public String getGender() {

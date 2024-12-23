@@ -15,6 +15,7 @@ public class Message extends Text implements Serializable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedDateTime = currentDate.format(formatter);
         this.currentDateTime = formattedDateTime;
+
     }
     public  String getContent(){
         return content;
