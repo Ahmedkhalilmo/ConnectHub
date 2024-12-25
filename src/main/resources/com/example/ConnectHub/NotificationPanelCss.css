@@ -6,7 +6,6 @@
     -fx-padding: 10px 20px;
     -fx-border-radius: 25px;
     -fx-background-radius: 25px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 4);
     -fx-cursor: hand;
 }
 
@@ -16,5 +15,4 @@
 
 .button:pressed {
     -fx-background-color: #1e5ab5;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 3, 0.5, 0, 2);
 }

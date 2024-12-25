@@ -1,0 +1,45 @@
+.root {
+    -fx-background-color: linear-gradient(to bottom right, #121212, #1e1e1e);
+    -fx-font-family: 'Poppins', 'Arial', sans-serif;
+    -fx-font-size: 14px;
+}
+.list-view {
+    -fx-background-color: black;
+}
+.label {
+    -fx-text-fill: linear-gradient(to right, #6a11cb, #2575fc);
+}
+.button {
+    -fx-background-color: linear-gradient(to right, #5c4d9d, #9a3cbb);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to right, #9a3cbb, #5c4d9d);
+}
+
+.button:pressed {
+    -fx-background-color: #8b3b8b;
+}
+
+
+#returntimage {
+    -fx-text-fill: white;
+
+  -fx-cursor: hand;
+      -fx-background-radius: 50%;
+  }
+
+
+#returntimage:hover {
+
+     -fx-opacity: 0.8;
+       -fx-scale-x: 1.1;
+       -fx-scale-y: 1.1;
+}

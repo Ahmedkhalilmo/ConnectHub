@@ -1,5 +1,6 @@
 package com.example.ConnectHub;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -18,7 +19,6 @@ import javafx.stage.Stage;
 
 import javafx.scene.input.MouseEvent;
 
-import java.awt.event.ActionEvent;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -49,6 +49,8 @@ public class Home {
     @FXML
     private Circle ProfileImageView;
 
+    String textColor = ProfilePage.isDarkTheme ? "white" : "#2a2a2a";
+    String BGColor = ProfilePage.isDarkTheme ? "#2a2a2a" : "white";
     public void initialize() {
 //        loadPostsFromFile(); // Load saved posts from 'posts.txt'
         UsernameLabel.setText(user.getUsername());
@@ -56,6 +58,29 @@ public class Home {
         loadUserProfileImage();
         System.out.println("init");
 //        Runtime.getRuntime().addShutdownHook(new Thread(this::savePostsToFile)); // Save posts on shutdown
+    }
+
+    public void toggleThemeAndRefresh(MouseEvent e) {
+        ProfilePage.isDarkTheme = !ProfilePage.isDarkTheme;
+        System.out.println("Theme toggled: " + (ProfilePage.isDarkTheme ? "Dark" : "Light"));
+        refreshCurrentPage();
+    }
+
+    private void refreshCurrentPage() {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Home.fxml")));
+            stage = (Stage) postsContainer.getScene().getWindow();
+            scene = new Scene(root);
+
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(ProfilePage.isDarkTheme?"DarkHome.css":"Home.css")).toExternalForm());
+
+
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void loadUserProfileImage() {
@@ -72,7 +97,7 @@ public class Home {
             Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Chat.fxml")));
             stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             scene = new Scene(root);
-            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Chat.css")).toExternalForm());
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(ProfilePage.isDarkTheme ? "DarkChat.css" :"Chat.css")).toExternalForm());
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
@@ -85,7 +110,7 @@ public class Home {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("ProfilePage.fxml")));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("profile.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(ProfilePage.isDarkTheme?"Darkprofile.css":"profile.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
@@ -169,6 +194,7 @@ public class Home {
 
     public void displayPosts() {
         postsContainer.getChildren().clear();
+        postsContainer.setTranslateX(50);
 //        loadPostsFromFile();
 //        CommentsManager.loadCommentsFromFile();
         for (Post post : posts) {
@@ -186,16 +212,16 @@ public class Home {
 
             VBox commentsBox = new VBox();
             commentsBox.setSpacing(10);
-            commentsBox.setStyle("-fx-background-color: #f9f9f9; -fx-padding: 10px; -fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-border-radius: 5px;");
+            commentsBox.setStyle("-fx-background-color:" + BGColor + "; -fx-padding: 10px; -fx-border-width: 1px; -fx-border-radius: 5px;");
             commentsBox.setMaxHeight(100);
 
             TextField commentInput = new TextField();
             commentInput.setPromptText("Write a comment...");
             commentInput.setPrefWidth(280);
-            commentInput.setStyle("-fx-font-size: 12px; -fx-padding: 5px;");
+            commentInput.setStyle("-fx-text-fill: "+textColor+";-fx-font-size: 12px; -fx-padding: 5px;");
 
             Button addCommentButton = new Button("Add Comment");
-            addCommentButton.setStyle("-fx-font-size: 12px; -fx-background-color: #4CAF50; -fx-text-fill: white; "
+            addCommentButton.setStyle("-fx-font-size: 12px; -fx-background-color: #4CAF50; -fx-text-fill: white;"
                     + "-fx-padding: 5px; -fx-border-radius: 5px;");
             refreshCommentsDisplay(commentsBox, post);
             addCommentButton.setOnAction(e -> {
@@ -229,8 +255,8 @@ public class Home {
             Label commentLabel = new Label(commentText);
             commentLabel.setMaxWidth(300);
             commentLabel.setWrapText(true);
-            commentLabel.setStyle("-fx-font-size: 12px; -fx-background-color: white; -fx-padding: 5px; "
-                    + "-fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-border-radius: 5px;");
+            commentLabel.setStyle("-fx-font-size: 12px; -fx-background-color: "+BGColor+"; -fx-padding: 5px; "
+                    + " -fx-border-width: 1px; -fx-border-radius: 5px;");
             commentsBox.getChildren().add(commentLabel);
         }
     }
@@ -239,7 +265,7 @@ public class Home {
     private VBox createPostBox(Post post) {
         VBox postBox = new VBox();
         postBox.setSpacing(15);
-        postBox.setStyle("-fx-background-color: white; -fx-background-radius: 10px; -fx-padding: 10px; -fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-effect: dropshadow(gaussian, #000000, 10, 0.2, 0, 0);");
+     //   postBox.setStyle("-fx-background-color: white; -fx-background-radius: 10px; -fx-padding: 10px; -fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-effect: dropshadow(gaussian, #000000, 10, 0.2, 0, 0);");
 
         HBox postHeader = createPostHeader(post);
         postBox.getChildren().add(postHeader);
@@ -247,7 +273,7 @@ public class Home {
         TextArea textArea = new TextArea(post.getTextContent());
         textArea.setEditable(false);
         textArea.setWrapText(true);
-        textArea.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 14px;");
+        textArea.setStyle("-fx-background-color: "+BGColor + "; -fx-border-color: transparent; -fx-font-size: 14px;");
         postBox.getChildren().add(textArea);
 
         if (post.getImage() != null) {
@@ -322,7 +348,7 @@ public class Home {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("SearchResults.fxml")));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("SearchResults.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(ProfilePage.isDarkTheme ?"DarkSearch.css":"SearchResults.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
@@ -331,7 +357,7 @@ public class Home {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("NotificationBar.fxml")));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("NotificationBar.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(ProfilePage.isDarkTheme ?"DarkNotificationBar.css":"NotificationBar.css")).toExternalForm());
 
         stage.setScene(scene);
         stage.show();

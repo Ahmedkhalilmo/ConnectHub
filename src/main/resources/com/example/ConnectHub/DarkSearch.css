@@ -4,12 +4,16 @@
     -fx-faint-focus-color: transparent;
 }
 
+#back{
+    -fx-background-color: linear-gradient(to bottom right, #121212, #1e1e1e);
+}
+
 .anchor-pane {
     -fx-background-color: linear-gradient(to bottom, #1e3c72, #2a5298); /* Elegant gradient */
 }
 
 .list-view {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #0f172a;
     -fx-background-radius: 20px;
     -fx-padding: 10px;
     -fx-border-color: #145DA0;
@@ -27,18 +31,14 @@
 }
 
 .list-view .list-cell:hover {
-    -fx-background-color: #f0f4ff;
+    -fx-background-color: #0f172a;
     -fx-text-fill: #1e3c72;
 }
 
 .list-view .list-cell:selected {
     -fx-background-color: #2a5298;
-    -fx-text-fill: white;
+    -fx-text-fill: #0f172a;
 }
-
-
-
-
 
 .image-view {
     -fx-cursor: hand;

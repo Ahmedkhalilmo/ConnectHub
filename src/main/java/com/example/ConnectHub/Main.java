@@ -10,6 +10,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Main extends Application {
     @Override
@@ -29,7 +30,7 @@ public class Main extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        scene.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(ProfilePage.isDarkTheme?"DarkLogin.css":"Login.css")).toExternalForm());
         stage.setTitle("ConnectHub");
         stage.setScene(scene);
         stage.show();

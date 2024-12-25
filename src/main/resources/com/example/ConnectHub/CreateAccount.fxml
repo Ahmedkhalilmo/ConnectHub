@@ -57,7 +57,7 @@
                   <TextField fx:id="emailF" prefHeight="38.0" prefWidth="243.0" promptText="Email" translateY="40.0" />
                   <PasswordField fx:id="passwordF" prefHeight="38.0" prefWidth="243.0" promptText="Password" translateY="54.0" />
                   <PasswordField fx:id="passwordF2" prefHeight="38.0" prefWidth="243.0" promptText="Confirm Password" translateY="72.0" />
-                  <HBox prefHeight="36.0" prefWidth="238.0" translateY="90.0">
+                  <HBox fx:id="ss" prefHeight="36.0" prefWidth="238.0" translateY="90.0">
                      <children>
                         <RadioButton fx:id="MaleF" mnemonicParsing="false" text="Male" />
                         <RadioButton fx:id="FemaleF" mnemonicParsing="false" text="Female" translateX="90.0" />

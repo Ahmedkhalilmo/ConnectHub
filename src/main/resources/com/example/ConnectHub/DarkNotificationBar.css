@@ -1,0 +1,15 @@
+#returnimage {
+    -fx-cursor: hand;
+    -fx-background-radius: 50%;
+}
+
+
+#returnimage:hover {
+    -fx-opacity: 0.8;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+#PostSelectedPanel{
+    -fx-background-color: linear-gradient(to bottom right, #121212, #1e1e1e);
+}

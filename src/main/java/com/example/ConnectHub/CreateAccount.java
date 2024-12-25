@@ -72,7 +72,7 @@ public class CreateAccount {
         root = FXMLLoader.load(this.getClass().getResource("Login.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         scene=new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Login.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(ProfilePage.isDarkTheme?"DarkLogin.css":"Login.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
@@ -162,7 +162,7 @@ public class CreateAccount {
             Parent root = FXMLLoader.load(this.getClass().getResource("Login.fxml"));
             stage = (Stage)((Node)e.getSource()).getScene().getWindow();
             scene=new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(ProfilePage.isDarkTheme?"DarkLogin.css":"Login.css")).toExternalForm());
             stage.setScene(scene);
             stage.show();
 

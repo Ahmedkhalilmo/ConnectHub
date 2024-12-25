@@ -4,6 +4,9 @@
     -fx-font-family: 'Poppins', 'Arial', sans-serif;
     -fx-font-size: 14px;
 }
+#HBoxTop{
+ -fx-background-color: #181818;
+}
 
 /* Label styling */
 .label {
@@ -20,7 +23,6 @@
     -fx-padding: 10px 20px;
     -fx-border-radius: 25px;
     -fx-background-radius: 25px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 4);
     -fx-cursor: hand;
 }
 
@@ -30,7 +32,6 @@
 
 .button:pressed {
     -fx-background-color: #1e5ab5;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 3, 0.5, 0, 2);
 }
 
 /* Text field styling */
@@ -42,7 +43,6 @@
     -fx-padding: 10px;
     -fx-font-size: 14px;
     -fx-font-family: 'Poppins', sans-serif;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.3, 1, 1);
 }
 
 .text-field:focused, .password-field:focused {
@@ -92,7 +92,6 @@
     -fx-background-color: #f3f4f6;
     -fx-background-radius: 15px;
     -fx-padding: 20px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.3, 1, 1);
 }
 
 /* Button styling in posts */
@@ -106,7 +105,6 @@
     -fx-padding: 10px;
     -fx-border-color: #d3d3d3;
     -fx-border-width: 1px;
-    -fx-effect: dropshadow(gaussian, #000000, 10, 0.2, 0, 0);
 }
 
 .post-header {
@@ -131,7 +129,6 @@
 }
 #OpenChat {
   -fx-cursor: hand;
-      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 2);
       -fx-background-radius: 50%;
   }
 
@@ -140,11 +137,9 @@
      -fx-opacity: 0.8;
        -fx-scale-x: 1.1;
        -fx-scale-y: 1.1;
-       -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 15, 0.5, 0, 4);
 }
 #openNotificationPanel {
   -fx-cursor: hand;
-      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 2);
       -fx-background-radius: 50%;
   }
 
@@ -153,11 +148,9 @@
      -fx-opacity: 0.8;
        -fx-scale-x: 1.1;
        -fx-scale-y: 1.1;
-       -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 15, 0.5, 0, 4);
 }
 #uploadImage {
   -fx-cursor: hand;
-      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 2);
       -fx-background-radius: 50%;
   }
 
@@ -166,11 +159,9 @@
      -fx-opacity: 0.8;
        -fx-scale-x: 1.1;
        -fx-scale-y: 1.1;
-       -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 15, 0.5, 0, 4);
 }
 #logo {
   -fx-cursor: hand;
-      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 2);
       -fx-background-radius: 50%;
   }
 
@@ -179,11 +170,9 @@
      -fx-opacity: 0.8;
        -fx-scale-x: 1.1;
        -fx-scale-y: 1.1;
-       -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 15, 0.5, 0, 4);
 }
 #ProfileImageView {
   -fx-cursor: hand;
-      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 2);
       -fx-background-radius: 50%;
   }
 
@@ -192,7 +181,6 @@
      -fx-opacity: 0.8;
        -fx-scale-x: 1.1;
        -fx-scale-y: 1.1;
-       -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 15, 0.5, 0, 4);
 }
 
 .like-button {
@@ -205,6 +193,10 @@
     -fx-background-color: #f44336;
     -fx-text-fill: red;
     -fx-border-radius: 5px;
+}
+
+#PostCardLayout{
+    -fx-background-color: #D3D3D3;
 }
 
 
