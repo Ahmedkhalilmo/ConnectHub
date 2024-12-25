@@ -4,6 +4,9 @@
     -fx-font-family: 'Poppins', 'Arial', sans-serif;
     -fx-font-size: 14px;
 }
+#HBoxTop{
+ -fx-background-color: #181818;
+}
 
 /* Label styling */
 .label {

@@ -10,181 +10,65 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: D3D3D3;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.ProfilePage">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.ProfilePage">
     <children>
         <ImageView fitHeight="134.0" fitWidth="554.0" layoutX="534.2" layoutY="11.2" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="574.8" AnchorPane.leftAnchor="534.2" AnchorPane.rightAnchor="237.07856445312495" AnchorPane.topAnchor="11.2">
             <image>
                 <Image url="@wallpaper.jpg" />
             </image>
         </ImageView>
-        <Pane layoutY="147.0" prefHeight="573.0" prefWidth="1280.0" style="-fx-background-color: white;">
+        <Pane layoutY="147.0" prefHeight="573.0" prefWidth="1280.0">
             <children>
-                <ScrollPane hbarPolicy="NEVER" layoutX="374.0" layoutY="56.0" prefHeight="518.0" prefWidth="578.0" style="-fx-background-color: #242526;" vbarPolicy="NEVER">
+                <ScrollPane hbarPolicy="NEVER" layoutX="374.0" layoutY="56.0" prefHeight="518.0" prefWidth="578.0" vbarPolicy="NEVER">
                     <content>
                         <StackPane>
                             <children>
                                 <Pane prefHeight="520.0" prefWidth="200.0" />
-                                <VBox fx:id="ProfilePostsContainer" prefHeight="650.0" prefWidth="575.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #d3d3d3; -fx-padding: 10px; -fx-spacing: 10px;"/>
+                                <VBox fx:id="ProfilePostsContainer" prefHeight="650.0" prefWidth="575.0" />
                             </children>
                         </StackPane>
                     </content>
                 </ScrollPane>
-                <Pane layoutX="14.0" layoutY="180.0" prefHeight="253.0" prefWidth="326.0" style="-fx-background-color: D3D3D3; -fx-background-radius: 50;">
-                    <children>
-                        <Label layoutX="100.0" layoutY="20.0" style="-fx-background-color: #A11CBFF;" text="Details">
+                <Pane layoutX="14.0" layoutY="180.0" prefHeight="253.0" prefWidth="326.0" style="-fx-background-color: D3D3D3; -fx-background-radius: 50;">                    <children>
+                        <Label layoutX="100.0" layoutY="20.0" text="Details">
                             <font>
                                 <Font name="TimeBurner Bold" size="40.0" />
                             </font>
-                            <textFill>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                        <Stop>
-                                            <color>
-                                                <Color red="0.056530214846134186" green="0.4098440408706665" blue="0.7631579041481018" />
-                                            </color>
-                                        </Stop>
-                                        <Stop offset="1.0">
-                                            <color>
-                                                <Color red="0.4156862795352936" green="0.06666667014360428" blue="0.7960784435272217" />
-                                            </color>
-                                        </Stop>
-                                    </stops>
-                                </LinearGradient>
-                            </textFill>
                         </Label>
                         <Label layoutX="10.0" layoutY="145.0" text="BirthDate:">
                             <font>
                                 <Font name="TimeBurner Bold" size="24.0" />
                             </font>
-                            <textFill>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                        <Stop>
-                                            <color>
-                                                <Color red="0.056530214846134186" green="0.4098440408706665" blue="0.7631579041481018" />
-                                            </color>
-                                        </Stop>
-                                        <Stop offset="1.0">
-                                            <color>
-                                                <Color red="0.4156862795352936" green="0.06666667014360428" blue="0.7960784435272217" />
-                                            </color>
-                                        </Stop>
-                                    </stops>
-                                </LinearGradient>
-                            </textFill>
                         </Label>
                         <Label layoutX="10.0" layoutY="185.0" text="Gender:">
                             <font>
                                 <Font name="TimeBurner Bold" size="24.0" />
                             </font>
-                            <textFill>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                        <Stop>
-                                            <color>
-                                                <Color red="0.056530214846134186" green="0.4098440408706665" blue="0.7631579041481018" />
-                                            </color>
-                                        </Stop>
-                                        <Stop offset="1.0">
-                                            <color>
-                                                <Color red="0.4156862795352936" green="0.06666667014360428" blue="0.7960784435272217" />
-                                            </color>
-                                        </Stop>
-                                    </stops>
-                                </LinearGradient>
-                            </textFill>
                         </Label>
                         <Line endX="155.4000244140625" layoutX="173.0" layoutY="88.0" opacity="0.48" startX="-164.59999084472656" stroke="#56585b" />
                         <Label fx:id="BirthDateL" layoutX="112.0" layoutY="138.0" prefHeight="50.0" prefWidth="168.0" text=" 05/06/2005">
                             <font>
                                 <Font name="TimeBurner Bold" size="24.0" />
                             </font>
-                            <textFill>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                        <Stop>
-                                            <color>
-                                                <Color red="0.056530214846134186" green="0.4098440408706665" blue="0.7631579041481018" />
-                                            </color>
-                                        </Stop>
-                                        <Stop offset="1.0">
-                                            <color>
-                                                <Color red="0.4156862795352936" green="0.06666667014360428" blue="0.7960784435272217" />
-                                            </color>
-                                        </Stop>
-                                    </stops>
-                                </LinearGradient>
-                            </textFill>
                         </Label>
                         <Label fx:id="GenderL" layoutX="95.0" layoutY="178.0" prefHeight="50.0" prefWidth="193.0" text="Male">
                             <font>
                                 <Font name="TimeBurner Bold" size="24.0" />
                             </font>
-                            <textFill>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                        <Stop>
-                                            <color>
-                                                <Color red="0.056530214846134186" green="0.4098440408706665" blue="0.7631579041481018" />
-                                            </color>
-                                        </Stop>
-                                        <Stop offset="1.0">
-                                            <color>
-                                                <Color red="0.4156862795352936" green="0.06666667014360428" blue="0.7960784435272217" />
-                                            </color>
-                                        </Stop>
-                                    </stops>
-                                </LinearGradient>
-                            </textFill>
                         </Label>
                         <Label layoutX="10.0" layoutY="101.0" text="Email: ">
                             <font>
                                 <Font name="TimeBurner Bold" size="24.0" />
                             </font>
-                            <textFill>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                        <Stop>
-                                            <color>
-                                                <Color red="0.056530214846134186" green="0.4098440408706665" blue="0.7631579041481018" />
-                                            </color>
-                                        </Stop>
-                                        <Stop offset="1.0">
-                                            <color>
-                                                <Color red="0.4156862795352936" green="0.06666667014360428" blue="0.7960784435272217" />
-                                            </color>
-                                        </Stop>
-                                    </stops>
-                                </LinearGradient>
-                            </textFill>
                         </Label>
                         <Label fx:id="EmailL" layoutX="75.0" layoutY="94.0" prefHeight="50.0" prefWidth="250.0" text="S@gmail.com">
                             <font>
                                 <Font name="TimeBurner Bold" size="24.0" />
                             </font>
-                            <textFill>
-                                <LinearGradient endX="1.0" endY="1.0">
-                                    <stops>
-                                        <Stop>
-                                            <color>
-                                                <Color red="0.056530214846134186" green="0.4098440408706665" blue="0.7631579041481018" />
-                                            </color>
-                                        </Stop>
-                                        <Stop offset="1.0">
-                                            <color>
-                                                <Color red="0.4156862795352936" green="0.06666667014360428" blue="0.7960784435272217" />
-                                            </color>
-                                        </Stop>
-                                    </stops>
-                                </LinearGradient>
-                            </textFill>
                         </Label>
                     </children>
                 </Pane>
@@ -192,67 +76,21 @@
                     <font>
                         <Font name="TimeBurner Bold" size="26.0" />
                     </font>
-                    <textFill>
-                        <LinearGradient endX="1.0" endY="1.0">
-                            <stops>
-                                <Stop>
-                                    <color>
-                                        <Color red="0.056530214846134186" green="0.4098440408706665" blue="0.7631579041481018" />
-                                    </color>
-                                </Stop>
-                                <Stop offset="1.0">
-                                    <color>
-                                        <Color red="0.4156862795352936" green="0.06666667014360428" blue="0.7960784435272217" />
-                                    </color>
-                                </Stop>
-                            </stops>
-                        </LinearGradient>
-                    </textFill>
                 </Label>
+                <Button layoutX="74.0" layoutY="430.0" mnemonicParsing="false" text="Dark Theme" onAction="#toggleThemeAndRefresh" prefHeight="35.0" prefWidth="193.0"/>
                 <Button layoutX="74.0" layoutY="483.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="35.0" prefWidth="193.0" text="Logout" />
-                <Pane fx:id="MyFriends" layoutX="978.0" layoutY="56.0" prefHeight="518.0" prefWidth="271.0" style="-fx-background-color: D3D3D3;" />
-                <VBox fx:id="MyFriendsBox" layoutX="978.0" layoutY="56.0" prefHeight="518.0" prefWidth="271.0" style="-fx-background-color: D3D3D3;">
-                    <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="My Friends">
-                        <textFill>
-                            <LinearGradient endX="1.0" endY="1.0">
-                                <stops>
-                                    <Stop>
-                                        <color>
-                                            <Color red="0.14509804546833038" green="0.4588235318660736" blue="0.9882352948188782" />
-                                        </color>
-                                    </Stop>
-                                    <Stop offset="1.0">
-                                        <color>
-                                            <Color red="0.4156862795352936" green="0.06666667014360428" blue="0.7960784435272217" />
-                                        </color>
-                                    </Stop>
-                                </stops>
-                            </LinearGradient>
-                        </textFill></Label>
+                <Pane fx:id="MyFriends" layoutX="978.0" layoutY="56.0" prefHeight="518.0" prefWidth="271.0" />
+                <VBox fx:id="MyFriendsBox" layoutX="978.0" layoutY="56.0" prefHeight="518.0" prefWidth="271.0">
+                    <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="My Friends"/>
                     <ListView fx:id="friendsListView" prefHeight="490.0" prefWidth="271.0" />
                 </VBox>
                 <Pane />
-            </children></Pane>
+            </children>
+        </Pane>
         <Label fx:id="nameLabel" layoutX="319.0" layoutY="96.0" prefHeight="66.0" prefWidth="507.0" text="Name">
             <font>
                 <Font name="TimeBurner Bold" size="45.0" />
             </font>
-            <textFill>
-                <LinearGradient endX="1.0" endY="1.0">
-                    <stops>
-                        <Stop>
-                            <color>
-                                <Color red="0.056530214846134186" green="0.4098440408706665" blue="0.7631579041481018" />
-                            </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                            <color>
-                                <Color red="0.4156862795352936" green="0.06666667014360428" blue="0.7960784435272217" />
-                            </color>
-                        </Stop>
-                    </stops>
-                </LinearGradient>
-            </textFill>
         </Label>
         <Circle fx:id="CircleImageView" fill="#f0f1f2" layoutX="165.0" layoutY="162.0" radius="140.0" stroke="BLACK" strokeType="INSIDE" />
         <ImageView fx:id="returntimage" fitHeight="50.0" fitWidth="61.0" layoutY="6.0" onMouseClicked="#returntoHomepage" pickOnBounds="true" preserveRatio="true">

@@ -14,26 +14,22 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="MyBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #18191a;" stylesheets="@Home.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.Home">
+<BorderPane fx:id="MyBorderPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ConnectHub.Home">
     <!-- Top Bar Section -->
     <top>
         <HBox fx:id="HBoxTop" alignment="CENTER" prefHeight="70.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
             <children>
                 <HBox alignment="CENTER" prefHeight="70.0" prefWidth="191.0">
                     <children>
-                        <ImageView fx:id="logo" fitHeight="103.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" translateX="-150.0">
+                        <ImageView fx:id="logo" fitHeight="103.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@icon.png" />
                             </image>
-                            <HBox.margin>
-                                <Insets left="5.0" />
-                            </HBox.margin>
                         </ImageView>
                         <ImageView fx:id="OpenChat" fitHeight="59.0" fitWidth="53.0" onMouseClicked="#OpenChat" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -44,7 +40,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="70.0" prefWidth="426.0">
                     <children>
-                        <Label textFill="#cccccc" translateX="15.0">
+                        <Label translateX="15.0">
                             <font>
                                 <Font name="TimeBurner Bold" size="18.0" />
                             </font>
@@ -52,7 +48,6 @@
                         <TextField fx:id="searchBar" prefHeight="59.0" prefWidth="414.0" promptText="Search" translateX="50.0" />
                         <Button mnemonicParsing="false" onAction="#switchtoresult">
                             <graphic>
-
                                 <ImageView fx:id="SearchBTN" fitHeight="37.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@SearchIcon.png" />
@@ -72,7 +67,7 @@
                         <Image url="@notification.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="UsernameLabel" text="UserName" textFill="#cccccc" translateX="80.0">
+                <Label fx:id="UsernameLabel" text="UserName" translateX="80.0">
                     <font>
                         <Font name="TimeBurner Bold" size="24.0" />
                     </font>
@@ -101,26 +96,27 @@
 
     <!-- Left and Right Bar Section -->
     <left>
-        <VBox fx:id="LeftBar" prefHeight="647.0" prefWidth="200.0" style="-fx-background-color: #d3d3d3;">
+        <VBox fx:id="LeftBar" prefHeight="647.0" prefWidth="200.0">
             <children>
-                <VBox prefHeight="663.0" prefWidth="200.0" style="-fx-background-color: #8F00FF;" />
-            </children></VBox>
+                <VBox prefHeight="663.0" prefWidth="200.0" />
+            </children>
+        </VBox>
     </left>
     <right>
-        <VBox fx:id="RightBar" prefHeight="636.0" prefWidth="0.0" style="-fx-background-color: #ffffff;" />
+        <VBox fx:id="RightBar" prefHeight="636.0" prefWidth="0.0" />
     </right>
 
     <!-- Main Content Section -->
     <center>
-        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="574.0" prefWidth="930.0" style="-fx-background-color: #18191a;" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="574.0" prefWidth="930.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
             <content>
                 <StackPane>
-                    <VBox fx:id="PostCardLayout" prefHeight="800.0" prefWidth="1242.0" style="-fx-background-color: #ffffff;">
+                    <VBox fx:id="PostCardLayout" prefHeight="800.0" prefWidth="1242.0">
                         <!-- Post Input Area -->
-                        <VBox fx:id="PostInputArea" prefHeight="142.0" prefWidth="1242.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #d3d3d3; -fx-padding: 10px; -fx-spacing: 10px;">
+                        <VBox fx:id="PostInputArea" prefHeight="142.0" prefWidth="1242.0">
                             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="938.0" translateX="-150.0">
                                 <children>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 10px;">
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0">
                                         <children>
                                             <!-- Image icon -->
                                             <ImageView fx:id="uploadImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#uploadImage" preserveRatio="true">
@@ -132,39 +128,23 @@
                                             <TextField fx:id="postContentArea" prefHeight="44.0" prefWidth="463.0" promptText="What's on your mind?" />
                                         </children>
                                     </HBox>
-                           <RadioButton fx:id="isPrivateButton" mnemonicParsing="false" text="friends only" />
+                                    <RadioButton fx:id="isPrivateButton" mnemonicParsing="false" text="friends only" />
                                 </children>
                             </HBox>
                             <!-- Button to Submit Post -->
                             <HBox alignment="CENTER" prefHeight="40.0">
                                 <children>
-                                    <Button mnemonicParsing="false" onAction="#createPost" onMouseClicked="#createPost" prefHeight="81.0" prefWidth="144.0" style="-fx-background-radius: 100px;" text="Post" translateX="-150.0">
+                                    <Button mnemonicParsing="false" onAction="#createPost" onMouseClicked="#createPost" prefHeight="81.0" prefWidth="144.0" text="Post" translateX="-150.0">
                                         <font>
                                             <Font name="TimeBurner Bold" size="18.0" />
                                         </font>
-                                        <textFill>
-                                            <LinearGradient endX="1.0" endY="1.0">
-                                                <stops>
-                                                    <Stop>
-                                                        <color>
-                                                            <Color />
-                                                        </color>
-                                                    </Stop>
-                                                    <Stop offset="1.0">
-                                                        <color>
-                                                            <Color red="0.5686274766921997" green="0.5607843399047852" blue="1.0" />
-                                                        </color>
-                                                    </Stop>
-                                                </stops>
-                                            </LinearGradient>
-                                        </textFill>
                                     </Button>
                                 </children>
                             </HBox>
                         </VBox>
 
                         <!-- Posts Display Area -->
-                        <VBox fx:id="postsContainer" prefHeight="650.0" prefWidth="1211.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: #d3d3d3; -fx-padding: 10px; -fx-spacing: 10px;" />
+                        <VBox fx:id="postsContainer" prefHeight="650.0" prefWidth="1211.0" />
                     </VBox>
                 </StackPane>
             </content>

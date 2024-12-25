@@ -85,7 +85,7 @@ public class Home {
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("ProfilePage.fxml")));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("profile.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(ProfilePage.isDarkTheme?"Darkprofile.css":"profile.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
@@ -239,7 +239,7 @@ public class Home {
     private VBox createPostBox(Post post) {
         VBox postBox = new VBox();
         postBox.setSpacing(15);
-        postBox.setStyle("-fx-background-color: white; -fx-background-radius: 10px; -fx-padding: 10px; -fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-effect: dropshadow(gaussian, #000000, 10, 0.2, 0, 0);");
+     //   postBox.setStyle("-fx-background-color: white; -fx-background-radius: 10px; -fx-padding: 10px; -fx-border-color: #d3d3d3; -fx-border-width: 1px; -fx-effect: dropshadow(gaussian, #000000, 10, 0.2, 0, 0);");
 
         HBox postHeader = createPostHeader(post);
         postBox.getChildren().add(postHeader);
@@ -247,7 +247,7 @@ public class Home {
         TextArea textArea = new TextArea(post.getTextContent());
         textArea.setEditable(false);
         textArea.setWrapText(true);
-        textArea.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 14px;");
+       // textArea.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 14px;");
         postBox.getChildren().add(textArea);
 
         if (post.getImage() != null) {

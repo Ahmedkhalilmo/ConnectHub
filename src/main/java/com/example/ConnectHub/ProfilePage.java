@@ -1,5 +1,6 @@
 package com.example.ConnectHub;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +25,7 @@ import java.util.Objects;
 
 public class ProfilePage extends Profile
 {
+    public static boolean isDarkTheme = false;
 
     public static User friendUser;
 
@@ -124,7 +126,7 @@ public class ProfilePage extends Profile
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("Home.fxml")));
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Home.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(isDarkTheme?"DarkHome.css":"Home.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
@@ -134,7 +136,7 @@ public class ProfilePage extends Profile
         Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("login.fxml")));
         stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Login.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(isDarkTheme?"DarkLogin.css":"Login.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
 
@@ -143,5 +145,27 @@ public class ProfilePage extends Profile
         double centerY = (screenBounds.getHeight() - stage.getHeight()) / 2;
         stage.setX(centerX);
         stage.setY(centerY);
+    }
+
+    public void toggleThemeAndRefresh(ActionEvent actionEvent) {
+       isDarkTheme = !isDarkTheme;
+       System.out.println("Theme toggled: " + (isDarkTheme ? "Dark" : "Light"));
+        refreshCurrentPage();
+    }
+    private void refreshCurrentPage() {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("ProfilePage.fxml")));
+            stage = (Stage) ProfilePostsContainer.getScene().getWindow();
+            scene = new Scene(root);
+
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(ProfilePage.isDarkTheme?"Darkprofile.css":"profile.css")).toExternalForm());
+
+
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
